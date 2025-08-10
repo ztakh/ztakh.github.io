@@ -1,0 +1,147 @@
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 20;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    line-height: 1.5em;
+    border-radius: var(--radius);
+}
+
+.modal-active {
+    display: flex;
+}
+
+.modal.transparentBg {
+    background-color: rgba(0, 0, 0, 0);
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+}
+
+.modal .content {
+    -webkit-animation: animateout 0.4s;
+    animation: animateout 0.4s;
+    position: relative;
+    background-color: var(--card-bg);
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--border-color);
+    width: 90dvw;
+    max-width: 1000px;
+    box-shadow: 0 4px 8px 0 var(--shadow), 0 6px 20px 0 var(--shadow);
+    border-radius: var(--radius);
+
+}
+
+.modal .content.show {
+    -webkit-animation: animatetop 0.4s;
+    animation: animatetop 0.4s;
+}
+
+@-webkit-keyframes animatetop {
+    from {
+        top: 20px;
+        opacity: 0;
+    }
+
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: 20px;
+        opacity: 0;
+    }
+
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes animateout {
+    from {
+        top: 0;
+        opacity: 1;
+    }
+
+    to {
+        top: 20px;
+        opacity: 0;
+    }
+}
+
+@keyframes animateout {
+    from {
+        top: 0;
+        opacity: 1;
+    }
+
+    to {
+        top: 20px;
+        opacity: 0;
+    }
+}
+
+.close {
+    float: right;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.close:hover,
+.close:focus {
+    color: var(--primary-blue);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.close .twemoji {
+    margin-right: 0;
+}
+
+.modal .header {
+    padding: 10px;
+    background-color: var(--bg-light);
+    border-radius: var(--radius);
+}
+
+.modal .header h2 {
+    margin: 0;
+}
+
+.modal .body {
+    padding: 20px;
+    max-height: 80dvh;
+    overflow-y: auto;
+}
+
+.modal .body>*:first-child {
+    margin-top: 0;
+}
+
+.modal .body>*:last-child {
+    margin-bottom: 0;
+}
+
+.modal .footer {
+    padding: 10px;
+    color: var(--secondary-blue);
+}
+
+.modal .footer p:first-child {
+    margin-top: 0;
+}
+
+.modal .footer p:last-child {
+    margin-bottom: 0;
+}

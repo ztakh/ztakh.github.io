@@ -1,0 +1,63 @@
+.law-article-list {
+    display: flex;
+    flex-direction: row;
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+.law-chapter-list p {
+    margin: 0 0 0.5em 0;
+}
+
+.law-article-num {
+    margin-right: 4em;
+    min-width: 3.5em;
+    color: var(--primary-blue);
+}
+
+.law-article-num span {
+    min-width: 1.5em;
+    text-align: center;
+    display: inline-block;
+}
+
+.law-article-item-group {
+    counter-reset: 項;
+    position: relative;
+}
+
+.law-article-item-group .law-article-item::before {
+    counter-increment: 項;
+    content: counter(項);
+    display: inline-block;
+    position: absolute;
+    left: -2em;
+    font-style: italic;
+    opacity: 0.5;
+    text-align: right;
+    width: 1em;
+}
+
+.law-article-item ol {
+    list-style: trad-chinese-informal;
+    padding-left: 2em;
+    padding-bottom: 0.5em;
+}
+
+@media (max-width: 768px) {
+    .law-article-list {
+        display: flex;
+        flex-direction: column;
+        padding-left: 2em;
+        margin-bottom: 1em;
+    }
+
+    .law-article-num {
+        margin: 0 0 0.5em -2em;
+        min-width: 3.5em;
+    }
+
+    .law-article-item-group .law-article-item::before {
+        left: -2em;
+    }
+}
