@@ -1,0 +1,64 @@
+{
+    "genp": {
+        "display": "第一編　總則　§1",
+        "title": "h3",
+        "url": "../genp/",
+        "children": {
+            "ch1": {
+                "display": "第一章　例　§1"
+            },
+            "ch2": {
+                "display": "第二章　玩家　§6"
+            },
+            "ch3": {
+                "display": "第三章　準備　§11"
+            },
+            "ch4": {
+                "display": "第四章　位置　§18"
+            }
+        }
+    },
+    "spep": {
+        "display": "第二編　分則　§22",
+        "title": "h3",
+        "url": "../spep/",
+        "children": {
+            "ch5": {
+                "display": "第五章　匿者牌堆　§22",
+                "title": "a",
+                "children": {
+                    "ch5s1": {
+                        "display": "第一節　時賞牌令　§26"
+                    },
+                    "ch5s2": {
+                        "display": "第二節　權能牌令　§28"
+                    }
+                }
+            },
+            "ch6": {
+                "display": "第六章　六大詰問　§32",
+                "title": "a",
+                "children": {
+                    "ch6s1": {
+                        "display": "第一節　異同之問　§34"
+                    },
+                    "ch6s2": {
+                        "display": "第二節　遠近之問　§36"
+                    },
+                    "ch6s3": {
+                        "display": "第三節　項背之問　§38"
+                    },
+                    "ch6s4": {
+                        "display": "第四節　環偵之問　§40"
+                    },
+                    "ch6s5": {
+                        "display": "第五節　鎖域之問　§42"
+                    },
+                    "ch6s6": {
+                        "display": "第六節　採樣之問　§44"
+                    }
+                }
+            }
+        }
+    }
+}

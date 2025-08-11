@@ -46,7 +46,8 @@
     --card-bg: #ffffff;
     --transition: all 0.3s ease-in-out;
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --radius: 8px;
+    --radius: 1em;
+    --radius-half: 0.5em;
 }
 
 * {
@@ -61,7 +62,8 @@ html {
     -webkit-user-select: none;
     overscroll-behavior: none;
     font-feature-settings: "kern";
-    scroll-padding-top: 80px;
+    scroll-padding-top: 90px;
+    font-size: 17px;
 }
 
 body {
@@ -107,6 +109,11 @@ code {
     font-family: var(--font-code);
 }
 
+*.disabled {
+    opacity: 0.3;
+    cursor: not-allowed !important;
+}
+
 .logo-container {
     display: flex;
     flex: 1;
@@ -123,7 +130,7 @@ code {
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 26px;
+    font-size: 1.5rem;
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(51, 102, 204, 0.2);
     animation: pulse 2s infinite;
@@ -144,7 +151,7 @@ code {
 }
 
 .logo-text {
-    font-size: 28px;
+    font-size: 1.6rem;
     font-weight: 700;
     letter-spacing: -0.5px;
     color: var(--dark-gray);
@@ -168,7 +175,7 @@ code {
     border-radius: 50px;
     width: 100%;
     font-family: var(--font-primary);
-    font-size: 16px;
+    font-size: 0.95rem;
     transition: var(--transition);
     background: var(--bg-light);
 }
@@ -206,7 +213,7 @@ code {
 .user-actions a {
     color: var(--primary-blue);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 0.88rem;
     font-weight: 600;
     padding: 8px 15px;
     border-radius: 50px;
@@ -223,8 +230,8 @@ code {
     display: flex;
     max-width: 1600px;
     margin: 0 auto;
-    padding: 20px;
-    gap: 30px;
+    padding: 1.5em;
+    gap: 1.8em;
 }
 
 /* Sidebar Styles */
@@ -233,7 +240,7 @@ code {
     background: white;
     border-radius: var(--radius);
     padding: 25px 15px;
-    font-size: 15px;
+    font-size: 0.88rem;
     position: sticky;
     top: 100px;
     left: 10px;
@@ -244,30 +251,67 @@ code {
     transition: var(--transition);
 }
 
-.sidebar>*:first-child {
-    margin-top: 0;
+#aside-button-group {
+    display: flex;
+    margin: 0 10px 3em;
+    justify-content: space-around;
+}
+
+#aside-button-group div {
+    background-color: transparent;
+    flex: 1;
+    text-align: center;
+    padding: 5px 10px;
+    color: inherit;
+    font-weight: 500;
+    border: 2px solid var(--light-blue);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+#aside-button-group div:hover {
+    background-color: var(--light-gray);
+}
+
+#aside-button-toc {
+    border-radius: 50px 0 0 50px;
+}
+
+#aside-button-pages {
+    border-radius: 0 50px 50px 0;
+}
+
+#aside-button-group div.selected {
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+    cursor: default;
 }
 
 .sidebar-toggle {
     display: none;
-    background: var(--primary-blue);
-    color: white;
+    /* background: var(--primary-blue); */
+    border: 1px solid var(--border);
+    /* color: white; */
     width: 2em;
     height: 2em;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: var(--shadow);
+    /* box-shadow: var(--shadow); */
     align-items: center;
     justify-content: center;
 }
 
 .sidebar h3 {
     color: var(--secondary-blue);
-    font-size: 18px;
-    margin: 25px 0 15px 10px;
+    font-size: 1.05rem;
+    margin: 2.5em 0 1em 0.5em;
     padding-bottom: 8px;
     border-bottom: 2px solid var(--light-blue);
     position: relative;
+}
+
+.sidebar h3:first-child {
+    margin-top: 0;
 }
 
 .sidebar h3::after {
@@ -282,6 +326,15 @@ code {
 
 .sidebar ul {
     list-style: none;
+    margin-bottom: 1.5em;
+}
+
+.sidebar ul:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar ul ul ul {
+    padding-left: 1em;
 }
 
 .sidebar li {
@@ -311,7 +364,7 @@ code {
     font-family: 'Material Symbols Rounded';
     font-weight: normal;
     font-style: normal;
-    font-size: 24px;
+    font-size: 1.4rem;
     line-height: 1;
     letter-spacing: normal;
     text-transform: none;
@@ -344,6 +397,13 @@ code {
 }
 
 /* Article Styles */
+.article-container-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
 .article-container {
     flex: 1;
     padding: 0 30px 50px;
@@ -361,7 +421,7 @@ code {
 }
 
 .article-header h1 {
-    font-size: 42px;
+    font-size: 2.4rem;
     font-weight: 700;
     margin-bottom: 10px;
     font-family: var(--font-display);
@@ -374,7 +434,7 @@ code {
     color: white;
     padding: 5px 15px;
     border-radius: 50px;
-    font-size: 14px;
+    font-size: 0.8rem;
     font-weight: 600;
     margin-bottom: 15px;
 }
@@ -383,7 +443,8 @@ code {
     display: flex;
     gap: 20px;
     color: var(--medium-gray);
-    font-size: 15px;
+    font-size: 0.88rem;
+    font-weight: 500;
     margin-top: 20px;
 }
 
@@ -406,7 +467,7 @@ code {
 }
 
 .article-content {
-    font-size: 17px;
+    font-size: 1rem;
 }
 
 .article-content p {
@@ -418,8 +479,8 @@ code {
 .modal a {
     color: var(--primary-blue);
     text-decoration: none;
-    padding: 0 0.25em;
-    border-bottom: 1.5px dotted var(--medium-gray);
+    padding: 0 0.15em;
+    margin: 0 0.1em;
     transition: var(--transition);
 }
 
@@ -428,8 +489,12 @@ code {
     background-color: var(--light-blue);
 }
 
+.article-content a[data-key] {
+    border-bottom: 1.5px dotted var(--medium-gray);
+}
+
 .article-content h2 {
-    font-size: 32px;
+    font-size: 1.8rem;
     font-weight: 700;
     border-bottom: 2px solid var(--light-blue);
     padding-bottom: 8px;
@@ -450,7 +515,7 @@ code {
 }
 
 .article-content h3 {
-    font-size: 24px;
+    font-size: 1.4rem;
     margin: 30px 0 15px;
     color: var(--secondary-blue);
 }
@@ -463,7 +528,7 @@ code {
     margin: 0 0 20px 30px;
     padding: 20px;
     width: 300px;
-    font-size: 15px;
+    font-size: 0.88rem;
     box-shadow: var(--shadow);
     transition: var(--transition);
 }
@@ -476,7 +541,7 @@ code {
 .infobox-title {
     text-align: center;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 1.3rem;
     margin-bottom: 15px;
     color: var(--secondary-blue);
     padding-bottom: 10px;
@@ -512,7 +577,7 @@ code {
 .card {
     background: white;
     border-radius: var(--radius);
-    padding: 20px;
+    padding: 1em;
     box-shadow: var(--shadow);
     transition: var(--transition);
     border: 1px solid var(--border-color);
@@ -527,8 +592,8 @@ code {
 .card .card-icon {
     width: 100%;
     height: 180px;
-    border-radius: var(--radius);
-    margin-bottom: 15px;
+    border-radius: var(--radius-half);
+    margin-bottom: 0.8em;
     border: 1px solid var(--border-color);
     background: var(--gradient, linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)));
     color: white;
@@ -552,20 +617,20 @@ code {
 }
 
 .card h4 {
-    font-size: 20px;
+    font-size: 1.17rem;
     margin-bottom: 10px;
     color: var(--secondary-blue);
 }
 
 .references {
-    font-size: 15px;
+    font-size: 0.88rem;
     margin-top: 40px;
     border-top: 1px solid var(--border-color);
     padding-top: 25px;
 }
 
 .references h2 {
-    font-size: 28px;
+    font-size: 1.6rem;
     margin-bottom: 20px;
 }
 
@@ -618,12 +683,44 @@ code {
     color: var(--medium-gray);
 } */
 
+.article-pagination {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    padding: 0.5em;
+}
+
+.pag-button {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    font-weight: 500;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.pag-button:hover {
+    color: var(--primary-blue);
+    background-color: var(--light-blue);
+}
+
+.pag-bar {
+    width: 0;
+    border-right: 1px dashed var(--border-color);
+    height: 100%;
+}
+
 /* Footer Styles */
 footer {
     background: var(--secondary-blue);
     color: white;
     padding: 50px 0 30px;
-    font-size: 15px;
+    font-size: 0.88rem;
 }
 
 .footer-content {
@@ -636,7 +733,7 @@ footer {
 }
 
 .footer-section h3 {
-    font-size: 20px;
+    font-size: 1.17rem;
     margin-bottom: 25px;
     position: relative;
     padding-bottom: 10px;
@@ -684,7 +781,7 @@ footer {
     padding-top: 40px;
     margin-top: 40px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 14px;
+    font-size: 0.8rem;
     color: #a7d7f9;
 }
 
@@ -717,18 +814,18 @@ footer {
 
 .preview-title {
     display: none;
-    font-size: 18px;
+    font-size: 1.05rem;
     font-weight: bold;
 }
 
 .preview-description {
-    font-size: 14px;
+    font-size: 0.8rem;
     color: var(--dark-gray);
     text-align: justify;
 }
 
 .preview-reference {
-    font-size: 12px;
+    font-size: 0.7rem;
     color: var(--medium-gray);
     margin-top: 5px;
     text-align: right;
@@ -759,22 +856,79 @@ mark.small {
     color: inherit;
 }
 
-mark.big::before {
+mark.big:not([data-solo])::before {
     content: '大／';
 }
 
-mark.middle::before {
+mark.middle:not([data-solo])::before {
     content: '中／';
 }
 
-mark.small::before {
+mark.small:not([data-solo])::before {
     content: '小／';
+}
+
+:not(:lang(zh-tw))>ruby+ruby {
+    margin-left: 0.4em;
+}
+
+:not(:lang(zh-tw))>ruby rt {
+    font-size: 0.7em;
+    font-weight: 500;
+    padding-bottom: 0.3em;
+}
+
+.rubyWrapper {
+    display: contents;
+}
+
+ruby rt:empty {
+    display: none;
+}
+
+ruby rt sup {
+    position: relative;
+    line-height: 0;
+    vertical-align: baseline;
+}
+
+ruby {
+    font-family: 'ZutekSans', 'Bpmf', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.2em;
+}
+
+ruby rt {
+    display: inline-block;
+    color: var(--border);
+    font-size: 0.4em;
+    font-weight: 500;
+    max-height: 3em;
+    writing-mode: vertical-rl;
+    margin-left: 0.2em
+}
+
+ruby rt sup {
+    font-size: 1em;
+    top: -1em;
+    left: 0.8em;
+    writing-mode: horizontal-tb;
+    margin-right: 0.5em;
+}
+
+ruby rt sub {
+    display: block;
+    text-align: center;
+    margin-top: -0.75em;
+    font-size: 1em;
 }
 
 /* Responsive adjustments */
 @media (max-width: 1100px) {
     .sidebar {
-        width: 220px;
+        min-width: 220px;
+        width: 25dvw;
     }
 
     .infobox {
@@ -788,20 +942,23 @@ mark.small::before {
     }
 
     .sidebar {
+        --width: calc(100dvh - 20px);
         position: fixed;
         top: 10px;
-        right: -300px;
+        right: calc(-1 * var(--width));
         left: unset;
-        height: calc(100dvh - 20px);
+        width: 70dvw;
+        height: var(--width);
         z-index: 3;
     }
 
     .overlay {
-        position: absolute;
+        position: fixed;
         z-index: 2;
         width: 100dvw;
         height: 100dvh;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(5px);
         opacity: 0;
         transition: var(--transition);
     }
@@ -820,7 +977,7 @@ mark.small::before {
         display: flex;
     }
 
-    .article-container {
+    .article-container:not(.article-pagination) {
         padding: 0 20px 40px;
         margin: 0 auto;
     }
@@ -833,6 +990,10 @@ mark.small::before {
 }
 
 @media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+
     .search-container {
         max-width: 100%;
     }
@@ -842,16 +1003,12 @@ mark.small::before {
         justify-content: center;
     }
 
-    .article-header h1 {
-        font-size: 32px;
-    }
-
-    .article-content h2 {
-        font-size: 28px;
+    .article-container-group {
+        gap: 0.6em;
     }
 
     .container {
-        padding: 10px;
+        padding: 0.7em;
     }
 
     .preview-box {
