@@ -1,0 +1,49 @@
+{
+    "deck": {
+        "display": "匿者牌堆",
+        "title": "h3",
+        "url": "../deck/",
+        "children": {
+            "time": {
+                "display": "時賞令"
+            },
+            "perm": {
+                "display": "權能牌",
+                "title": "a",
+                "children": {
+                    "perm-def": {
+                        "display": "利己權能牌"
+                    },
+                    "perm-atk": {
+                        "display": "制約權能牌"
+                    }
+                }
+            }
+        }
+    },
+    "6qs": {
+        "display": "六大詰問",
+        "title": "h3",
+        "url": "../6qs/",
+        "children": {
+            "match": {
+                "display": "異同之問"
+            },
+            "distance": {
+                "display": "遠近之問"
+            },
+            "apart": {
+                "display": "項背之問"
+            },
+            "radar": {
+                "display": "環偵之問"
+            },
+            "tentacle": {
+                "display": "鎖域之問"
+            },
+            "photo": {
+                "display": "採樣之問"
+            }
+        }
+    }
+}

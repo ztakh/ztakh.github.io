@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Questions | Hide + Seek / ZTAKH.LOL</title>
+    <meta name="description" content="">
+    <!-- <link rel="icon" type="image/x-icon" href="/image/favicon.ico"> -->
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+        .chat-bubble {
+            margin-bottom: 2em;
+        }
+
+        .chat-bubble>div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+
+        .chat-bubble>div+div {
+            margin-top: 1em;
+        }
+
+        .chat-bubble>div>div {
+            font-size: 1.3em;
+            min-width: 2em;
+            max-width: 2em;
+            height: 2em;
+            text-align: center;
+            background-color: var(--medium-gray);
+            color: white;
+            font-weight: 500;
+            line-height: 2em;
+            border-radius: 50px;
+        }
+
+        .chat-bubble>div>p {
+            margin: 0;
+            border: 1px solid var(--border-color);
+            padding: 0.3em 1em;
+            border-radius: 1.5rem;
+        }
+
+        .chat-bubble>div:last-child {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+        }
+
+        .chat-bubble>div:last-child>div {
+            background-color: var(--light-gray);
+            color: var(--secondary-blue)
+        }
+
+        .chat-bubble>div:last-child>p {
+            border-color: var(--light-gray);
+        }
+
+        .table-container {
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .chat-bubble>div {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+    <div class="container">
+        <aside data-toc="../toc.json"></aside>
+        <div class="article-container-group">
+            <main class="article-container">
+                <div class="article-header">
+                    <!-- <span class="article-tag">道具</span> -->
+                    <h1>六大詰問</h1>
+                    <div class="article-actions-holder">
+                        <div class="article-actions">
+                            <a draggable="false"><span class="material-symbols-rounded">download_2</span> 下載 PDF</a>
+                            <a draggable="false"><span class="material-symbols-rounded">aspect_ratio</span> 選擇品等</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-banner" style="--gradient: linear-gradient(135deg, #8d2a8b, #5c33cc)">
+                    <span class="material-symbols-rounded">join</span>
+                    <span class="material-symbols-rounded">social_distance</span>
+                    <span class="material-symbols-rounded">move_location</span>
+                    <span class="material-symbols-rounded">radar</span>
+                    <span class="material-symbols-rounded">detection_and_zone</span>
+                    <span class="material-symbols-rounded">photo</span>
+                </div>
+                <div class="article-content">
+                    <h2 id="match">其一　異同之問</h2>
+                    <div class="chat-bubble">
+                        <div>
+                            <div>尋</div>
+                            <p>距離我們最近的「甲」都是「乙」嗎？</p>
+                        </div>
+                        <div>
+                            <div>匿</div>
+                            <p>是／否</p>
+                        </div>
+                    </div>
+                    <figure class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style=" width: 50%">甲</th>
+                                    <th>乙</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>捷運路線，包含輕軌</td>
+                                    <td><span>淡水信義線</span>、<span>桃園機場捷運</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>國際機場</td>
+                                    <td><span>臺灣桃園國際機場</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>路街道</td>
+                                    <td><span>凱達格蘭大道</span>、<span>忠孝東路</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>第一級行政區<small>（省、直轄市）</small></td>
+                                    <td><span>臺灣省</span>、<span>福建省</span>、<span>臺北市</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>第二級行政區<small>（縣、省轄市）</small></td>
+                                    <td><span>宜蘭縣</span>、<span>連江縣</span>、<span>基隆市</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>第三級行政區<small>（鄉、鎮、縣轄市、區）</small></td>
+                                    <td><span>中正區</span>、<span>和平區</span>、<span>蘭嶼鄉</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>第四級行政區<small>（村或里）</small></td>
+                                    <td><span>三民里</span>、<span>圓山里</span>、<span>龍潭村</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>山</td>
+                                    <td><span>陽明山</span>、<span>八卦山</span>、<span>礮臺山</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>公園</td>
+                                    <td><span>八里左岸公園</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>大學</td>
+                                    <td><span>臺大</span>、<span>臺師大</span>、<span>臺科大</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>夜市</td>
+                                    <td><span>士林夜市</span>、<span>寧夏夜市</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>百貨公司</td>
+                                    <td><span>新光三越臺北站前店</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>書局</td>
+                                    <td><span>誠品生活西門</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>圖書館</td>
+                                    <td><span>國市立圖書館</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>博物館</td>
+                                    <td><span>臺灣博物館</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>電影院</td>
+                                    <td><span>威秀影城</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>醫院</td>
+                                    <td><span>三軍總醫院</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>港口</td>
+                                    <td><span>基隆港</span>、<span>臺中港</span>、<span>高雄港</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>活動中心</td>
+                                    <td><span>某區活動中心</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>雕像</td>
+                                    <td><span>彌勒佛雕像</span>等</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </figure>
+                    <h2 id="distance">其二　遠近之問</h2>
+                    <div class="chat-bubble">
+                        <div>
+                            <div>尋</div>
+                            <p>我距離「甲」「距離」；你離「甲」更近還是更遠？</p>
+                        </div>
+                        <div>
+                            <div>匿</div>
+                            <p>近／遠</p>
+                        </div>
+                    </div>
+                    <figure class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%">類別</th>
+                                    <th>甲</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span>捷運車站</span>，<span>包含輕軌</span></td>
+                                    <td><span>淡水站</span>、<span>新店站</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td><span>臺鐵車站</span>或<span>高鐵車站</span></td>
+                                    <td><span>臺北站</span>、<span>板橋站</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>國際機場</td>
+                                    <td><span>臺灣桃園國際機場</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>第一級行政區邊界</td>
+                                    <td><span>臺灣省界</span>、<span>臺北市界</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>第二級行政區邊界</td>
+                                    <td><span>宜蘭縣界</span>、<span>基隆市界</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>海拔*</td>
+                                    <td>※ 應詢問海拔更高或更低</td>
+                                </tr>
+                                <tr>
+                                    <td>自然水域</td>
+                                    <td><span>臺灣海峽</span>、<span>淡水河</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>山</td>
+                                    <td><span>圓山</span>、<span>象山</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>公園</td>
+                                    <td><span>新北大都會公園</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>大學</td>
+                                    <td><span>臺大</span>、<span>臺師大</span>、<span>臺科大</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>夜市</td>
+                                    <td><span>基隆廟口夜市</span>、<span>桃園觀光夜市</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>百貨公司</td>
+                                    <td><span>統一時代百貨臺北店</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>書局</td>
+                                    <td><span>墊腳石臺北重南店</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>圖書館</td>
+                                    <td><span>國立市立圖書館</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>博物館</td>
+                                    <td><span>郵政博物館</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>電影院</td>
+                                    <td><span>秀泰影城</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>醫院</td>
+                                    <td><span>馬偕紀念醫院</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>港口</td>
+                                    <td><span>基隆港</span>、<span>臺中港</span>、<span>高雄港</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>活動中心</td>
+                                    <td><span>某區活動中心</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>雕像</td>
+                                    <td><span>琉球漁民慰靈碑</span>等</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </figure>
+                    <h2 id="apart">其三　項背之問</h2>
+                    <div class="chat-bubble">
+                        <div>
+                            <div>尋</div>
+                            <p>剛剛移動了（至少）「甲」，我現在是項還是背？</p>
+                        </div>
+                        <div>
+                            <div>匿</div>
+                            <p>項／背</p>
+                        </div>
+                    </div>
+                    <figure class="table-container">
+                        <table class="custom">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">甲</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: right; width: 50%">800.0</td>
+                                    <td style="text-align: justify">公尺</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">4.8</td>
+                                    <td style="text-align: justify">公里</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">16.0</td>
+                                    <td style="text-align: justify">公里</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">80.0</td>
+                                    <td style="text-align: justify">公里</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </figure>
+                    <h2 id="radar">其四　環偵之問</h2>
+                    <div class="chat-bubble">
+                        <div>
+                            <div>尋</div>
+                            <p>你是否距離我「甲」以內？</p>
+                        </div>
+                        <div>
+                            <div>匿</div>
+                            <p>是／否</p>
+                        </div>
+                    </div>
+                    <figure class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="2">甲</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:right; width: 50%">400.0</td>
+                                    <td style="text-align: justify;">公尺</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">800.0</td>
+                                    <td style="text-align: justify;">公尺</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">1.6</td>
+                                    <td style="text-align: justify;">公里</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">4.8</td>
+                                    <td style="text-align: justify;">公里</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">8.0</td>
+                                    <td style="text-align: justify;">公里</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">16.0</td>
+                                    <td style="text-align: justify;">公里</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">40.0</td>
+                                    <td style="text-align: justify;">公里</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">80.0</td>
+                                    <td style="text-align: justify;">公里</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">160.0</td>
+                                    <td style="text-align: justify;">公里</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:center;">任意距離</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </figure>
+                    <h2 id="tentacle">其五　鎖域之問</h2>
+                    <div class="chat-bubble">
+                        <div>
+                            <div>尋</div>
+                            <p>我方圓半徑「甲」公里內的「乙」哪個離你最近？</p>
+                        </div>
+                        <div>
+                            <div>匿</div>
+                            <p>*名稱*</p>
+                        </div>
+                    </div>
+                    <figure class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%">乙</th>
+                                    <th>例如</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>公園</td>
+                                    <td><span>陽光運動公園</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>大學</td>
+                                    <td><span>淡江大學</span>、<span>輔仁大學</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>夜市</td>
+                                    <td><span>師大夜市</span>、<span>公館夜市</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>百貨公司</td>
+                                    <td><span>遠東百貨板橋中山店</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>山</td>
+                                    <td><span>劍潭山</span>、<span>芝山巖</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>電影院</td>
+                                    <td><span>微風影城</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>博物館</td>
+                                    <td><span>自來水博物館</span>等</td>
+                                </tr>
+                                <tr>
+                                    <td>活動中心</td>
+                                    <td><span>某區活動中心</span>等</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </figure>
+                    <h2 id="photo">其六　採樣之問</h2>
+                    <div class="chat-bubble">
+                        <div>
+                            <div>尋</div>
+                            <p>給我一張「甲」。</p>
+                        </div>
+                        <div>
+                            <div>匿</div>
+                            <p>*圖片*</p>
+                        </div>
+                    </div>
+                    <figure class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>甲</th>
+                                    <th>拍攝要求</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="min-width: 4em"><span>區域中樞</span>附近<span>任何建築</span></td>
+                                    <td style="text-align: justify;">佇於車站任何出口，拍出建築物屋頂及兩側，且屋頂應位於照片頂端 ⅓ 處。</td>
+                                </tr>
+                                <tr>
+                                    <td>至闊康衢</td>
+                                    <td style="text-align: justify;">拍出最寬大道兩側。</td>
+                                </tr>
+                                <tr>
+                                    <td>行道樹</td>
+                                    <td style="text-align: justify;">整棵樹都須入鏡。</td>
+                                </tr>
+                                <tr>
+                                    <td>目及<span>至高大廈</span></td>
+                                    <td style="text-align: justify;">匿者角度出發之任何主觀認定最高大樓，應含屋頂及兩側，且屋頂應位於照片頂端 ⅓ 處。</td>
+                                </tr>
+                                <tr>
+                                    <td>匿者視角</td>
+                                    <td style="text-align: justify;">豎置手機於頭頂向前拍攝，不調參數，須垂直地面。</td>
+                                </tr>
+                                <tr>
+                                    <td>水溝蓋<span>視角</span></td>
+                                    <td style="text-align: justify;">於戶外平置手機於地面向上拍攝，不調參數。</td>
+                                </tr>
+                                <tr>
+                                    <td><span>區域中樞</span>附近<span>至高大廈</span></td>
+                                    <td style="text-align: justify;">佇於車站任何出口，拍出主觀認定除車站外最高大樓屋頂及兩側，且屋頂應位於照片頂端 ⅓ 處。</td>
+                                </tr>
+                                <tr>
+                                    <td>雙樓並影</td>
+                                    <td style="text-align: justify;">至少含 2 棟大樓之 1 至 4 樓，且屋頂應位於照片頂端 ⅓ 處。</td>
+                                </tr>
+                                <tr>
+                                    <td>商家店鋪</td>
+                                    <td style="text-align: justify;">至少含 1 爿有窗之店，並拍出店內及周遭。</td>
+                                </tr>
+                                <tr>
+                                    <td>公園</td>
+                                    <td rowspan="2" style="text-align: justify;">面向公園／廟宇，豎置手機於頭頂向前拍攝，垂直地面，不調參數，無遮蔽物。</td>
+                                </tr>
+                                <tr>
+                                    <td>廟宇</td>
+                                </tr>
+                                <tr>
+                                    <td><span>區域中樞</span><span>月臺</span></td>
+                                    <td style="text-align: justify;">至少含 3 件可辨識之物體。</td>
+                                </tr>
+                                <tr>
+                                    <td>電線桿</td>
+                                    <td style="text-align: justify;">將電線桿拍全。</td>
+                                </tr>
+                                <tr>
+                                    <td>交叉路口</td>
+                                    <td style="text-align: justify;">應含所有車道。</td>
+                                </tr>
+                                <tr>
+                                    <td><span>區域中樞</span>附近<span>最高山巔</span></td>
+                                    <td style="text-align: justify;">佇於車站任意出口拍攝主觀認定最高之峰，山頂應位於照片頂端 ⅓ 處。</td>
+                                </tr>
+                                <tr>
+                                    <td>最廣<span>自然水域</span></td>
+                                    <td style="text-align: justify;">應含兩側岸邊及地平線，最多 3 倍焦距。</td>
+                                </tr>
+                                <tr>
+                                    <td>五樓連影</td>
+                                    <td style="text-align: justify;">應至少含 5 棟樓宇之 1 至 4 樓，且屋頂應位於照片頂端 ⅓ 處。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </figure>
+                </div>
+            </main>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="/hideandseek/includes/includes.js"></script>
+</body>
+
+</html>

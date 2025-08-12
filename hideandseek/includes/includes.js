@@ -39,11 +39,21 @@ fetch('/hideandseek/includes/lawPreview.json')
             previewDescription.textContent = content;
             previewReference.textContent = reference;
 
-            const linkRect = e.target.getBoundingClientRect();
-            previewBox.style.top = `${linkRect.bottom + window.scrollY + 5}px`;
-            previewBox.style.left = `${linkRect.left + window.scrollX}px`;
-
             return previewBox;
+        }
+
+        function positionPreviewBox(e, previewBox) {
+            const linkRect = e.target.getBoundingClientRect();
+
+            const previewBoxTop = linkRect.bottom + window.scrollY + 5;
+            let previewBoxLeft = linkRect.left + window.scrollX;
+
+            if (previewBoxLeft + previewBox.offsetWidth > window.innerWidth) {
+                previewBoxLeft = linkRect.right + window.scrollX - previewBox.offsetWidth;
+            }
+
+            previewBox.style.top = `${previewBoxTop}px`;
+            previewBox.style.left = `${previewBoxLeft}px`;
         }
 
         function handleMobileClick(e) {
@@ -53,6 +63,9 @@ fetch('/hideandseek/includes/lawPreview.json')
             if (!previewBox) return;
 
             document.body.append(previewBox);
+
+            positionPreviewBox(e, previewBox);
+
             setTimeout(() => previewBox.classList.add("visible"), 10);
 
             const closePreview = (event) => {
@@ -72,6 +85,9 @@ fetch('/hideandseek/includes/lawPreview.json')
             if (!previewBox) return;
 
             document.body.append(previewBox);
+
+            positionPreviewBox(e, previewBox);
+
             setTimeout(() => previewBox.classList.add("visible"), 10);
 
             e.target.addEventListener("mouseleave", function () {
@@ -136,9 +152,11 @@ function addShareModal() {
 
 function initialiseShareButton() {
     const articleActions = document.querySelectorAll('.article-actions')[0];
-    if (articleActions) {
-        articleActions.innerHTML += `<a draggable="false" onclick="openModal('qrcode')"><span class="material-symbols-rounded">share</span> 分享</a>`;
+    if (!articleActions) {
+        return;
     }
+
+    articleActions.innerHTML += `<a draggable="false" onclick="openModal('qrcode')"><span class="material-symbols-rounded">share</span> 分享</a>`;
 
     const modal = document.createElement('div');
     modal.classList.add('modal');
@@ -193,6 +211,54 @@ function headerScript() {
     loadHTML('aside', '/hideandseek/includes/aside.html');
 }
 
+function loadPag(mainParent, data) {
+    const pages = Object.keys(data);
+
+    const currentPath = window.location.pathname.replace(/\/$/, '');
+    const currentPage = currentPath.split('/').pop();
+
+    const currentPageIndex = pages.indexOf(currentPage);
+    if (currentPageIndex === -1) return;
+
+    const prevPage = currentPageIndex > 0 ? `../${pages[currentPageIndex - 1]}/` : null;
+    const nextPage = currentPageIndex < pages.length - 1 ? `../${pages[currentPageIndex + 1]}/` : null;
+
+    const nav = document.createElement('nav');
+    nav.classList.add('article-container', 'article-pagination');
+
+    const prevLink = document.createElement('a');
+    prevLink.classList.add('pag-button');
+    prevLink.draggable = 'false';
+
+    const nextLink = document.createElement('a');
+    nextLink.classList.add('pag-button');
+    nextLink.draggable = 'false';
+
+    const pagBar = document.createElement('div');
+
+    pagBar.classList.add('pag-bar');
+
+    if (prevPage) {
+        prevLink.setAttribute('href', prevPage);
+    } else {
+        prevLink.classList.add('disabled');
+    }
+    prevLink.innerHTML = '<span class="material-symbols-rounded">arrow_left_alt</span>前頁';
+
+    if (nextPage) {
+        nextLink.setAttribute('href', nextPage);
+    } else {
+        nextLink.classList.add('disabled');
+    }
+    nextLink.innerHTML = '後頁<span class="material-symbols-rounded">arrow_right_alt</span>';
+
+    nav.appendChild(prevLink);
+    nav.appendChild(pagBar);
+    nav.appendChild(nextLink);
+
+    mainParent.appendChild(nav);
+}
+
 function asideScript() {
     document.querySelector('aside').classList.add('sidebar');
 
@@ -228,130 +294,103 @@ function asideScript() {
         document.getElementById('aside-button-group').remove();
         document.getElementById('aside-toc').remove();
         document.getElementById('aside-pages').style.display = 'block';
-    } else {
-        const toc = aside.getAttribute('data-toc');
-        let curUrl = '';
+        return;
+    }
 
-        function generateTOC(data, parentKey = '') {
-            let tocHTML = '<ul>';
+    const toc = aside.getAttribute('data-toc');
+    let curUrl = '';
 
-            for (let key in data) {
-                const section = data[key];
+    function generateTOC(data, parentKey = '') {
+        let tocHTML = '<ul>';
 
-                if (section.url)
-                    curUrl = section.url;
+        for (let key in data) {
+            const section = data[key];
 
-                const sectionUrl = curUrl + '#' + key;
+            if (section.url)
+                curUrl = section.url;
 
-                if (section.title) {
-                    tocHTML += `<${section.title} href="${sectionUrl}">${section.display}</${section.title}>`;
-                } else {
-                    tocHTML += `<li><a href="${sectionUrl}" draggable="false">${section.display}</a>`;
-                }
+            const sectionUrl = curUrl + '#' + key;
 
-                if (section.children) {
-                    tocHTML += generateTOC(section.children, key);
-                }
-
-                tocHTML += '</li>';
+            if (section.title) {
+                tocHTML += `<${section.title} href="${sectionUrl}">${section.display}</${section.title}>`;
+            } else {
+                tocHTML += `<li><a href="${sectionUrl}" draggable="false">${section.display}</a>`;
             }
 
-            tocHTML += '</ul>';
-            return tocHTML;
+            if (section.children) {
+                tocHTML += generateTOC(section.children, key);
+            }
+
+            tocHTML += '</li>';
         }
 
-        fetch(toc)
-            .then(response => {
-                if (!response.ok) throw new Error(`Failed to load ${file}`);
-                return response.json();
-            })
-            .then(data => {
-                document.getElementById('aside-toc').innerHTML = generateTOC(data);
-            })
-            .catch(error => console.error('Error loading JSON:', error));
-
-        const tocDiv = document.getElementById('aside-toc');
-        const pagesDiv = document.getElementById('aside-pages');
-        const tocBtn = document.getElementById('aside-button-toc');
-        const pagesBtn = document.getElementById('aside-button-pages');
-
-        function switchTabs(isToc) {
-            tocBtn.classList.toggle('selected', isToc);
-            pagesBtn.classList.toggle('selected', !isToc);
-            tocDiv.style.display = isToc ? 'block' : 'none';
-            pagesDiv.style.display = !isToc ? 'block' : 'none';
-        }
-
-        document.getElementById('aside-button-pages').addEventListener('click', function (e) {
-            switchTabs(false);
-        });
-
-        document.getElementById('aside-button-toc').addEventListener('click', function (e) {
-            switchTabs(true);
-        });
+        tocHTML += '</ul>';
+        return tocHTML;
     }
+
+    fetch(toc)
+        .then(response => {
+            if (!response.ok) throw new Error(`Failed to load ${file}`);
+            return response.json();
+        })
+        .then(data => {
+            const asideToc = document.getElementById('aside-toc');
+            asideToc.innerHTML = generateTOC(data);
+            asideToc.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    const targetId = link.getAttribute('href').split('#')[1];
+
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            const mainParent = document.getElementsByClassName('article-container-group')[0];
+            loadPag(mainParent, data);
+        })
+        .catch(error => console.error('Error loading JSON:', error));
+
+    const tocDiv = document.getElementById('aside-toc');
+    const pagesDiv = document.getElementById('aside-pages');
+    const tocBtn = document.getElementById('aside-button-toc');
+    const pagesBtn = document.getElementById('aside-button-pages');
+
+    function switchTabs(isToc) {
+        tocBtn.classList.toggle('selected', isToc);
+        pagesBtn.classList.toggle('selected', !isToc);
+        tocDiv.style.display = isToc ? 'block' : 'none';
+        pagesDiv.style.display = !isToc ? 'block' : 'none';
+    }
+
+    document.getElementById('aside-button-pages').addEventListener('click', function (e) {
+        switchTabs(false);
+    });
+
+    document.getElementById('aside-button-toc').addEventListener('click', function (e) {
+        switchTabs(true);
+    });
+}
+
+function scrollToId() {
+    if (!window.location.hash)
+        return;
+
+    const hash = window.location.hash;
+
+    const targetElement = document.querySelector(hash);
+    if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    history.pushState('', document.title, window.location.pathname + window.location.search);
 }
 
 function footerScript() {
     setTimeout(() => {
         scrollToKey();
-    }, 500);
-}
-
-function loadPag(mainParent, pages) {
-    const currentPath = window.location.pathname.replace(/\/$/, '');
-    const currentPage = currentPath.split('/').pop();
-
-    const currentPageIndex = pages.indexOf(currentPage);
-    if (currentPageIndex === -1) return;
-
-    const prevPage = currentPageIndex > 0 ? `../${pages[currentPageIndex - 1]}/` : null;
-    const nextPage = currentPageIndex < pages.length - 1 ? `../${pages[currentPageIndex + 1]}/` : null;
-
-    const nav = document.createElement('nav');
-    nav.classList.add('article-container', 'article-pagination');
-
-    const prevLink = document.createElement('a');
-    prevLink.classList.add('pag-button');
-
-    const nextLink = document.createElement('a');
-    nextLink.classList.add('pag-button');
-
-    const pagBar = document.createElement('div');
-
-    pagBar.classList.add('pag-bar');
-
-    if (prevPage) {
-        prevLink.setAttribute('href', prevPage);
-    } else {
-        prevLink.classList.add('disabled');
-    }
-    prevLink.innerHTML = '<span class="material-symbols-rounded">arrow_left_alt</span>前頁';
-
-    if (nextPage) {
-        nextLink.setAttribute('href', nextPage);
-    } else {
-        nextLink.classList.add('disabled');
-    }
-    nextLink.innerHTML = '後頁<span class="material-symbols-rounded">arrow_right_alt</span>';
-
-    nav.appendChild(prevLink);
-    nav.appendChild(pagBar);
-    nav.appendChild(nextLink);
-
-    mainParent.appendChild(nav);
-}
-
-const mainParent = document.getElementsByClassName('article-container-group')[0];
-
-if (mainParent.hasAttribute('data-pag')) {
-    fetch(mainParent.getAttribute('data-pag'))
-        .then(response => {
-            if (!response.ok) throw new Error(`Failed to load ${toc}`);
-            return response.json();
-        })
-        .then(data => {
-            loadPag(mainParent, data);
-        })
-        .catch(error => console.error('Error loading JSON:', error));
+        scrollToId();
+    }, 100);
 }
