@@ -8,6 +8,11 @@
     <meta name="description" content="">
     <!-- <link rel="icon" type="image/x-icon" href="/image/favicon.ico"> -->
     <link rel="stylesheet" href="/style.css" />
+    <style>
+        .article-container-group .material-symbols-rounded {
+            margin: 0 0.2em;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,18 +21,26 @@
         <aside></aside>
         <div class="article-container-group">
             <main class="article-container">
-                <div class="article-header">
+                <div class="article-header" style="margin-bottom: 0;">
                     <!-- <span class="article-tag">Strategy Board Game</span> -->
-                    <h1 style="display: flex;flex-direction: row;align-items: center;"><span class="material-symbols-rounded">skull</span><span class="material-symbols-rounded">pageview</span><span style="margin-left: 0.25em;">404</span></h1>
+                    <h1 style="display: flex; flex-direction: row; align-items: center; justify-content: center;"><span class="material-symbols-rounded">skull</span> 404 <span class="material-symbols-rounded">pageview</span></h1>
                 </div>
                 <div class="article-content">
-                    <p>所輸網址不存在⋯⋯</p>
+                    <p style="margin: 0; text-align: center;"><code id="errorUrl"></code> <span style="white-space: nowrap;">不存在⋯⋯</span></p>
                 </div>
             </main>
+            <nav class="article-container article-pagination">
+                <a class="pag-button" draggable="true" onclick="history.back()"><span class="material-symbols-rounded">undo</span>返回上頁</a>
+                <div class="pag-bar"></div>
+                <a class="pag-button" draggable="true"><span class="material-symbols-rounded">home</span>回主頁</a>
+            </nav>
         </div>
     </div>
     <footer></footer>
     <script src="/hideandseek/includes/includes.js"></script>
+    <script>
+        document.getElementById('errorUrl').textContent = 'https://ztakh.lol' + window.location.pathname;
+    </script>
 </body>
 
 </html>

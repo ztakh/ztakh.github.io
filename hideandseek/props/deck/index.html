@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deck of Cards | Hide + Seek / ZTAKH.LOL</title>
+    <meta name="description" content="">
+    <!-- <link rel="icon" type="image/x-icon" href="/image/favicon.ico"> -->
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/hideandseek/rulebook/stylesheet.css" />
+    <style>
+        .time-card-icon {
+            font-size: 5em;
+            font-style: italic;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+    <div class="container">
+        <aside data-toc="../toc.json"></aside>
+        <div class="article-container-group">
+            <div class="article-container article-banner" style="--gradient: linear-gradient(135deg, #71cc33, #2d8d2a)">
+                <span class="material-symbols-rounded">more_time</span>
+                <span class="material-symbols-rounded">cards_star</span>
+                <span class="material-symbols-rounded">stack_hexagon</span>
+            </div>
+            <main class="article-container">
+                <div class="article-header">
+                    <!-- <span class="article-tag">道具</span> -->
+                    <h1>匿者牌堆</h1>
+                    <div class="article-actions-holder">
+                        <div class="article-actions">
+                            <a id="mapSelect-btn" draggable="false"><span class="material-symbols-rounded">aspect_ratio</span> <span><span id="mapSelect-label"></span>品等</span></a>
+                            <a draggable="false"><span class="material-symbols-rounded">download_2</span> 下載 PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-content">
+                    <h2 id="time">時賞令</h2>
+                    <p><a draggable="false" data-key="a5p4">局末</a>時，<a draggable="false" data-key="a23p1-hand">手執</a>全部時賞將計入<a draggable="false" data-key="a15">藏匿時間</a>。</p>
+                    <div class="game-cards">
+                        <div class="card">
+                            <div class="card-icon" style="background: olivedrab;">
+                                <span class="time-card-icon">1</span>
+                            </div>
+                            <h4>一倍時賞令</h4>
+                            <p class="text-centre">+2 分鐘</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: olivedrab;">
+                                <span class="time-card-icon">2</span>
+                            </div>
+                            <h4>雙倍時賞令</h4>
+                            <p class="text-centre">+4 分鐘</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: olivedrab;">
+                                <span class="time-card-icon">3</span>
+                            </div>
+                            <h4>三倍時賞令</h4>
+                            <p class="text-centre">+6 分鐘</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: olivedrab;">
+                                <span class="time-card-icon">4</span>
+                            </div>
+                            <h4>四倍時賞令</h4>
+                            <p class="text-centre">+8 分鐘</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: olivedrab;">
+                                <span class="time-card-icon">6</span>
+                            </div>
+                            <h4>六倍時賞令</h4>
+                            <p class="text-centre">+12 分鐘</p>
+                        </div>
+                    </div>
+                    <h2 id="perm">權能牌</h2>
+                    <h3 id="perm-def">利己權能牌</h3>
+                    <div class="game-cards">
+                        <div class="card">
+                            <div class="card-icon" style="background: coral;">
+                                <span class="material-symbols-rounded">person_cancel</span>
+                            </div>
+                            <h4>迴避</h4>
+                            <p>抵銷<a draggable="false" data-key="a9p1">答題義務</a>，不獲<a draggable="false" data-key="a9p2">掣牌權</a>。</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: cadetblue;">
+                                <span class="material-symbols-rounded">change_circle</span>
+                            </div>
+                            <h4>換題</h4>
+                            <p>尋差須利用亂數產生器自原詰問類型重新選新題目。原問題不視為答畢，故應納入樣本空間。</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: cadetblue;">
+                                <span class="material-symbols-rounded">delete_sweep</span>
+                            </div>
+                            <h4>返還 1</h4>
+                            <p><a draggable="false" data-key="a23p3">返還</a><a draggable="false" data-key="a23p1-hand">手執</a>任何牌令 1 張，並掣取 2 張新牌令。請留意返還規則。</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: cadetblue;">
+                                <span class="material-symbols-rounded">delete_sweep</span>
+                            </div>
+                            <h4>返還 2</h4>
+                            <p><a draggable="false" data-key="a23p3">返還</a><a draggable="false" data-key="a23p1-hand">手執</a>任何牌令 2 張，並掣取 3 張新牌令。請留意返還規則。</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: cadetblue;">
+                                <span class="material-symbols-rounded">note_stack_add</span>
+                            </div>
+                            <h4>擴增</h4>
+                            <p><a draggable="false" data-key="a23p1-limit">執牌定額</a>上限拓容 1 張。</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: cadetblue;">
+                                <span class="material-symbols-rounded">content_copy</span>
+                            </div>
+                            <h4>摹形</h4>
+                            <p>複製<a draggable="false" data-key="a23p1-hand">手執</a>任何牌令。</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: cadetblue;">
+                                <span class="material-symbols-rounded">move</span>
+                            </div>
+                            <h4>遷徙</h4>
+                            <p>立即暫停該<a draggable="false" data-key="a5p4">局</a>，尋差原地停止移動。匿者獲 <span class="forS">10</span><span class="forM">20</span><span class="forL">60</span> 分鐘移動時間至新<a draggable="false" data-key="a14p2">匿域中樞</a>。</p>
+                        </div>
+                    </div>
+                    <h3 id="perm-atk">制約權能牌</h3>
+                    <div class="game-cards">
+                        <a href="/hideandseek/rulebook/spep/#car" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">directions_car</span>
+                            </div>
+                            <h4>出示載具</h4>
+                            <p>拍攝 1 輛車，尋差須回拍 1 輛更貴的車。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#bridge" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">looks</span>
+                            </div>
+                            <h4>橋一下</h4>
+                            <p>尋差下回詰問時須位於橋下。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#noask" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">mic_off</span>
+                            </div>
+                            <h4>非請勿問</h4>
+                            <p>任選 3 道題禁止尋差詢問。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#water" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">water_full</span>
+                            </div>
+                            <h4>負水難走</h4>
+                            <p>尋差須揹負 2 公升溶液進行遊戲，未獲取前不得詰問。倘溶液遺失，則匿者獲得 <span class="forS">30</span><span class="forM">30</span><span class="forL">60</span> 分鐘時賞。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#bug" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">owl</span>
+                            </div>
+                            <h4>特攝</h4>
+                            <p>拍攝 1 隻有效生物，尋差須回拍 1 隻同分類之有效生物。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#egg" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">egg</span>
+                            </div>
+                            <h4>完美蛋侶</h4>
+                            <p>尋差須攜帶 1 顆蛋進行遊戲，未獲取前不得詰問。倘蛋遺失或破損，則匿者獲得 <span class="forS">30</span><span class="forM">45</span><span class="forL">60</span> 分鐘時賞。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#door" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">door_open</span>
+                            </div>
+                            <h4>門神七動</h4>
+                            <p>接下來的 <span class="forS">30 分鐘</span><span class="forM">1 小時</span><span class="forL">3 小時</span>，尋差欲進入任何建築物或交通運輸，必先於門前擲骰子。未擲 7 前不得進入，且須俟 <span class="forS">5</span><span class="forM">10</span><span class="forL">15</span> 分鐘方得復試。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#brain" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">cognition</span>
+                            </div>
+                            <h4>腦霧</h4>
+                            <p>。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#bird" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">raven</span>
+                            </div>
+                            <h4>禽難捕捉</h4>
+                            <p>。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#streetview" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">map_search</span>
+                            </div>
+                            <h4>盲人摸巷</h4>
+                            <p>。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#pun" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">emoji_language</span>
+                            </div>
+                            <h4>雙關齊下</h4>
+                            <p>。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#trip" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">trip</span>
+                            </div>
+                            <h4>校外教學</h4>
+                            <p>。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#shopping" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">shopping_bag_speed</span>
+                            </div>
+                            <h4>衝動購物</h4>
+                            <p>。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/#shuttle" draggable="false" class="card">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">line_start_circle</span>
+                            </div>
+                            <h4>區間終點</h4>
+                            <p>。</p>
+                        </a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="/hideandseek/includes/includes.js"></script>
+    <script src="/js/mapSize/script.js"></script>
+</body>
+
+</html>

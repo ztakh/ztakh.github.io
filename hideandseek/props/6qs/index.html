@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matching Questions | Hide + Seek / ZTAKH.LOL</title>
+    <title>6 Major Questions | Hide + Seek / ZTAKH.LOL</title>
     <meta name="description" content="">
     <!-- <link rel="icon" type="image/x-icon" href="/image/favicon.ico"> -->
     <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/hideandseek/rulebook/stylesheet.css" />
     <style>
         .chat-bubble {
-            margin-bottom: 2em;
+            margin-bottom: 1em;
         }
 
         .chat-bubble>div {
@@ -60,6 +61,26 @@
             border-color: var(--light-gray);
         }
 
+        .question-limit {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-blue);
+            padding: 0.5em;
+            border-radius: 2em;
+            margin-bottom: 2em;
+            color: var(--secondary-blue);
+        }
+
+        .question-limit>div {
+            display: flex;
+            align-items: center;
+            gap: 0.25em;
+            padding: 0 1em;
+        }
+
         .table-container {
             text-align: center;
         }
@@ -77,24 +98,24 @@
     <div class="container">
         <aside data-toc="../toc.json"></aside>
         <div class="article-container-group">
+            <div class="article-container article-banner" style="--gradient: linear-gradient(135deg, #8d2a8b, #5c33cc)">
+                <span class="material-symbols-rounded">join</span>
+                <span class="material-symbols-rounded">social_distance</span>
+                <span class="material-symbols-rounded">move_location</span>
+                <span class="material-symbols-rounded">radar</span>
+                <span class="material-symbols-rounded">detection_and_zone</span>
+                <span class="material-symbols-rounded">photo</span>
+            </div>
             <main class="article-container">
                 <div class="article-header">
                     <!-- <span class="article-tag">道具</span> -->
                     <h1>六大詰問</h1>
                     <div class="article-actions-holder">
                         <div class="article-actions">
+                            <a id="mapSelect-btn" draggable="false"><span class="material-symbols-rounded">aspect_ratio</span> <span><span id="mapSelect-label"></span>品等</span></a>
                             <a draggable="false"><span class="material-symbols-rounded">download_2</span> 下載 PDF</a>
-                            <a draggable="false"><span class="material-symbols-rounded">aspect_ratio</span> 選擇品等</a>
                         </div>
                     </div>
-                </div>
-                <div class="article-banner" style="--gradient: linear-gradient(135deg, #8d2a8b, #5c33cc)">
-                    <span class="material-symbols-rounded">join</span>
-                    <span class="material-symbols-rounded">social_distance</span>
-                    <span class="material-symbols-rounded">move_location</span>
-                    <span class="material-symbols-rounded">radar</span>
-                    <span class="material-symbols-rounded">detection_and_zone</span>
-                    <span class="material-symbols-rounded">photo</span>
                 </div>
                 <div class="article-content">
                     <h2 id="match">其一　異同之問</h2>
@@ -107,6 +128,10 @@
                             <div>匿</div>
                             <p>是／否</p>
                         </div>
+                    </div>
+                    <div class="question-limit">
+                        <div><span class="material-symbols-rounded">timer</span> 5 分鐘</div>
+                        <div><span class="material-symbols-rounded">mobile_hand</span> 掣 3 留 1</div>
                     </div>
                     <figure class="table-container">
                         <table>
@@ -211,6 +236,10 @@
                             <p>近／遠</p>
                         </div>
                     </div>
+                    <div class="question-limit">
+                        <div><span class="material-symbols-rounded">timer</span> 5 分鐘</div>
+                        <div><span class="material-symbols-rounded">mobile_hand</span> 掣 3 留 1</div>
+                    </div>
                     <figure class="table-container">
                         <table>
                             <thead>
@@ -314,6 +343,10 @@
                             <p>項／背</p>
                         </div>
                     </div>
+                    <div class="question-limit">
+                        <div><span class="material-symbols-rounded">timer</span> 5 分鐘</div>
+                        <div><span class="material-symbols-rounded">mobile_hand</span> 掣 2 留 1</div>
+                    </div>
                     <figure class="table-container">
                         <table class="custom">
                             <thead>
@@ -330,11 +363,11 @@
                                     <td style="text-align: right">4.8</td>
                                     <td style="text-align: justify">公里</td>
                                 </tr>
-                                <tr>
+                                <tr class="forML">
                                     <td style="text-align: right">16.0</td>
                                     <td style="text-align: justify">公里</td>
                                 </tr>
-                                <tr>
+                                <tr class="forL">
                                     <td style="text-align: right">80.0</td>
                                     <td style="text-align: justify">公里</td>
                                 </tr>
@@ -351,6 +384,10 @@
                             <div>匿</div>
                             <p>是／否</p>
                         </div>
+                    </div>
+                    <div class="question-limit">
+                        <div><span class="material-symbols-rounded">timer</span> 5 分鐘</div>
+                        <div><span class="material-symbols-rounded">mobile_hand</span> 掣 2 留 1</div>
                     </div>
                     <figure class="table-container">
                         <table>
@@ -403,60 +440,72 @@
                         </table>
                     </figure>
                     <h2 id="tentacle">其五　鎖域之問</h2>
-                    <div class="chat-bubble">
-                        <div>
-                            <div>尋</div>
-                            <p>我方圓半徑「甲」公里內的「乙」哪個離你最近？</p>
+                    <section class="forS">
+                        <p><mark class="small" data-solo>小</mark> 品等不適用此詰問。</p>
+                    </section>
+                    <section class="forML">
+                        <div class="chat-bubble">
+                            <div>
+                                <div>尋</div>
+                                <p>我方圓半徑「甲」公里內的「乙」哪個離你最近？</p>
+                            </div>
+                            <div>
+                                <div>匿</div>
+                                <p>*名稱*</p>
+                            </div>
                         </div>
-                        <div>
-                            <div>匿</div>
-                            <p>*名稱*</p>
+                        <div class="question-limit">
+                            <div><span class="material-symbols-rounded">timer</span> 5 分鐘</div>
+                            <div><span class="material-symbols-rounded">mobile_hand</span> 掣 4 留 2</div>
                         </div>
-                    </div>
-                    <figure class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th style="width: 50%">乙</th>
-                                    <th>例如</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>公園</td>
-                                    <td><span>陽光運動公園</span>等</td>
-                                </tr>
-                                <tr>
-                                    <td>大學</td>
-                                    <td><span>淡江大學</span>、<span>輔仁大學</span>等</td>
-                                </tr>
-                                <tr>
-                                    <td>夜市</td>
-                                    <td><span>師大夜市</span>、<span>公館夜市</span>等</td>
-                                </tr>
-                                <tr>
-                                    <td>百貨公司</td>
-                                    <td><span>遠東百貨板橋中山店</span>等</td>
-                                </tr>
-                                <tr>
-                                    <td>山</td>
-                                    <td><span>劍潭山</span>、<span>芝山巖</span>等</td>
-                                </tr>
-                                <tr>
-                                    <td>電影院</td>
-                                    <td><span>微風影城</span>等</td>
-                                </tr>
-                                <tr>
-                                    <td>博物館</td>
-                                    <td><span>自來水博物館</span>等</td>
-                                </tr>
-                                <tr>
-                                    <td>活動中心</td>
-                                    <td><span>某區活動中心</span>等</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </figure>
+                        <figure class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="min-width: 3em;">甲</th>
+                                        <th style="width: 40%">乙</th>
+                                        <th>例如</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="4">1.6</td>
+                                        <td>公園</td>
+                                        <td><span>陽光運動公園</span>等</td>
+                                    </tr>
+                                    <tr>
+                                        <td>大學</td>
+                                        <td><span>淡江大學</span>、<span>輔仁大學</span>等</td>
+                                    </tr>
+                                    <tr>
+                                        <td>夜市</td>
+                                        <td><span>師大夜市</span>、<span>公館夜市</span>等</td>
+                                    </tr>
+                                    <tr>
+                                        <td>百貨公司</td>
+                                        <td><span>遠東百貨板橋中山店</span>等</td>
+                                    </tr>
+                                    <tr class="forL">
+                                        <td rowspan="4">24</td>
+                                        <td>山</td>
+                                        <td><span>劍潭山</span>、<span>芝山巖</span>等</td>
+                                    </tr>
+                                    <tr class="forL">
+                                        <td>電影院</td>
+                                        <td><span>微風影城</span>等</td>
+                                    </tr>
+                                    <tr class="forL">
+                                        <td>博物館</td>
+                                        <td><span>自來水博物館</span>等</td>
+                                    </tr>
+                                    <tr class="forL">
+                                        <td>活動中心</td>
+                                        <td><span>某區活動中心</span>等</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </figure>
+                    </section>
                     <h2 id="photo">其六　採樣之問</h2>
                     <div class="chat-bubble">
                         <div>
@@ -468,6 +517,10 @@
                             <p>*圖片*</p>
                         </div>
                     </div>
+                    <div class="question-limit">
+                        <div><span class="material-symbols-rounded">timer</span> <span class="forS">10</span><span class="forM">10</span><span class="forL">20</span> 分鐘</div>
+                        <div><span class="material-symbols-rounded">mobile_hand</span> 掣 1 留 1</div>
+                    </div>
                     <figure class="table-container">
                         <table>
                             <thead>
@@ -478,7 +531,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="min-width: 4em"><span>區域中樞</span>附近<span>任何建築</span></td>
+                                    <td style="min-width: 4em"><span><a draggable="false" data-key="a14p2">匿域中樞</a></span><span>附近</span><span>任何建築</span></td>
                                     <td style="text-align: justify;">佇於車站任何出口，拍出建築物屋頂及兩側，且屋頂應位於照片頂端 ⅓ 處。</td>
                                 </tr>
                                 <tr>
@@ -501,46 +554,46 @@
                                     <td>水溝蓋<span>視角</span></td>
                                     <td style="text-align: justify;">於戶外平置手機於地面向上拍攝，不調參數。</td>
                                 </tr>
-                                <tr>
-                                    <td><span>區域中樞</span>附近<span>至高大廈</span></td>
+                                <tr class="forML">
+                                    <td><span><a draggable="false" data-key="a14p2">匿域中樞</a></span><span>附近</span><span>至高大廈</span></td>
                                     <td style="text-align: justify;">佇於車站任何出口，拍出主觀認定除車站外最高大樓屋頂及兩側，且屋頂應位於照片頂端 ⅓ 處。</td>
                                 </tr>
-                                <tr>
+                                <tr class="forML">
                                     <td>雙樓並影</td>
                                     <td style="text-align: justify;">至少含 2 棟大樓之 1 至 4 樓，且屋頂應位於照片頂端 ⅓ 處。</td>
                                 </tr>
-                                <tr>
+                                <tr class="forML">
                                     <td>商家店鋪</td>
                                     <td style="text-align: justify;">至少含 1 爿有窗之店，並拍出店內及周遭。</td>
                                 </tr>
-                                <tr>
+                                <tr class="forML">
                                     <td>公園</td>
                                     <td rowspan="2" style="text-align: justify;">面向公園／廟宇，豎置手機於頭頂向前拍攝，垂直地面，不調參數，無遮蔽物。</td>
                                 </tr>
-                                <tr>
+                                <tr class="forML">
                                     <td>廟宇</td>
                                 </tr>
-                                <tr>
-                                    <td><span>區域中樞</span><span>月臺</span></td>
+                                <tr class="forML">
+                                    <td><span><a draggable="false" data-key="a14p2">匿域中樞</a></span><span>月臺</span></td>
                                     <td style="text-align: justify;">至少含 3 件可辨識之物體。</td>
                                 </tr>
-                                <tr>
+                                <tr class="forML">
                                     <td>電線桿</td>
                                     <td style="text-align: justify;">將電線桿拍全。</td>
                                 </tr>
-                                <tr>
+                                <tr class="forML">
                                     <td>交叉路口</td>
                                     <td style="text-align: justify;">應含所有車道。</td>
                                 </tr>
-                                <tr>
-                                    <td><span>區域中樞</span>附近<span>最高山巔</span></td>
+                                <tr class="forL">
+                                    <td><span><a draggable="false" data-key="a14p2">匿域中樞</a></span><span>附近</span><span>最高山巔</span></td>
                                     <td style="text-align: justify;">佇於車站任意出口拍攝主觀認定最高之峰，山頂應位於照片頂端 ⅓ 處。</td>
                                 </tr>
-                                <tr>
+                                <tr class="forL">
                                     <td>最廣<span>自然水域</span></td>
                                     <td style="text-align: justify;">應含兩側岸邊及地平線，最多 3 倍焦距。</td>
                                 </tr>
-                                <tr>
+                                <tr class="forL">
                                     <td>五樓連影</td>
                                     <td style="text-align: justify;">應至少含 5 棟樓宇之 1 至 4 樓，且屋頂應位於照片頂端 ⅓ 處。</td>
                                 </tr>
@@ -553,6 +606,7 @@
     </div>
     <footer></footer>
     <script src="/hideandseek/includes/includes.js"></script>
+    <script src="/js/mapSize/script.js"></script>
 </body>
 
 </html>

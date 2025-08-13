@@ -25,7 +25,9 @@ fetch('/hideandseek/includes/lawPreview.json')
 
             if (!data[key]) return null;
 
-            const { book, content, reference } = data[key];
+            const { book, content, id, reference } = data[key];
+
+            if (id) key = id;
 
             if (isTouchDevice()) {
                 previewBox.addEventListener('click', () => {

@@ -1,0 +1,78 @@
+.forL {
+    display: none;
+}
+
+.forM {
+    display: none;
+}
+
+.forML {
+    display: none;
+}
+
+.forS {
+    display: none;
+}
+
+body[data-mapsize="L"] {
+    #mapSelect-btn {
+        background-color: #e91e64;
+        color: white;
+    }
+
+    .forL,
+    .forML {
+        display: block;
+    }
+
+    span.forL,
+    span.forML {
+        display: inline;
+    }
+
+    tr.forL,
+    tr.forML {
+        display: table-row;
+    }
+}
+
+body[data-mapsize="M"] {
+    #mapSelect-btn {
+        background-color: #f0561f;
+        color: white;
+    }
+
+    .forM,
+    .forML {
+        display: block;
+    }
+
+    span.forM,
+    span.forML {
+        display: inline;
+    }
+
+    tr.forM,
+    tr.forML {
+        display: table-row;
+    }
+}
+
+body[data-mapsize="S"] {
+    #mapSelect-btn {
+        background-color: #ffc50a;
+        color: var(--dark-gray);
+    }
+
+    .forS {
+        display: block;
+    }
+
+    span.forS {
+        display: inline;
+    }
+
+    tr.forS {
+        display: table-row;
+    }
+}

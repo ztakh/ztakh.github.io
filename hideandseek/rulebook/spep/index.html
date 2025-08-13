@@ -16,6 +16,9 @@
     <div class="container">
         <aside data-toc="../toc.json"></aside>
         <div class="article-container-group">
+            <div class="article-banner" style="--gradient: linear-gradient(135deg, #33b6cc, #2a7a8d)">
+                <span class="material-symbols-rounded">book_2</span>
+            </div>
             <main class="article-container">
                 <div class="article-header">
                     <!-- <span class="article-tag">通則</span> -->
@@ -25,9 +28,6 @@
                     <a draggable="false"><i class="fas fa-history"></i> View History</a> -->
                         <a draggable="false"><span class="material-symbols-rounded">download_2</span> 下載 PDF</a>
                     </div>
-                </div>
-                <div class="article-banner" style="--gradient: linear-gradient(135deg, #33b6cc, #2a7a8d)">
-                    <span class="material-symbols-rounded">book_2</span>
                 </div>
                 <div class="article-content law">
                     <h2 id="ch5">第五章　匿者牌堆</h2>
@@ -41,13 +41,13 @@
                         <div class="law-article-list">
                             <div class="law-article-num">第<span>23</span>條</div>
                             <div class="law-article-item-group">
-                                <div class="law-article-item">
+                                <div class="law-article-item" id="a23p1">
                                     <p>稱手執者，謂匿者已掣且未行權之牌。以 6 張為限，稱執牌定額。</p>
                                 </div>
                                 <div class="law-article-item">
                                     <p>稱行使前提者，謂匿者欲行使權能時應先達成之條件，或行使權能後伴隨之副作用。</p>
                                 </div>
-                                <div class="law-article-item">
+                                <div class="law-article-item" id="a23p3">
                                     <p>稱返還者，謂匿者自手執中所汰之牌令。遭返還之牌不得回入牌堆中。</p>
                                 </div>
                                 <div class="law-article-item">
@@ -58,6 +58,9 @@
                                 </div>
                                 <div class="law-article-item">
                                     <p>稱制約者，謂得干擾、影響尋差部分權利之權能。具行使前提。</p>
+                                </div>
+                                <div class="law-article-item">
+                                    <p>稱某物遺失者，謂該物距離尋差至少 10 公尺遠時。用於制約權能牌之訂定。</p>
                                 </div>
                             </div>
                         </div>
@@ -145,48 +148,48 @@
                         <div class="law-article-list">
                             <div class="law-article-num">第<span>31</span>條</div>
                             <div class="law-article-item">
-                                <p>制約權能牌各 1 張，如下：</p>
+                                <p>制約權能牌各 1 張，使用方式如各牌所示；其詳細規定如下：</p>
                                 <ol>
-                                    <li>
-                                        <p>出示載具。</p>
+                                    <li id="car">
+                                        <p>出示載具。雙方之圖皆須足以使對方清楚辨認之，亦需對所攝之車之價格達成共識。</p>
                                     </li>
-                                    <li>
-                                        <p>橋一下。</p>
+                                    <li id="bridge">
+                                        <p>橋一下。建在市區交通要道上或架在河面上接通兩岸，並可由行人或交通運輸通過之建築物即為橋。</p>
                                     </li>
-                                    <li>
-                                        <p>非請勿問。</p>
+                                    <li id="noask">
+                                        <p>非請勿問。匿者不得以此牌抵銷尋差已經或正在詰問之題。</p>
                                     </li>
-                                    <li>
-                                        <p>負水難走。</p>
+                                    <li id="water">
+                                        <p>負水難走。尋差於接收此制約前身上所有溶液均不得計入。溶液得由任何容器盛裝，亦得由任何尋差揹負，非靜止時不得將溶液卸下。尋差應主動向匿者回報溶液遺失之消息。</p>
                                     </li>
-                                    <li>
-                                        <p>特攝。</p>
+                                    <li id="bug">
+                                        <p>特攝。雙方之圖皆須足以使對方清楚辨認之。有效生物分類為魚類、鳥類、爬蟲類、兩棲類、廣義蟲類；其中廣義蟲類包含昆蟲、蜘蛛、馬蠲（又稱馬陸）、蜈蚣、蝸牛、蚯蚓等口頭語意上會歸類為蟲子之生物。所有生物皆須為野生，即非人飼。</p>
                                     </li>
-                                    <li>
-                                        <p>完美蛋侶。</p>
+                                    <li id="egg">
+                                        <p>完美蛋侶。尋差得使用任何品種之真蛋，不得使用如塑膠、巧克力等假蛋。此蛋將被視為尋差一員；意即，擁有該類玩家之全部權利及義務。稱破損者，謂蛋殼任何肉眼可見之劃傷、碎痕。</p>
                                     </li>
-                                    <li>
-                                        <p>門神七動。</p>
+                                    <li id="door">
+                                        <p>門神七動。尋差須擲 2 顆 6 面骰子。欲進入之門尚未映入眼簾前不得提前擲骰；意即，如欲登車，須待該車駛過面前時方得擲骰。</p>
                                     </li>
-                                    <li>
+                                    <li id="brain">
                                         <p>腦霧。</p>
                                     </li>
-                                    <li>
+                                    <li id="bird">
                                         <p>禽難捕捉。</p>
                                     </li>
-                                    <li>
+                                    <li id="streetview">
                                         <p>盲人摸巷。</p>
                                     </li>
-                                    <li>
+                                    <li id="pun">
                                         <p>雙關齊下。</p>
                                     </li>
-                                    <li>
+                                    <li id="trip">
                                         <p>校外教學。</p>
                                     </li>
-                                    <li>
+                                    <li id="shopping">
                                         <p>衝動購物。</p>
                                     </li>
-                                    <li>
+                                    <li id="shuttle">
                                         <p>區間終點。</p>
                                     </li>
                                     <li>

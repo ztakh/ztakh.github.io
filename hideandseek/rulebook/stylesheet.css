@@ -44,6 +44,43 @@
     padding-bottom: 0.5em;
 }
 
+mark {
+    display: inline-block;
+    padding: 0.3em 0.6em;
+    font-size: 0.9em;
+    line-height: 1.1;
+    text-align: center;
+    vertical-align: baseline;
+    border-radius: 5px;
+}
+
+mark.big {
+    background-color: #e91e64;
+    color: white;
+}
+
+mark.middle {
+    background-color: #f0561f;
+    color: white;
+}
+
+mark.small {
+    background-color: #ffc50a;
+    color: inherit;
+}
+
+mark.big:not([data-solo])::before {
+    content: '大／';
+}
+
+mark.middle:not([data-solo])::before {
+    content: '中／';
+}
+
+mark.small:not([data-solo])::before {
+    content: '小／';
+}
+
 @media (max-width: 768px) {
     .law-article-list {
         display: flex;
