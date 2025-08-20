@@ -120,7 +120,7 @@ function scrollToKey() {
 
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            element.style.transition = 'background-color 0.2s ease';
+            element.style.transition = 'background-color 1s ease';
             element.style.backgroundColor = 'var(--light-blue)';
 
             setTimeout(() => {
@@ -230,11 +230,11 @@ function loadPag(mainParent, data) {
 
     const prevLink = document.createElement('a');
     prevLink.classList.add('pag-button');
-    prevLink.draggable = 'false';
+    prevLink.draggable = false;
 
     const nextLink = document.createElement('a');
     nextLink.classList.add('pag-button');
-    nextLink.draggable = 'false';
+    nextLink.draggable = false;
 
     const pagBar = document.createElement('div');
 

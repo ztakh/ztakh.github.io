@@ -31,7 +31,7 @@
 }
 
 :root {
-    --font-primary: 'Noto Sans Display', 'ZutekSans', 'PingFang TC', 'Product Sans', 'Noto Sans TC', sans-serif;
+    --font-primary: 'Noto Sans Display', 'ZutekSans', 'PingFang TC', 'Product Sans', 'Noto Sans TC', 'PingFang SC', 'Noto Sans SC', 'Microsoft Jhenghei', 'Microsoft Yahei', sans-serif;
     --font-display: "Montserrat", var(--font-primary);
     --font-code: "Noto Sans Mono", monospace;
 
@@ -110,7 +110,11 @@ code {
     font-family: var(--font-code);
 }
 
-*.disabled {
+.books {
+    text-decoration: 1px underline wavy;
+}
+
+.disabled {
     opacity: 0.3;
     cursor: not-allowed !important;
 }
@@ -479,7 +483,7 @@ code {
 }
 
 .article-content p {
-    margin-bottom: 20px;
+    margin-bottom: 1em;
     text-align: justify;
 }
 
@@ -892,20 +896,21 @@ footer {
 
 .preview-box {
     position: absolute;
-    background-color: var(--bg-light);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
     /* border: 1px solid var(--border-color); */
     border-radius: var(--radius);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     padding: 10px;
     width: min(300px, 30dvw);
     z-index: 1;
-    transform: translateY(5px);
+    transform: scale(0.98);
     opacity: 0;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: var(--transition);
 }
 
 .preview-box.visible {
-    transform: translateY(0);
+    transform: scale(1);
     opacity: 1;
 }
 
@@ -1076,10 +1081,5 @@ ruby rt sub {
 
     .preview-box {
         width: 50dvw;
-    }
-
-    mark {
-        display: inline;
-        padding: 0.1em 0.3em;
     }
 }

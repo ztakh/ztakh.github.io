@@ -44,19 +44,87 @@
     padding-bottom: 0.5em;
 }
 
+.law-article-item ol li::marker {
+    color: rgba(32, 33, 34, 0.5);
+}
+
+.law-clause-item-group {
+    padding-left: 1.2em;
+    font-size: 0.9em;
+}
+
+.law-clause-item-group p {
+    position: relative;
+}
+
+.law-clause-item-group p::before {
+    position: absolute;
+    left: -1.2em;
+    opacity: 0.5;
+}
+
+.law-clause-item-group p:nth-child(1)::before {
+    content: "㈠";
+}
+
+.law-clause-item-group p:nth-child(2)::before {
+    content: "㈡";
+}
+
+.law-clause-item-group p:nth-child(3)::before {
+    content: "㈢";
+}
+
+.law-clause-item-group p:nth-child(4)::before {
+    content: "㈣";
+}
+
+.law-clause-item-group p:nth-child(5)::before {
+    content: "㈤";
+}
+
+.law-clause-item-group p:nth-child(6)::before {
+    content: "㈥";
+}
+
+.law-clause-item-group p:nth-child(7)::before {
+    content: "㈦";
+}
+
+.law-clause-item-group p:nth-child(8)::before {
+    content: "㈧";
+}
+
+.law-clause-item-group p:nth-child(9)::before {
+    content: "㈨";
+}
+
+.law-clause-item-group p:nth-child(8)::before {
+    content: "㈩";
+}
+
+/* .law-clause-item-group p span:first-child:before {
+    content: '（';
+}
+
+.law-clause-item-group p span:first-child::after {
+    content: '）';
+} */
+
 mark {
     display: inline-block;
     padding: 0.3em 0.6em;
     font-size: 0.9em;
     line-height: 1.1;
+    text-indent: 0;
     text-align: center;
     vertical-align: baseline;
-    border-radius: 5px;
 }
 
 mark.big {
     background-color: #e91e64;
     color: white;
+    border-radius: 0 1em 1em 0;
 }
 
 mark.middle {
@@ -67,6 +135,11 @@ mark.middle {
 mark.small {
     background-color: #ffc50a;
     color: inherit;
+    border-radius: 1em 0 0 1em;
+}
+
+mark[data-solo] {
+    border-radius: 1em;
 }
 
 mark.big:not([data-solo])::before {
@@ -96,5 +169,10 @@ mark.small:not([data-solo])::before {
 
     .law-article-item-group .law-article-item::before {
         left: -2em;
+    }
+
+    mark {
+        display: inline;
+        padding: 0.1em 0.3em;
     }
 }

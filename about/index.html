@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | ZTAKH.LOL</title>
+    <meta name="description" content="">
+    <!-- <link rel="icon" type="image/x-icon" href="/image/favicon.ico"> -->
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+        body {
+            background: #161a1d;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 2em;
+            color: white;
+        }
+
+        .backdrop-dot {
+            opacity: 0.05;
+            background: url('/images/dots.png') repeat;
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+            pointer-events: none;
+            mix-blend-mode: lighten;
+        }
+
+        .backdrop-colour {
+            background-color: #13293d;
+            background-image:
+                radial-gradient(at 47% 33%, hsl(180, 45%, 25%) 0, transparent 59%),
+                radial-gradient(at 82% 65%, hsl(263.21, 55%, 20%) 0, transparent 55%);
+            filter: blur(80px);
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            z-index: -2;
+            pointer-events: none;
+            mix-blend-mode: lighten;
+        }
+
+        .ztakh-logo {
+            width: 100%;
+            max-width: 1000px;
+            height: 100%;
+            position: fixed;
+            z-index: -2;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            opacity: 0.5;
+        }
+
+        h1 {
+            margin: 1em 0;
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-container {
+            display: flex;
+            min-width: 90dvw;
+            min-height: calc(100dvh - 17.95em);
+            gap: 5dvw;
+            margin-bottom: 5em;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2em;
+            border-radius: 2em;
+            text-align: center;
+            flex: 1;
+            transition: all 0.3s ease-in-out;
+            backdrop-filter: blur(15px) saturate(160%);
+            -webkit-backdrop-filter: blur(15px) saturate(160%);
+            /*! border: 1px solid rgba(255, 255, 255, 0.1); */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        img {
+            pointer-events: none;
+        }
+
+        .pfp {
+            border-radius: 50%;
+            width: min(30dvw, 30dvh);
+            height: min(30dvw, 30dvh);
+            padding: 1em;
+            border: 1px solid #d1d5db4d;
+        }
+
+        .name,
+        .ztakh-name {
+            font-family: var(--font-display);
+            color: white;
+            font-weight: bold;
+            font-size: max(3.5dvw, 2em);
+            margin: min(6dvw, 6dvh) 0 min(3dvw, 3dvh) 0;
+        }
+
+        code {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.25dvw;
+        }
+
+        .empty {
+            min-height: 100dvh;
+            display: flex;
+
+        }
+
+        .ztakh-name {
+            font-size: 3.5rem;
+            height: fit-content;
+            margin: 0 0 0 auto;
+            background: linear-gradient(45deg, #ffe16b, #a8ffe2, #d2f5f9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+            position: sticky;
+            top: calc(100dvh - 7rem);
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 1.5em;
+            padding: 0.5em;
+            margin: 3em 0 2em 0;
+        }
+
+        .pag-button {
+            backdrop-filter: blur(15px) saturate(150%);
+            -webkit-backdrop-filter: blur(15px) saturate(150%);
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 1em;
+            overflow: hidden;
+            padding: 1.5em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .pag-button:hover {
+            transform: scale(1.025);
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 15px;
+            }
+
+            h1,
+            .ztakh-name {
+                font-size: 2.5rem;
+            }
+
+            .name {
+                font-size: max(3.5dvw, 1.5em);
+            }
+
+            code {
+                font-size: max(1.25dvw, 1em);
+            }
+
+            .about-container {
+                flex-direction: column;
+                min-height: calc(100dvh - 14.25em);
+                gap: 5dvh;
+            }
+
+            nav {
+                flex-direction: column;
+                font-size: 0.7em;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="backdrop-colour"></div>
+    <div class="ztakh-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" style="width:auto; height:100%" viewBox="0 0 550 200">
+            <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M103 160Q200.5 25 298 40 185.5 25 73 100q210-15 420 0-60-15-120 0" />
+        </svg>
+    </div>
+    <div class="backdrop-dot"></div>
+    <h1>關於我們</h1>
+    <div class="about-container">
+        <div class="about-card">
+            <img class="pfp" src="/images/pfp/cmt.png" draggable="false">
+            <p class="name">chocomilktea87</p>
+            <p><code>@chocomilktea87</code></p>
+        </div>
+        <div class="about-card">
+            <img class="pfp" src="/images/pfp/zutek.png" draggable="false">
+            <p class="name">Zutek 3134</p>
+            <p><code>@zutek3134</code></p>
+        </div>
+    </div>
+    <div class="empty">
+        <p class="ztakh-name">ZTAKH.LOL</p>
+    </div>
+    <nav>
+        <a class="pag-button" draggable="true" onclick="history.back()"><span class="material-symbols-rounded">undo</span>返回上頁</a>
+        <a class="pag-button" draggable="true" href="/"><span class="material-symbols-rounded">home</span>回主頁</a>
+    </nav>
+    <script>
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
