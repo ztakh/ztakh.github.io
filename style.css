@@ -18,7 +18,7 @@
 
 @font-face {
     font-family: "ZutekSans";
-    src: url("https://cdn.jsdelivr.net/gh/Zutek3134/zutek3134.github.io@main/stylesheets/fonts/ZutekSans/Demibold.woff") format("woff");
+    src: url("https://cdn.jsdelivr.net/gh/Zutek3134/zutek3134.github.io@main/stylesheets/fonts/ZutekSans/ZutekSans-Bold.woff") format("woff");
     font-display: swap;
     font-weight: 700;
 }
@@ -438,6 +438,7 @@ code {
 .article-tag {
     display: inline-block;
     background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    font-family: var(--font-display);
     color: white;
     padding: 5px 15px;
     border-radius: 50px;

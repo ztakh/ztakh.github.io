@@ -143,7 +143,7 @@
             display: flex;
             flex-direction: row;
             gap: 1.5em;
-            padding: 0.5em;
+            padding: 0.3em;
             margin: 3em 0 2em 0;
         }
 
@@ -189,7 +189,7 @@
 
             nav {
                 flex-direction: column;
-                font-size: 0.7em;
+                font-size: 0.8em;
                 gap: 1rem;
             }
         }
@@ -228,6 +228,9 @@
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
         });
+
+        const flexDirection = Math.random() < 0.5 ? 'row' : 'row-reverse';
+        document.querySelector(".about-container").style.flexDirection = flexDirection;
     </script>
 </body>
 
