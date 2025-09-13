@@ -209,6 +209,57 @@ const currentScript = document.querySelector('script[src="/includes/includes.js"
 loadHTML('header', '/hideandseek/includes/header.html');
 loadHTML('footer', '/hideandseek/includes/footer.html');
 
+function scrollTitleText() {
+    const header = document.querySelector('header');
+    const headerFlexBox = header.querySelector('.flex-1');
+    const headerH1 = header.querySelector('.h1');
+    const headerH2 = header.querySelector('.h2');
+    const mainH1 = document.querySelector('main h1');
+    const mainH2 = document.querySelectorAll('main h2');
+
+    headerFlexBox.setAttribute("style", `width: ${headerFlexBox.style.offsetWidth}px`);
+    headerH1.textContent = mainH1.textContent.trim();
+
+    function onScroll() {
+        if (mainH1.getBoundingClientRect().bottom > header.offsetHeight) {
+            header.classList.remove('scrolled');
+            return;
+        }
+
+        header.classList.add('scrolled');
+
+        let currentH2 = null;
+
+        mainH2.forEach(h2 => {
+            const rect = h2.getBoundingClientRect();
+            if (rect.top < window.innerHeight / 2) {
+                currentH2 = h2;
+            }
+        });
+
+        if (!currentH2) {
+            header.classList.remove('shrink');
+            setTimeout(() => {
+                headerH2.textContent = '';
+            }, 300);
+        } else {
+            const newH2Text = currentH2.textContent.trim();
+            if (headerH2.textContent !== newH2Text) {
+                headerH2.style.opacity = 0;
+                setTimeout(() => {
+                    headerH2.textContent = newH2Text;
+                    headerH2.style.opacity = 1;
+                    header.classList.add('shrink');
+                }, 300);
+            }
+        }
+    }
+
+    window.addEventListener('scroll', onScroll);
+
+    onScroll();
+}
+
 function headerScript() {
     loadHTML('aside', '/hideandseek/includes/aside.html');
 }
@@ -390,9 +441,24 @@ function scrollToId() {
     history.pushState('', document.title, window.location.pathname + window.location.search);
 }
 
+function addLinkSpace() {
+    const links = document.querySelectorAll('main a');
+
+    for (let i = 0; i < links.length - 1; i++) {
+        const currentLink = links[i];
+        const nextLink = links[i + 1];
+
+        if (nextLink && currentLink.nextSibling === nextLink) {
+            nextLink.classList.add('ml');
+        }
+    }
+}
+
 function footerScript() {
     setTimeout(() => {
         scrollToKey();
         scrollToId();
+        addLinkSpace();
+        scrollTitleText();
     }, 100);
 }

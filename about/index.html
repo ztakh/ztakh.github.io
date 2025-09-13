@@ -70,6 +70,10 @@
             margin-bottom: 5em;
         }
 
+        .about-container.reverse {
+            flex-direction: row-reverse;
+        }
+
         .about-card {
             background: rgba(255, 255, 255, 0.05);
             padding: 2em;
@@ -187,6 +191,10 @@
                 gap: 5dvh;
             }
 
+            .about-container.reverse {
+                flex-direction: column-reverse;
+            }
+
             nav {
                 flex-direction: column;
                 font-size: 0.8em;
@@ -229,8 +237,9 @@
             e.preventDefault();
         });
 
-        const flexDirection = Math.random() < 0.5 ? 'row' : 'row-reverse';
-        document.querySelector(".about-container").style.flexDirection = flexDirection;
+        if (Math.random() < 0.5) {
+            document.querySelector(".about-container").classList.add("reverse");
+        }
     </script>
 </body>
 
