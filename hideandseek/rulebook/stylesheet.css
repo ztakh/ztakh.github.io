@@ -12,7 +12,7 @@
 .law-article-num {
     margin-right: 4em;
     min-width: 3.5em;
-    color: var(--primary-blue);
+    color: rgb(var(--primary));
 }
 
 .law-article-num span {
@@ -33,7 +33,7 @@
     position: absolute;
     left: -2em;
     font-style: italic;
-    opacity: 0.5;
+    color: rgba(var(--primary), 0.7);
     text-align: right;
     width: 1em;
 }
@@ -45,7 +45,7 @@
 }
 
 .law-article-item ol li::marker {
-    color: rgba(32, 33, 34, 0.5);
+    color: rgba(var(--text-title), 0.5);
 }
 
 .law-clause-item-group {
@@ -60,7 +60,7 @@
 .law-clause-item-group p::before {
     position: absolute;
     left: -1.2em;
-    opacity: 0.5;
+    color: rgba(var(--text-title), 0.5);
 }
 
 .law-clause-item-group p:nth-child(1)::before {
@@ -122,19 +122,19 @@ mark {
 }
 
 mark.big {
-    background-color: #e91e64;
+    background-color: #b50000;
     color: white;
     border-radius: 0 1em 1em 0;
 }
 
 mark.middle {
-    background-color: #f0561f;
+    background-color: #f45d48;
     color: white;
 }
 
 mark.small {
-    background-color: #ffc50a;
-    color: inherit;
+    background-color: #f4e148;
+    color: black;
     border-radius: 1em 0 0 1em;
 }
 

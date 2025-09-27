@@ -1,6 +1,6 @@
 {
     "genp": {
-        "display": "第一編　總則　§1",
+        "display": "第一編　總則",
         "title": "h3",
         "url": "../genp/",
         "children": {
@@ -19,7 +19,7 @@
         }
     },
     "spep": {
-        "display": "第二編　分則　§22",
+        "display": "第二編　分則",
         "title": "h3",
         "url": "../spep/",
         "children": {

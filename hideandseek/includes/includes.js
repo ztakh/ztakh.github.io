@@ -121,7 +121,7 @@ function scrollToKey() {
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             element.style.transition = 'background-color 1s ease';
-            element.style.backgroundColor = 'var(--light-blue)';
+            element.style.backgroundColor = 'rgba(var(--highlight), 0.4)';
 
             setTimeout(() => {
                 element.style.backgroundColor = 'transparent';
@@ -175,7 +175,7 @@ function initialiseShareButton() {
         </div>
         <div class="body">
             <div style="display: flex; flex-direction: column;">
-                <img src="share.svg" draggable="false" loading="lazy" style="margin: auto;max-width: 60dvw;max-height: 60dvh;">
+                <img src="share.svg" class="modal-qr" draggable="false" loading="lazy">
                 <p style="text-align: center; margin-top: 1em;"><a class="inlineLink" href="https://ztakh.lol${window.location.pathname}" draggable="false"><code>https://ztakh.lol${window.location.pathname}</code></a></p>
             </div>
         </div>
@@ -221,6 +221,11 @@ function scrollTitleText() {
     headerH1.textContent = mainH1.textContent.trim();
 
     function onScroll() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.querySelector("header .progress-bar").style.width = scrolled + "%";
+
         if (mainH1.getBoundingClientRect().bottom > header.offsetHeight) {
             header.classList.remove('scrolled');
             return;
@@ -262,6 +267,43 @@ function scrollTitleText() {
 
 function headerScript() {
     loadHTML('aside', '/hideandseek/includes/aside.html');
+
+    document.querySelectorAll('main h2').forEach(heading => {
+        const length = heading.textContent.trim().length + 0.5;
+        heading.style.setProperty('--width', length + 'em');
+    });
+
+    const themeToggleButton = document.querySelector('header #theme')
+    themeToggleButton.addEventListener('click', function () {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        applyTheme(newTheme);
+    });
+
+    function setTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        } else {
+            applyTheme(userPrefersDark ? 'dark' : 'light', true);
+        }
+    }
+
+    function applyTheme(newTheme, isAuto = false) {
+        document.documentElement.setAttribute('data-theme', newTheme);
+
+        if (isAuto) {
+            return;
+        }
+
+        localStorage.setItem('theme', newTheme);
+        themeToggleButton.querySelector('.material-symbols-rounded').textContent = newTheme === 'dark' ? 'brightness_4' : 'brightness_7';
+    }
+
+    setTheme();
 }
 
 function loadPag(mainParent, data) {
@@ -321,7 +363,7 @@ function asideScript() {
     overlay.style.display = 'none';
     document.body.insertBefore(overlay, document.body.firstChild);
 
-    document.getElementsByClassName('sidebar-toggle')[0].addEventListener('click', function () {
+    document.querySelector('header #sidebar').addEventListener('click', function () {
         if (!aside) {
             aside = document.querySelector('aside');
         }
@@ -341,6 +383,11 @@ function asideScript() {
             overlay.style.display = 'none';
         }, 300);
         document.body.style.overflow = 'auto';
+    });
+
+    document.querySelectorAll('#aside-pages h3').forEach(heading => {
+        const length = heading.textContent.trim().length + 0.5;
+        heading.style.setProperty('--width', length + 'em');
     });
 
     if (!aside.hasAttribute('data-toc')) {
@@ -365,7 +412,7 @@ function asideScript() {
             const sectionUrl = curUrl + '#' + key;
 
             if (section.title) {
-                tocHTML += `<${section.title} href="${sectionUrl}">${section.display}</${section.title}>`;
+                tocHTML += `<${section.title} href="${sectionUrl}" style="--width: ${section.display.trim().length}.5em;">${section.display}</${section.title}>`;
             } else {
                 tocHTML += `<li><a href="${sectionUrl}" draggable="false">${section.display}</a>`;
             }

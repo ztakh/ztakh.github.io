@@ -32,8 +32,8 @@
             max-width: 2em;
             height: 2em;
             text-align: center;
-            background-color: var(--medium-gray);
-            color: white;
+            background-color: rgb(var(--highlight-dark));
+            color: rgb(var(--bg-main));
             font-weight: 500;
             line-height: 2em;
             border-radius: 50px;
@@ -41,7 +41,7 @@
 
         .chat-bubble>div>p {
             margin: 0;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgb(var(--highlight-dark));
             padding: 0.3em 1em;
             border-radius: 1.5rem;
         }
@@ -53,12 +53,12 @@
         }
 
         .chat-bubble>div:last-child>div {
-            background-color: var(--light-gray);
+            background-color: rgb(var(--highlight));
             color: var(--secondary-blue)
         }
 
         .chat-bubble>div:last-child>p {
-            border-color: var(--light-gray);
+            border-color: rgb(var(--highlight));
         }
 
         .question-limit {
@@ -67,11 +67,11 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            background-color: var(--light-blue);
+            background-color: rgba(var(--primary-light), 0.15);
             padding: 0.5em;
             border-radius: 2em;
             margin-bottom: 2em;
-            color: var(--secondary-blue);
+            color: rgb(var(--primary));
         }
 
         .question-limit>div {
