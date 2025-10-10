@@ -61,7 +61,7 @@ body[data-mapsize="M"] {
 body[data-mapsize="S"] {
     #mapSelect-btn {
         background-color: #ffc50a;
-        color: var(--dark-gray);
+        color: #232323;
     }
 
     .forS {

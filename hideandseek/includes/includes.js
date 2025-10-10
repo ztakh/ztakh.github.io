@@ -50,7 +50,7 @@ fetch('/hideandseek/includes/lawPreview.json')
             const previewBoxTop = linkRect.bottom + window.scrollY + 5;
             let previewBoxLeft = linkRect.left + window.scrollX;
 
-            if (previewBoxLeft + previewBox.offsetWidth > window.innerWidth) {
+            if (previewBoxLeft + previewBox.offsetWidth + 15 > window.innerWidth) {
                 previewBoxLeft = linkRect.right + window.scrollX - previewBox.offsetWidth;
             }
 

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Notes | Hide + Seek / ZTAKH.LOL</title>
+    <meta name="description" content="">
+    <!-- <link rel="icon" type="image/x-icon" href="/image/favicon.ico"> -->
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/js/snackbar/script.js"></script>
+    <style>
+        #categories-container {
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+            margin-bottom: 1em;
+        }
+
+        #categories-container.fadeOut {
+            opacity: 0;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+            gap: 0.5em;
+        }
+
+        .question-card {
+            padding: 1em 0.25em;
+            background: rgb(var(--highlight));
+            color: rgb(var(--highlight-dark));
+            border-radius: var(--radius);
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-align: center;
+            min-height: 2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .question-card.answered {
+            background-color: transparent;
+            border: 2px solid rgba(var(--highlight-dark), 0.5);
+            border-radius: calc(var(--radius) / 2);
+            opacity: 0.7;
+        }
+
+        .question-card:hover {
+            background: rgb(var(--highlight-dark));
+            color: rgb(var(--bg-main));
+        }
+
+        .answer-list:empty {
+            display: none;
+        }
+
+        .answer-list {
+            border: 1px solid rgba(var(--border-colour), 0.5);
+            padding: 0 1em;
+            border-radius: calc(var(--radius) / 2);
+            margin-bottom: 2em;
+        }
+
+        .answer-item {
+            padding: 1.5em 0.5em;
+            border-bottom: 1px dashed rgba(var(--border-colour), 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1em;
+        }
+
+        .answer-item:last-child {
+            border-bottom: none;
+        }
+
+        .delete-answer {
+            color: rgb(var(--text-danger));
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.3em;
+            margin: -0.5em;
+            min-width: 2em;
+            min-height: 2em;
+            border-radius: 0.25em;
+        }
+
+        .delete-answer:hover {
+            background-color: rgb(var(--text-danger));
+            color: rgb(var(--bg-main));
+            border-radius: 50%;
+        }
+
+        .add-answer-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75em;
+            font-weight: 500;
+        }
+
+        .add-answer-form input {
+            padding: 1em;
+            border: none;
+            border-radius: calc(var(--radius) / 2);
+            background-color: rgba(var(--text-paragraph), 0.1);
+            color: inherit;
+            font-family: inherit;
+            font-weight: inherit;
+            font-size: inherit;
+        }
+
+        .add-answer-form .saveBtn {
+            padding: 0.7em 1em;
+            background: rgb(var(--primary));
+            color: rgb(var(--bg-main));
+            border-radius: calc(var(--radius) / 2);
+            cursor: pointer;
+            width: fit-content;
+            align-self: end;
+        }
+
+        #restart-btn {
+            background: rgb(var(--text-danger));
+            color: rgb(var(--bg-main));
+        }
+
+        .binary-options {
+            display: flex;
+            gap: 0.5em;
+        }
+
+        .binary-option {
+            flex: 1;
+            padding: 0.7em 1em;
+            background: rgba(var(--text-paragraph), 0.1);
+            border-radius: calc(var(--radius) / 2);
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .binary-option .material-symbols-rounded {
+            width: calc(0em);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .binary-option.selected,
+        .add-answer-form input.used {
+            background: rgb(var(--secondary));
+            color: rgb(var(--bg-main));
+            border-radius: var(--radius);
+        }
+
+        .binary-option.selected .material-symbols-rounded {
+            width: calc(1em);
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+    <div class="container">
+        <aside></aside>
+        <div class="article-container-group">
+            <div class="article-banner" style="--gradient: linear-gradient(135deg, #aaa, #777)">
+                <span class="material-symbols-rounded">note_alt</span>
+            </div>
+            <main class="article-container">
+                <div class="article-header">
+                    <!-- <span class="article-tag">114-9-21</span> -->
+                    <h1>電子詰問簿</h1>
+                    <div class="article-actions">
+                        <a id="mapSelect-btn" draggable="false"><span class="material-symbols-rounded">aspect_ratio</span> <span><span id="mapSelect-label"></span>品等</span></a>
+                    </div>
+                </div>
+
+                <div class="article-content">
+                    <div id="categories-container">
+                        <!-- Categories will be generated here -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <div id="modal-question" class="modal">
+        <div class="content">
+            <div class="header">
+                <span class="close" onclick="closeModal()"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2c5.53 0 10 4.47 10 10s-4.47 10-10 10S2 17.53 2 12 6.47 2 12 2m3.59 5L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z"></path>
+                        </svg></span></span>
+                <h2 id="modalQuestionText"></h2>
+                <div id="modalQuestionType" style="font-style: italic; margin-bottom: 10px;"></div>
+            </div>
+            <div class="body">
+                <div style="display: flex; flex-direction: column;">
+                    <div class="answer-list" id="answerList">
+                        <!-- Existing answers will appear here -->
+                    </div>
+                    <div class="add-answer-form" id="addAnswerForm">
+                        <!-- Answer input will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="/hideandseek/includes/includes.js"></script>
+    <script src="/js/mapSize/script.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
