@@ -390,6 +390,17 @@ function asideScript() {
         heading.style.setProperty('--width', length + 'em');
     });
 
+    const asidePagesA = document.querySelectorAll('#aside-pages a');
+
+    for (let index = 0; index < asidePagesA.length; index++) {
+        const element = asidePagesA[index];
+
+        if (element.href === window.location.href) {
+            element.classList.add("disabled");
+            break;
+        }
+    }
+
     if (!aside.hasAttribute('data-toc')) {
         document.getElementById('aside-button-group').remove();
         document.getElementById('aside-toc').remove();

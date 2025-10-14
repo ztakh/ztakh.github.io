@@ -10,6 +10,7 @@
     bottom: 2em;
     width: 100%;
     transform: translateX(-50%);
+    transition: opacity 0.3s ease-in-out;
 }
 
 #snackbar {
