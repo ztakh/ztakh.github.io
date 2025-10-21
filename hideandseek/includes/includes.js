@@ -397,6 +397,7 @@ function asideScript() {
 
         if (element.href === window.location.href) {
             element.classList.add("disabled");
+            element.removeAttribute('href');
             break;
         }
     }

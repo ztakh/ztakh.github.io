@@ -7,6 +7,9 @@
     <title>Deck of Cards | Hide + Seek / ZTAKH.LOL</title>
     <meta name="description" content="">
     <link rel="icon" type="image/x-icon" href="/hideandseek/logo/logo.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/Zutek3134/zutek3134.github.io@main/stylesheets/fonts/ZutekSans/ZutekSans-Normal.woff" as="font" type="font/woff" crossorigin>
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/hideandseek/rulebook/stylesheet.css" />
     <style>
@@ -17,16 +20,18 @@
         }
 
         .card p {
-            margin-bottom: 0.5em;
+            margin-bottom: 0;
             flex: 1;
         }
 
         .card .cost {
-            /* text-align: right; */
             font-size: 0.9em;
             font-weight: 500;
             color: rgb(var(--text-danger));
             flex: 0;
+            padding-top: 1em;
+            border-top: 1px dashed rgba(var(--border-colour), 0.5);
+            margin-top: 1em;
         }
     </style>
 </head>
@@ -152,7 +157,7 @@
                                 <span class="material-symbols-rounded">door_open</span>
                             </div>
                             <h4>門神七動</h4>
-                            <p>接下來的 <span class="forS">30 分鐘</span><span class="forM">1 小時</span><span class="forL">3 小時</span>，尋差欲進入任何建築物或交通運輸，必先於門前擲骰子；其點之和非為 7 前不得進入，且須俟 <span class="forS">5</span><span class="forM">10</span><span class="forL">15</span> 分鐘方得復試。</p>
+                            <p>接下來的 <span class="forS">30 分鐘</span><span class="forM">1 小時</span><span class="forL">3 小時</span>，尋差欲進入任何建築物或搭乘交通運輸前，必先於門前擲骰子；點數為 7 才能進入，否則要等 <span class="forS">5</span><span class="forM">10</span><span class="forL">15</span> 分鐘後再度重試。</p>
                             <p class="cost">返還 2 張牌令。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=streetview" draggable="false" class="card" id="streetview">
@@ -160,7 +165,7 @@
                                 <span class="material-symbols-rounded">map_search</span>
                             </div>
                             <h4>盲人摸巷</h4>
-                            <p>自電子地圖中選擇 1 處距離尋差 150 公尺內之地點並擷圖該地街景；其中應含 1 件人為建築。尋差應移動至該位址並回拍街景，且不得利用科技。</p>
+                            <p>自電子地圖中選擇 1 處距離尋差 150 公尺範圍內之地點並擷圖該地街景；其中應含 1 件人為建築。尋差應移動至該位址並回拍街景，且不得利用科技。</p>
                             <p class="cost">尋差非於室內。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=noask" draggable="false" class="card" id="noask">
@@ -170,14 +175,6 @@
                             <h4>非請勿問</h4>
                             <p>任選 3 道題禁止尋差詢問。</p>
                             <p class="cost">返還全部手執。</p>
-                        </a>
-                        <a href="/hideandseek/rulebook/spep/?key=water" draggable="false" class="card" id="water">
-                            <div class="card-icon" style="background: cornflowerblue;">
-                                <span class="material-symbols-rounded">water_full</span>
-                            </div>
-                            <h4>負水難走</h4>
-                            <p>尋差應揹負 2 公升溶液進行遊戲，未獲取前不得詰問。倘溶液遺失，則匿者獲得 <span class="forS">30</span><span class="forM">30</span><span class="forL">60</span> 分鐘時賞。</p>
-                            <p class="cost">尋差方圓 300 公尺內應有自然水體。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=bug" draggable="false" class="card" id="bug">
                             <div class="card-icon" style="background: cornflowerblue;">
@@ -213,7 +210,7 @@
                                 <span class="material-symbols-rounded">nutrition</span>
                             </div>
                             <h4>檸魂附身</h4>
-                            <p>尋差應黏貼 1 顆檸檬於身上，未完成前不得詰問。倘檸檬遺失或脫落，則匿者獲得 <span class="forS">30</span><span class="forM">45</span><span class="forL">60</span> 分鐘時賞。</p>
+                            <p>尋差應使 1 顆檸檬附著於身上，未完成前不得詰問。倘檸檬遺失或脫落，則匿者獲得 <span class="forS">30</span><span class="forM">45</span><span class="forL">60</span> 分鐘時賞。</p>
                             <p class="cost">返還 1 張利己權能牌，且當前非為殘局。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=silent" draggable="false" class="card" id="silent">
@@ -229,7 +226,7 @@
                                 <span class="material-symbols-rounded">groups_3</span>
                             </div>
                             <h4>好事乘三</h4>
-                            <p>接下來 3 回行使掣牌權時得多掣 1 張。</p>
+                            <p>接下來 3 回，行使掣牌權時得多掣 1 張。</p>
                             <p class="cost">返還 1 張手執。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=restroom" draggable="false" class="card" id="restroom">
@@ -239,6 +236,14 @@
                             <h4>急急如廁令</h4>
                             <p>尋差不得藉助科技，應自行尋找、前往、打卡公共廁所後，至鄰近場所休憩 <span class="forS">30</span><span class="forM">40</span><span class="forL">50</span> 分鐘；該廁所應有明確指示牌說明其實為之。</p>
                             <p class="cost">尋差得復用已詰之題，且匿者應放棄所多享之掣牌權。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/?key=pen" draggable="false" class="card" id="pen">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">stylus_note</span>
+                            </div>
+                            <h4>就是筆嘞</h4>
+                            <p>尋差應向玩家之外的人借 1 隻筆，並以手寫方式進行下Ｎ回詰問。</p>
+                            <p class="cost">拍下字串「麥可約瑟夫傑克森」8 字中任Ｎ字，至多 4 字。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=therock" draggable="false" class="card" id="therock">
                             <div class="card-icon" style="background: cornflowerblue;">
@@ -255,13 +260,6 @@
                             <h4>橋一下</h4>
                             <p>尋差下回詰問時應位於橋下。</p>
                             <p class="cost">尋差應距離匿者 <span class="forS">1.6</span><span class="forM">8</span><span class="forL">48</span> 公里以上。</p>
-                        </a>
-                        <a href="/hideandseek/rulebook/spep/?key=maze" draggable="false" class="card" id="maze">
-                            <div class="card-icon" style="background: cornflowerblue;">
-                                <span class="material-symbols-rounded">tactic</span>
-                            </div>
-                            <h4>囚</h4>
-                            <p>於 <span class="forS">10</span><span class="forM">20</span><span class="forL">30</span> 分鐘內徒手繪出 1 張迷宮。尋差非解題成功前不得詰問。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=bird" draggable="false" class="card" id="bird">
                             <div class="card-icon" style="background: cornflowerblue;">
@@ -286,6 +284,14 @@
                             <p>自電子地圖中選擇 1 處距離尋差 <span class="forS">400</span><span class="forM">400</span><span class="forL">800</span> 公尺內之公共區域；其應立即前往並於該地「玩耍」至少 <span class="forS">5</span><span class="forM">5</span><span class="forL">10</span> 分鐘，並帶回 1 樣紀念品。若紀念品遺失，則匿者獲得 <span class="forS">30</span><span class="forM">45</span><span class="forL">60</span> 分鐘時賞。玩耍過程中不得詰問。</p>
                             <p class="cost">尋差非於大眾運輸上，且至少距離匿者 <span class="forS">400</span><span class="forM">400</span><span class="forL">800</span> 公尺以上。</p>
                         </a>
+                        <a href="/hideandseek/rulebook/spep/?key=emoji" draggable="false" class="card" id="emoji">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded">routine</span>
+                            </div>
+                            <h4>象形文字</h4>
+                            <p>尋差下回詰問應全以表情符號書寫。</p>
+                            <p class="cost">返回 1 張手執，再掣取 1 張牌令。</p>
+                        </a>
                         <a href="/hideandseek/rulebook/spep/?key=store" draggable="false" class="card" id="store">
                             <div class="card-icon" style="background: cornflowerblue;">
                                 <span class="material-symbols-rounded">store</span>
@@ -300,13 +306,13 @@
                             <h4>出示載具</h4>
                             <p>拍攝 1 輛車，尋差應回拍 1 輛更貴的車。</p>
                         </a>
-                        <a href="/hideandseek/rulebook/spep/?key=shopping" draggable="false" class="card" id="shopping">
+                        <a href="/hideandseek/rulebook/spep/?key=sugar" draggable="false" class="card" id="sugar">
                             <div class="card-icon" style="background: cornflowerblue;">
-                                <span class="material-symbols-rounded">shopping_bag_speed</span>
+                                <span class="material-symbols-rounded">glucose</span>
                             </div>
-                            <h4>衝動購物</h4>
-                            <p>尋差應購買 1 樣公開廣告之商品；其中該廣告應距離店家及尋差 300 公尺以上。</p>
-                            <p class="cost">放棄下回掣牌權。</p>
+                            <h4>砂糖是的請</h4>
+                            <p>尋差應吃 1 種至少含有 15 克糖之非流體食物。</p>
+                            <p class="cost">幫砂糖拍寫真。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=pun" draggable="false" class="card" id="pun">
                             <div class="card-icon" style="background: cornflowerblue;">
@@ -335,7 +341,7 @@
                                 <img src="https://api.iconify.design/game-icons:measure-tape.svg" draggable="false">
                             </div>
                             <h4>五六三十</h4>
-                            <p>尋差下回詰問前應擲骰 30 公尺遠並落於 5 或 6 點，非完成任務前不得詰問。倘骰子碰撞他人或物，則匿者獲得 <span class="forS">10</span><span class="forM">20</span><span class="forL">30</span> 分鐘時賞。</p>
+                            <p>尋差下回詰問前應擲骰 30 公尺遠並落於 5 或 6 點，完成任務後才能詰問。倘骰子碰撞他人或物，則匿者獲得 <span class="forS">10</span><span class="forM">20</span><span class="forL">30</span> 分鐘時賞。</p>
                             <p class="cost">擲骰子並落於非 5 或 6 點。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=egg" draggable="false" class="card" id="egg">
@@ -343,7 +349,7 @@
                                 <span class="material-symbols-rounded">egg</span>
                             </div>
                             <h4>完美蛋侶</h4>
-                            <p>尋差應攜帶 1 顆蛋為蛋侶進行遊戲，未獲取前不得詰問。倘蛋侶遺失或破損，則匿者獲得 <span class="forS">30</span><span class="forM">45</span><span class="forL">60</span> 分鐘時賞。</p>
+                            <p>尋差應攜帶 1 顆蛋為蛋侶進行遊戲，獲取後才能詰問。倘蛋侶遺失或破損，則匿者獲得 <span class="forS">30</span><span class="forM">45</span><span class="forL">60</span> 分鐘時賞。</p>
                             <p class="cost">返還 2 張牌令，且當前非為殘局。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=yundle" draggable="false" class="card" id="yundle">
@@ -351,7 +357,7 @@
                                 <span class="material-symbols-rounded">crossword</span>
                             </div>
                             <h4>運斗</h4>
-                            <p>尋差使用預設設定遊玩並成功破關<span class="books">運dle</span>。破關失敗則應待 <span class="forS">7</span><span class="forM">10</span><span class="forL">14</span> 分鐘方得再度嘗試。非成功破關前不得詰問，亦不得搭乘大眾運輸工具。已於大眾運輸工具者，應於下站立即落車。</p>
+                            <p>尋差使用預設設定遊玩並成功破關<span class="books">運dle</span>。破關失敗則應待 <span class="forS">7</span><span class="forM">10</span><span class="forL">14</span> 分鐘方得再度嘗試。成功破關後才能詰問或搭乘大眾運輸工具，而正在搭乘大眾運輸工具的應於下站立即落車。</p>
                             <p class="cost">以預設設定遊玩<span class="books">運dle</span>，並返還 1 張手執。</p>
                         </a>
                     </div>
