@@ -75,21 +75,25 @@
     --bg-main: 38, 30, 24;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: var(--transition-all);
-}
-
 html {
+    box-sizing: border-box;
     scroll-behavior: smooth;
-    user-select: none;
     -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     overscroll-behavior: none;
+    -webkit-font-feature-settings: "kern";
     font-feature-settings: "kern";
     scroll-padding-top: 5.5em;
     font-size: 17px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    transition: var(--transition-all);
 }
 
 body {
@@ -104,8 +108,8 @@ body {
 
 header {
     background: rgba(var(--bg-main), 0.7);
-    backdrop-filter: blur(10px);
     --webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border-bottom: 0.25em solid rgba(var(--border-colour), 0.3);
     padding: 0 2rem;
     height: 4.5rem;
@@ -405,6 +409,7 @@ header #sidebar {
     direction: ltr;
     -moz-font-feature-settings: 'liga';
     -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
     font-variation-settings:
         'FILL' 1,
         'wght' 400,
@@ -413,6 +418,9 @@ header #sidebar {
     color: inherit;
     width: fit-content;
     max-width: 1em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 
@@ -523,7 +531,7 @@ header #sidebar {
 }
 
 a.ml {
-    margin-left: 0.1em;
+    margin-left: 0.15em;
 }
 
 .article-content a:not(.card):hover,
@@ -534,6 +542,11 @@ a.ml {
 
 .article-content a[data-key] {
     border-bottom: 1.5px dotted rgba(var(--highlight-dark), 0.5);
+}
+
+a[data-key] .material-symbols-rounded {
+    vertical-align: text-top;
+    font-size: small;
 }
 
 .article-content h2 {
@@ -561,6 +574,23 @@ a.ml {
     font-size: 1.4rem;
     margin: 30px 0 15px;
     color: rgb(var(--secondary));
+}
+
+.btn {
+    padding: 0.7em 1em;
+    font-weight: 500;
+    background: rgb(var(--secondary));
+    color: rgb(var(--bg-main));
+    border-radius: calc(var(--radius) / 2);
+    cursor: pointer;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+}
+
+.btn:hover {
+    transform: scale(0.95);
 }
 
 .table-container {
@@ -626,9 +656,9 @@ th {
 
 .game-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 23px;
-    margin: 30px 0;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    gap: 1.25em;
+    margin: 1.75em 0;
 }
 
 .card {
@@ -687,7 +717,7 @@ a.card:not(.disabled):hover {
 }
 
 .card .card-icon {
-    height: 180px;
+    height: 10em;
     /* border: 1px solid rgb(var(--border-colour)); */
     border-radius: var(--radius-half);
 }
@@ -717,6 +747,15 @@ a.card:not(.disabled):hover {
     font-size: 1.17rem;
     margin-bottom: 10px;
     color: rgb(var(--text-title));
+}
+
+.card h5,
+.smolTitle {
+    font-size: 0.9em;
+    margin: 0;
+    color: rgba(var(--text-title), 0.7);
+    text-align: left;
+    font-weight: 300;
 }
 
 .references {
@@ -856,6 +895,7 @@ footer {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    text-align: center;
 }
 
 .supported-browsers span {
@@ -919,7 +959,8 @@ footer {
 
 .preview-reference {
     font-size: 0.7rem;
-    color: rgb(var(--border-colour));
+    color: rgba(var(--text-paragraph), 0.8);
+    font-weight: 500;
     margin-top: 5px;
     text-align: right;
 }
@@ -943,9 +984,13 @@ ruby rt:empty {
 }
 
 ruby rt sup {
-    position: relative;
+    display: inline-block;
     line-height: 0;
-    vertical-align: baseline;
+    font-size: 1em;
+    width: 0;
+    height: 0;
+    vertical-align: super;
+    margin-left: -0.2em;
 }
 
 ruby {
@@ -956,21 +1001,20 @@ ruby {
 
 ruby rt {
     display: inline-block;
-    color: var(--border);
+    opacity: 0.7;
     font-family: 'ZutekSans', 'Bpmf', sans-serif;
     font-size: 0.4em;
     font-weight: 500;
     max-height: 3em;
-    writing-mode: vertical-rl;
-    margin-left: 0.2em
+    max-width: 1.5em;
+    line-height: 1em;
+    text-wrap: wrap;
+    text-align: left;
+    margin-left: 0.2em;
 }
 
-ruby rt sup {
-    font-size: 1em;
-    top: -1em;
-    left: 0.8em;
-    writing-mode: horizontal-tb;
-    margin-right: 0.5em;
+ruby rt:not(:has(sup)) {
+    max-width: 1em;
 }
 
 ruby rt sub {
@@ -1019,7 +1063,7 @@ ruby rt sub {
         top: 1em;
         right: calc(-1 * 70dvw);
         left: unset;
-        width: 70dvw;
+        width: min(70dvw, 300px);
         height: var(--height);
         z-index: 11;
         backdrop-filter: blur(10px);
@@ -1050,6 +1094,23 @@ ruby rt sub {
 
     header #sidebar {
         display: flex;
+    }
+
+    .game-cards {
+        gap: 0.75em;
+        margin: 1em 0;
+    }
+
+    .card .card-icon {
+        height: 8em;
+    }
+
+    .card-icon img {
+        width: 3.5em;
+    }
+
+    .card-icon .material-symbols-rounded {
+        font-size: 3.5em;
     }
 
     .infobox {

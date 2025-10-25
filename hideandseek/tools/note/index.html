@@ -64,7 +64,6 @@
             border: 1px solid rgba(var(--border-colour), 0.5);
             padding: 0 1em;
             border-radius: calc(var(--radius) / 2);
-            margin-bottom: 2em;
         }
 
         .answer-item {
@@ -117,18 +116,25 @@
         }
 
         .add-answer-form .saveBtn {
-            padding: 0.7em 1em;
             background: rgb(var(--primary));
-            color: rgb(var(--bg-main));
-            border-radius: calc(var(--radius) / 2);
-            cursor: pointer;
-            width: fit-content;
             align-self: end;
         }
 
         #restart-btn {
             background: rgb(var(--text-danger));
             color: rgb(var(--bg-main));
+        }
+
+        #modal-export #export-content {
+            width: 100%;
+            line-height: inherit;
+            font-size: inherit;
+            font-family: inherit;
+            font-weight: inherit;
+            color: inherit;
+            border: none;
+            resize: none;
+            background-color: transparent;
         }
 
         .binary-options {
@@ -138,14 +144,13 @@
 
         .binary-option {
             flex: 1;
-            padding: 0.7em 1em;
             background: rgba(var(--text-paragraph), 0.1);
-            border-radius: calc(var(--radius) / 2);
-            cursor: pointer;
-            text-align: center;
-            display: flex;
-            align-items: center;
+            color: rgb(var(--text-paragraph));
             justify-content: center;
+        }
+
+        .binary-option.btn:hover {
+            transform: none;
         }
 
         .binary-option .material-symbols-rounded {
@@ -181,6 +186,8 @@
                     <h1>電子詰問簿</h1>
                     <div class="article-actions">
                         <a id="mapSelect-btn" draggable="false"><span class="material-symbols-rounded">aspect_ratio</span> <span><span id="mapSelect-label"></span>品等</span></a>
+                        <a id="export-btn" draggable="false"><span class="material-symbols-rounded">export_notes</span> <span>匯出</span></a>
+                        <a id="restart-btn" draggable="false"><span class="material-symbols-rounded">refresh</span> <span>重置</span></a>
                     </div>
                 </div>
 
@@ -201,15 +208,29 @@
                 <h2 id="modalQuestionText"></h2>
                 <div id="modalQuestionType" style="font-style: italic; margin-bottom: 10px;"></div>
             </div>
-            <div class="body">
-                <div style="display: flex; flex-direction: column;">
-                    <div class="answer-list" id="answerList">
-                        <!-- Existing answers will appear here -->
-                    </div>
-                    <div class="add-answer-form" id="addAnswerForm">
-                        <!-- Answer input will be inserted here -->
-                    </div>
+            <div class="body" style="max-height: 50dvh;">
+                <div class="answer-list" id="answerList">
                 </div>
+            </div>
+            <div class="footer">
+                <div class="add-answer-form" id="addAnswerForm"></div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-export" class="modal">
+        <div class="content">
+            <div class="header">
+                <span class="close" onclick="closeModal()"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2c5.53 0 10 4.47 10 10s-4.47 10-10 10S2 17.53 2 12 6.47 2 12 2m3.59 5L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z"></path>
+                        </svg></span></span>
+                <h2><span class="material-symbols-rounded">note_alt</span>匯出筆記內容</h2>
+            </div>
+            <div class="body">
+                <textarea id="export-content" readonly></textarea>
+            </div>
+            <div class="footer" style="display: flex;flex-direction: row;justify-content: end;gap: 0.5em;">
+                <div id="copy-btn" class="btn"><span class="material-symbols-rounded">copy_all</span>複製</div>
+                <div id="download-btn" class="btn"><span class="material-symbols-rounded">download</span>下載</div>
             </div>
         </div>
     </div>

@@ -13,7 +13,6 @@ fetch('/hideandseek/includes/lawPreview.json')
         function createPreviewBox(e, key) {
             const previewBox = document.createElement("div");
             previewBox.classList.add("preview-box");
-            previewBox.id = e.target.textContent;
 
             const previewDescription = document.createElement("div");
             previewDescription.classList.add("preview-description");
@@ -59,7 +58,7 @@ fetch('/hideandseek/includes/lawPreview.json')
         }
 
         function handleMobileClick(e) {
-            const key = e.target.getAttribute("data-key");
+            const key = e.target.closest('a[data-key]').getAttribute("data-key");
             const previewBox = createPreviewBox(e, key);
 
             if (!previewBox) return;
@@ -176,7 +175,7 @@ function initialiseShareButton() {
         <div class="body">
             <div style="display: flex; flex-direction: column;">
                 <img src="share.svg" class="modal-qr" draggable="false" loading="lazy">
-                <p style="text-align: center; margin-top: 1em;"><a class="inlineLink" href="https://ztakh.lol${window.location.pathname}" draggable="false"><code>https://ztakh.lol${window.location.pathname}</code></a></p>
+                <p style="text-align: center; margin-top: 1em;"><a class="inlineLink" href="https://ztakh.lol${window.location.pathname}" draggable="false"><code>https://ztakh.lol${window.location.pathname.replaceAll(/(?<=[^:\/])\/(?!$)/g, '&ZeroWidthSpace;/')}</code></a></p>
             </div>
         </div>
     </div>`;
@@ -306,7 +305,7 @@ function headerScript() {
     setTheme();
 }
 
-function loadPag(mainParent, data) {
+function loadPag(nav, data) {
     const pages = Object.keys(data);
 
     const currentPath = window.location.pathname.replace(/\/$/, '');
@@ -318,9 +317,6 @@ function loadPag(mainParent, data) {
     const prevPage = currentPageIndex > 0 ? `../${pages[currentPageIndex - 1]}/` : null;
     const nextPage = currentPageIndex < pages.length - 1 ? `../${pages[currentPageIndex + 1]}/` : null;
 
-    const nav = document.createElement('nav');
-    nav.classList.add('article-container', 'article-pagination');
-
     const prevLink = document.createElement('a');
     prevLink.classList.add('pag-button');
     prevLink.draggable = false;
@@ -330,7 +326,6 @@ function loadPag(mainParent, data) {
     nextLink.draggable = false;
 
     const pagBar = document.createElement('div');
-
     pagBar.classList.add('pag-bar');
 
     if (prevPage) {
@@ -347,11 +342,10 @@ function loadPag(mainParent, data) {
     }
     nextLink.innerHTML = '後頁<span class="material-symbols-rounded">arrow_right_alt</span>';
 
-    nav.appendChild(prevLink);
-    nav.appendChild(pagBar);
+    nav.insertBefore(pagBar, nav.firstChild);
+    nav.insertBefore(prevLink, nav.firstChild);
+    nav.appendChild(pagBar.cloneNode(true));
     nav.appendChild(nextLink);
-
-    mainParent.appendChild(nav);
 }
 
 function asideScript() {
@@ -401,6 +395,20 @@ function asideScript() {
             break;
         }
     }
+
+    const nav = document.createElement('nav');
+    nav.classList.add('article-container', 'article-pagination');
+    document.getElementsByClassName('article-container-group')[0].appendChild(nav);
+
+    const backToTop = document.createElement('a');
+    backToTop.classList.add('pag-button');
+    backToTop.draggable = false;
+    backToTop.onclick = function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    backToTop.innerHTML = '<span class="material-symbols-rounded">vertical_align_top</span>回頂端';
+
+    nav.appendChild(backToTop);
 
     if (!aside.hasAttribute('data-toc')) {
         document.getElementById('aside-button-group').remove();
@@ -460,8 +468,7 @@ function asideScript() {
                 });
             });
 
-            const mainParent = document.getElementsByClassName('article-container-group')[0];
-            loadPag(mainParent, data);
+            loadPag(nav, data);
         })
         .catch(error => console.error('Error loading JSON:', error));
 

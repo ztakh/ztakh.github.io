@@ -155,7 +155,7 @@ function openQuestionModal(categoryIndex, questionIndex) {
 
     const textInput = document.createElement('input');
     textInput.type = 'text';
-    textInput.placeholder = '請輸入說明（選填）';
+    textInput.placeholder = '請輸入說明';
     textInput.id = 'newAnswer';
     textInput.autofocus = true;
     textInput.addEventListener('input', function () {
@@ -166,12 +166,14 @@ function openQuestionModal(categoryIndex, questionIndex) {
     const answerOptions = category.answerType;
 
     if (answerOptions) {
+        textInput.placeholder += '（選填）';
+
         const binaryContainer = document.createElement('div');
         binaryContainer.className = 'binary-options';
 
         answerOptions.forEach(option => {
             const optionElement = document.createElement('div');
-            optionElement.className = 'binary-option';
+            optionElement.classList.add('binary-option', 'btn');
             optionElement.innerHTML = "<span class=\"material-symbols-rounded\">check</span>" + option;
             optionElement.addEventListener('click', function () {
                 binaryContainer.querySelectorAll('.binary-option').forEach(el => {
@@ -187,8 +189,8 @@ function openQuestionModal(categoryIndex, questionIndex) {
 
     const addButton = document.createElement('div');
     addButton.id = 'addAnswer';
-    addButton.textContent = '＋ 添加';
-    addButton.classList.add('saveBtn');
+    addButton.innerHTML = '<span class="material-symbols-rounded">add_notes</span>添加';
+    addButton.classList.add('saveBtn', 'btn');
     addButton.addEventListener('click', addAnswer);
     addAnswerForm.appendChild(addButton);
 
@@ -208,7 +210,7 @@ function addAnswer() {
     let answerText = '';
 
     const textInput = document.getElementById('newAnswer');
-    answerText = textInput.value.trim();
+    answerText = textInput.value.trim().replaceAll("／", " / ");
 
     const answerOptions = category.answerType;
 
@@ -220,12 +222,15 @@ function addAnswer() {
         }
 
         if (answerText) {
-            answerText += " → ";
+            answerText += "／";
         }
         answerText += selectedOption.textContent.replace('check', '').trim();
+    } else if (answerText.length < 1) {
+        showSnackbar('請輸入說明');
+        return;
     }
 
-    answerText += `（${hours}:${minutes}）`;
+    answerText = hours + ":" + minutes + "／" + answerText;
 
     const questionKey = `${currentQuestion.categoryIndex}-${currentQuestion.questionIndex}`;
     if (!gameState.answeredQuestions[questionKey]) {
@@ -263,6 +268,129 @@ function deleteAnswer(answerIndex) {
     showSnackbar('成功刪除');
 }
 
+function exportNotes() {
+    let exportText = '';
+
+    const allAnswers = [];
+
+    Object.keys(gameState.answeredQuestions).forEach(questionKey => {
+        const [categoryIndex, questionIndex] = questionKey.split('-').map(Number);
+        const category = gameData.categories[categoryIndex];
+        const question = category.questions[questionIndex];
+        const answers = gameState.answeredQuestions[questionKey];
+
+        let questionText = typeof question === 'string' ? question : question.text;
+        if (questionText.includes("；")) {
+            questionText = questionText.split("；")[1];
+        }
+
+        answers.forEach(answer => {
+            const [timePart, ...contentParts] = answer.split('／');
+            const fullContent = contentParts.join('／');
+
+            let mainAnswer = fullContent;
+            let binaryOption = '';
+
+            if (category.answerType && Array.isArray(category.answerType)) {
+                const contentSegments = fullContent.split('／');
+                const lastSegment = contentSegments[contentSegments.length - 1];
+
+                if (category.answerType.includes(lastSegment)) {
+                    binaryOption = lastSegment;
+                    mainAnswer = contentSegments.slice(0, -1).join('／');
+
+                    if (mainAnswer.length === 0) {
+                        mainAnswer = '---';
+                    }
+                }
+            }
+
+            allAnswers.push({
+                category: category.name.split("　")[1],
+                question: questionText,
+                time: timePart,
+                answer: mainAnswer,
+                binaryOption: binaryOption,
+                timestamp: new Date(`1970-01-01T${timePart}:00`) // For sorting
+            });
+        });
+    });
+
+    allAnswers.sort((a, b) => a.timestamp - b.timestamp);
+
+    allAnswers.forEach(item => {
+        let line = `${item.time}／${item.category}／${item.question}／${item.answer}`;
+        if (item.binaryOption) {
+            line += `／${item.binaryOption}`;
+        }
+        exportText += line + '\n';
+    });
+
+    exportText = exportText.trim();
+
+    if (exportText) {
+        textarea = document.getElementById('export-content');
+        textarea.innerHTML = exportText;
+        textarea.style.height = (allAnswers.length * 1.5) + "em";
+        openModal('export');
+    } else {
+        showSnackbar('暫無筆記可匯出');
+    }
+}
+
+function copyExportToClipboard() {
+    const textarea = document.getElementById('export-content');
+    if (!textarea) return;
+
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); // For mobile devices
+
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            showSnackbar('成功複製');
+
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        } else {
+            showSnackbar('複製失敗，請手動選擇文字複製');
+        }
+    } catch (err) {
+        navigator.clipboard.writeText(textarea.value).then(() => {
+            showSnackbar('成功複製');
+
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        }).catch(() => {
+            showSnackbar('複製失敗，請手動選擇文字複製');
+        });
+    }
+}
+
+function downloadExportedNotes() {
+    if (confirm("確定下載？")) {
+        const now = new Date();
+
+        const year = now.getFullYear() - 1911;
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+
+        const blob = new Blob([document.getElementById('export-content').textContent], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `詰問簿筆記內容-${year}${month}${day}.txt`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        showSnackbar('成功下載');
+    }
+}
+
 function restartGame() {
     if (confirm("筆記將被清空，確定重置？")) {
         categoriesContainer.classList.add("fadeOut");
@@ -278,12 +406,10 @@ function restartGame() {
 }
 
 function setupEventListeners() {
-    const restartGameButton = document.createElement('a');
-    restartGameButton.id = 'restart-btn';
-    restartGameButton.draggable = false;
-    restartGameButton.innerHTML = '<span class="material-symbols-rounded">refresh</span> <span>重置</span>';
-    document.querySelector('.article-actions').appendChild(restartGameButton);
-    restartGameButton.addEventListener('click', restartGame);
+    document.querySelector('#restart-btn').addEventListener('click', restartGame);
+    document.querySelector('#export-btn').addEventListener('click', exportNotes);
+    document.querySelector('#copy-btn').addEventListener('click', copyExportToClipboard);
+    document.querySelector('#download-btn').addEventListener('click', downloadExportedNotes);
 }
 
 document.addEventListener('DOMContentLoaded', loadGameData);
