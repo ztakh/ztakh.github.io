@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-tw">
+<html lang="zh-Hant-TW">
 
 <head>
     <meta charset="UTF-8">
@@ -44,8 +44,7 @@
         }
 
         .ztakh-logo {
-            width: 100%;
-            max-width: 1000px;
+            width: max(100%, 1000px);
             height: 100%;
             position: fixed;
             z-index: -2;
@@ -215,13 +214,13 @@
     <h1>關於我們</h1>
     <div class="about-container">
         <div class="about-card">
-            <img class="pfp" src="/images/pfp/cmt.png" draggable="false">
-            <p class="name">chocomilktea87</p>
+            <img class="pfp" src="/images/pfp/cmt.png" alt="CMT" draggable="false">
+            <p class="name">CMT</p>
             <p><code>@chocomilktea87</code></p>
         </div>
         <div class="about-card">
-            <img class="pfp" src="/images/pfp/zutek.png" draggable="false">
-            <p class="name">Zutek 3134</p>
+            <img class="pfp" src="/images/pfp/zutek.png" alt="Zutek" draggable="false">
+            <p class="name">Zutek</p>
             <p><code>@zutek3134</code></p>
         </div>
     </div>
@@ -229,8 +228,8 @@
         <p class="ztakh-name">ZTAKH.LOL</p>
     </div>
     <nav>
-        <a class="pag-button" draggable="true" onclick="history.back()"><span class="material-symbols-rounded">undo</span>回上頁</a>
-        <a class="pag-button" draggable="true" href="/"><span class="material-symbols-rounded">home</span>回主頁</a>
+        <a class="pag-button" draggable="false" onclick="history.back()" aria-label="回上頁"><span class="material-symbols-rounded" aria-hidden="true">undo</span>回上頁</a>
+        <a class="pag-button" draggable="false" href="/" aria-label="回主頁"><span class="material-symbols-rounded" aria-hidden="true">home</span>回主頁</a>
     </nav>
     <script>
         document.addEventListener('contextmenu', function (e) {

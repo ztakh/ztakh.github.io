@@ -44,7 +44,8 @@ fetch('/hideandseek/includes/lawPreview.json')
         }
 
         function positionPreviewBox(e, previewBox) {
-            const linkRect = e.target.getBoundingClientRect();
+            const realTarget = isTouchDevice() ? e : e.target;
+            const linkRect = realTarget.getBoundingClientRect();
 
             const previewBoxTop = linkRect.bottom + window.scrollY + 5;
             let previewBoxLeft = linkRect.left + window.scrollX;
@@ -58,14 +59,15 @@ fetch('/hideandseek/includes/lawPreview.json')
         }
 
         function handleMobileClick(e) {
-            const key = e.target.closest('a[data-key]').getAttribute("data-key");
-            const previewBox = createPreviewBox(e, key);
+            const eReal = e.target.closest('a[data-key]');
+            const key = eReal.getAttribute("data-key");
+            const previewBox = createPreviewBox(eReal, key);
 
             if (!previewBox) return;
 
             document.body.append(previewBox);
 
-            positionPreviewBox(e, previewBox);
+            positionPreviewBox(eReal, previewBox);
 
             setTimeout(() => previewBox.classList.add("visible"), 10);
 
@@ -174,7 +176,7 @@ function initialiseShareButton() {
         </div>
         <div class="body">
             <div style="display: flex; flex-direction: column;">
-                <img src="share.svg" class="modal-qr" draggable="false" loading="lazy">
+                <img src="share.svg" class="modal-qr" draggable="false" loading="lazy" alt="分享 QR Code">
                 <p style="text-align: center; margin-top: 1em;"><a class="inlineLink" href="https://ztakh.lol${window.location.pathname}" draggable="false"><code>https://ztakh.lol${window.location.pathname.replaceAll(/(?<=[^:\/])\/(?!$)/g, '&ZeroWidthSpace;/')}</code></a></p>
             </div>
         </div>
@@ -202,6 +204,8 @@ function loadHTML(id, file) {
         })
         .catch(error => console.error(error));
 }
+
+document.querySelector('html').dataset.js = true;
 
 const currentScript = document.querySelector('script[src="/includes/includes.js"]');
 
@@ -333,14 +337,14 @@ function loadPag(nav, data) {
     } else {
         prevLink.classList.add('disabled');
     }
-    prevLink.innerHTML = '<span class="material-symbols-rounded">arrow_left_alt</span>前頁';
+    prevLink.innerHTML = '<span class="material-symbols-rounded" aria-hidden="true">arrow_left_alt</span>前頁';
 
     if (nextPage) {
         nextLink.setAttribute('href', nextPage);
     } else {
         nextLink.classList.add('disabled');
     }
-    nextLink.innerHTML = '後頁<span class="material-symbols-rounded">arrow_right_alt</span>';
+    nextLink.innerHTML = '後頁<span class="material-symbols-rounded" aria-hidden="true">arrow_right_alt</span>';
 
     nav.insertBefore(pagBar, nav.firstChild);
     nav.insertBefore(prevLink, nav.firstChild);
@@ -406,7 +410,7 @@ function asideScript() {
     backToTop.onclick = function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    backToTop.innerHTML = '<span class="material-symbols-rounded">vertical_align_top</span>回頂端';
+    backToTop.innerHTML = '<span class="material-symbols-rounded" aria-hidden="true">vertical_align_top</span>回頂端';
 
     nav.appendChild(backToTop);
 

@@ -174,7 +174,7 @@ function openQuestionModal(categoryIndex, questionIndex) {
         answerOptions.forEach(option => {
             const optionElement = document.createElement('div');
             optionElement.classList.add('binary-option', 'btn');
-            optionElement.innerHTML = "<span class=\"material-symbols-rounded\">check</span>" + option;
+            optionElement.innerHTML = "<span class=\"material-symbols-rounded\" aria-hidden=\"true\">check</span>" + option;
             optionElement.addEventListener('click', function () {
                 binaryContainer.querySelectorAll('.binary-option').forEach(el => {
                     el.classList.remove('selected');
@@ -189,7 +189,7 @@ function openQuestionModal(categoryIndex, questionIndex) {
 
     const addButton = document.createElement('div');
     addButton.id = 'addAnswer';
-    addButton.innerHTML = '<span class="material-symbols-rounded">add_notes</span>添加';
+    addButton.innerHTML = '<span class="material-symbols-rounded" aria-hidden="true">add_notes</span>添加';
     addButton.classList.add('saveBtn', 'btn');
     addButton.addEventListener('click', addAnswer);
     addAnswerForm.appendChild(addButton);
@@ -330,9 +330,14 @@ function exportNotes() {
 
     if (exportText) {
         textarea = document.getElementById('export-content');
-        textarea.innerHTML = exportText;
-        textarea.style.height = (allAnswers.length * 1.5) + "em";
+        textarea.value = exportText;
+        textarea.style.height = 0;
+
         openModal('export');
+
+        setTimeout(() => {
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }, 100);
     } else {
         showSnackbar('暫無筆記可匯出');
     }

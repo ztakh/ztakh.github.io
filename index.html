@@ -1,12 +1,323 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZTAKH.LOL</title>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #161a1d;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100dvh;
+            padding: 0 2em;
+            color: white;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(168, 255, 226, 0.2);
+            color: white;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 1em;
+            z-index: 9999;
+            transition: top 0.3s ease;
+            backdrop-filter: blur(15px) saturate(150%);
+            border: 1px solid rgba(168, 255, 226, 0.3);
+        }
+
+        .skip-link:focus {
+            top: 20px;
+            outline: 3px solid #a8ffe2;
+            outline-offset: 2px;
+        }
+
+        .backdrop-dot {
+            opacity: 0.05;
+            background: url('/images/dots.png') repeat;
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+            pointer-events: none;
+            mix-blend-mode: lighten;
+        }
+
+        .backdrop-colour {
+            background-color: #13293d;
+            background-image:
+                radial-gradient(at 47% 33%, hsl(180, 45%, 25%) 0, transparent 59%),
+                radial-gradient(at 82% 65%, hsl(263.21, 55%, 20%) 0, transparent 55%);
+            filter: blur(80px);
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            z-index: -2;
+            pointer-events: none;
+            mix-blend-mode: lighten;
+        }
+
+        .ztakh-logo {
+            width: min(100%, 800px);
+            height: 100%;
+            position: fixed;
+            z-index: -2;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.3;
+        }
+
+        .redirect-container {
+            width: min(100%, 550px);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3em 2em;
+            border-radius: 2em;
+            text-align: center;
+            backdrop-filter: blur(15px) saturate(160%);
+            -webkit-backdrop-filter: blur(15px) saturate(160%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-family: var(--font-display);
+            margin-bottom: 0.5em;
+            background: linear-gradient(45deg, #ffe16b, #a8ffe2, #d2f5f9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2em;
+        }
+
+        .text-nowrap {
+            white-space: nowrap;
+        }
+
+        .info-section {
+            margin-bottom: 2.5em;
+        }
+
+        .info-text {
+            font-size: 1.1em;
+            color: #e0e0e6;
+            margin-bottom: 1.5em;
+        }
+
+        .highlight {
+            color: #a8ffe2;
+            font-weight: 600;
+        }
+
+        .countdown-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1em;
+        }
+
+        .countdown-label {
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .countdown-number {
+            width: 44px;
+            height: 44px;
+            background: rgba(168, 255, 226, 0.1);
+            border-radius: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: #a8ffe2;
+            font-weight: 600;
+            border: 1px solid rgba(168, 255, 226, 0.3);
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .pag-button {
+            backdrop-filter: blur(15px) saturate(150%);
+            -webkit-backdrop-filter: blur(15px) saturate(150%);
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 1em;
+            overflow: hidden;
+            padding: 1.2em 2.5em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
+            font-size: 1em;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .pag-button:hover {
+            transform: scale(1.025) translateY(-2px);
+            background-color: rgba(255, 255, 255, 0.03);
+            border-color: rgba(168, 255, 226, 0.4);
+        }
+
+        .pag-button:focus-visible {
+            outline: 3px solid #a8ffe2;
+            outline-offset: 2px;
+        }
+
+        .footer-text {
+            margin-top: 1.5em;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        noscript {
+            display: block;
+            margin-top: 1.5em;
+            padding: 1.2em;
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            border-radius: 1em;
+            color: #ff9580;
+            font-size: 0.9em;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+
+            100% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .redirect-container {
+                padding: 2.5em 1.5em;
+                border-radius: 1.5em;
+            }
+
+            .pag-button {
+                width: 100%;
+                padding: 1.2em;
+            }
+        }
+    </style>
+</head>
 
 <body>
+    <a href="#main-content" class="skip-link">跳至跳轉說明</a>
+
+    <div class="backdrop-colour"></div>
+    <div class="ztakh-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" style="width:auto; height:60%" viewBox="0 0 550 200" aria-hidden="true">
+            <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M103 160Q200.5 25 298 40 185.5 25 73 100q210-15 420 0-60-15-120 0" />
+        </svg>
+    </div>
+    <div class="backdrop-dot"></div>
+
+    <h1>ZTAKH.LOL</h1>
+
+    <div class="redirect-container">
+        <main id="main-content">
+
+            <div class="info-section">
+                <p class="info-text">
+                    <span class="text-nowrap">即將自動跳轉至</span> <span class="text-nowrap"><span class="highlight">Hide + Seek 首頁</span>。</span>
+                </p>
+                <div class="countdown-container">
+                    <div class="countdown-number" id="countdown">1</div>
+                </div>
+                <p class="footer-text"><span class="text-nowrap">若未自動跳轉，</span><span class="text-nowrap">請點擊下方按鈕手動前往。</span></p>
+            </div>
+
+            <a href="/hideandseek/" class="pag-button" aria-label="手動前往 Hide + Seek 首頁">
+                <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+                前往遊戲首頁
+            </a>
+
+            <noscript>
+                <p>你的瀏覽器已禁用 JavaScript，請點擊上方按鈕或下方網址手動前往：</p>
+                <a href="/hideandseek/" class="highlight">https://ztakh.lol/hideandseek/</a>
+            </noscript>
+        </main>
+    </div>
 
     <script>
-        location.replace("/hideandseek/");
-    </script>
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
 
+        let countdown = 1;
+        const countdownEl = document.getElementById('countdown');
+        const timer = setInterval(() => {
+            countdown--;
+            countdownEl.textContent = countdown;
+            if (countdown <= 0) {
+                clearInterval(timer);
+                location.replace("/hideandseek/");
+            }
+        }, 1000);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                clearInterval(timer);
+                location.replace("/hideandseek/");
+            }
+        });
+
+        window.addEventListener('load', () => {
+            const liveRegion = document.createElement('div');
+            liveRegion.setAttribute('aria-live', 'polite');
+            liveRegion.style.position = 'absolute';
+            liveRegion.style.width = '1px';
+            liveRegion.style.height = '1px';
+            liveRegion.style.overflow = 'hidden';
+            document.body.appendChild(liveRegion);
+            liveRegion.textContent = '頁面即將在 10 秒後跳轉至 Hide + Seek 首頁，或按 Enter 鍵快速跳轉。';
+        });
+    </script>
 </body>
 
 </html>

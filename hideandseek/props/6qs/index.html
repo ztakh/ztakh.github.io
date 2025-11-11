@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-tw">
+<html lang="zh-Hant-TW">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6 Major Questions | Hide + Seek / ZTAKH.LOL</title>
-    <meta name="description" content="">
+    <title>6 Major Questions | Hide + Seek</title>
+    <meta name="description" content="Hide + Seek 六大詰問規則說明：異同之問、遠近之問、項背之問、環偵之問、鎖域之問、採樣之問之詳細規則及表格參考。">
     <link rel="icon" type="image/x-icon" href="/hideandseek/logo/logo.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,18 +96,18 @@
     </style>
 </head>
 
-<body>
+<body data-mapsize="M">
     <header></header>
     <div class="container">
         <aside data-toc="../toc.json"></aside>
         <div class="article-container-group">
             <div class="article-container article-banner" style="--gradient: linear-gradient(135deg, #8d2a8b, #5c33cc)">
-                <span class="material-symbols-rounded">join</span>
-                <span class="material-symbols-rounded">social_distance</span>
-                <span class="material-symbols-rounded">move_location</span>
-                <span class="material-symbols-rounded">radar</span>
-                <span class="material-symbols-rounded">detection_and_zone</span>
-                <span class="material-symbols-rounded">photo</span>
+                <span class="material-symbols-rounded" aria-hidden="true">join</span>
+                <span class="material-symbols-rounded" aria-hidden="true">social_distance</span>
+                <span class="material-symbols-rounded" aria-hidden="true">move_location</span>
+                <span class="material-symbols-rounded" aria-hidden="true">radar</span>
+                <span class="material-symbols-rounded" aria-hidden="true">detection_and_zone</span>
+                <span class="material-symbols-rounded" aria-hidden="true">photo</span>
             </div>
             <main class="article-container">
                 <div class="article-header">
@@ -115,8 +115,8 @@
                     <h1>六大詰問</h1>
                     <div class="article-actions-holder">
                         <div class="article-actions">
-                            <a id="mapSelect-btn" draggable="false"><span class="material-symbols-rounded">aspect_ratio</span> <span><span id="mapSelect-label"></span>品等</span></a>
-                            <a href="https://github.com/ztakh/ztakh.github.io/releases/download/v0.1/02_QuestionBook_0813-1815.pdf" onclick="return confirm('確定下載？');" draggable="false"><span class="material-symbols-rounded">download_2</span> 下載 PDF</a>
+                            <a id="mapSelect-btn" draggable="false" aria-label="品等選擇"><span class="material-symbols-rounded" aria-hidden="true">aspect_ratio</span> <span><span id="mapSelect-label">中</span>品等</span></a>
+                            <a href="https://github.com/ztakh/ztakh.github.io/releases/download/v0.1/02_QuestionBook_0813-1815.pdf" onclick="return confirm('確定下載？');" draggable="false" aria-label="下載 PDF 檔詰問簿"><span class="material-symbols-rounded" aria-hidden="true">download</span> 下載 PDF</a>
                         </div>
                     </div>
                 </div>
@@ -133,15 +133,16 @@
                         </div>
                     </div>
                     <div class="question-limit">
-                        <div><span class="material-symbols-rounded">timer</span> 5 分鐘</div>
-                        <div><span class="material-symbols-rounded">mobile_hand</span> 掣 3 留 1</div>
+                        <div><span class="material-symbols-rounded" aria-hidden="true">timer</span> 5 分鐘</div>
+                        <div><span class="material-symbols-rounded" aria-hidden="true">mobile_hand</span> 掣 3 留 1</div>
                     </div>
                     <figure class="table-container">
-                        <table>
+                        <table aria-describedby="match-table-desc">
+                            <caption id="match-table-desc" class="visually-hidden">異同之問的「甲」（類別）與「乙」（實例）對應表</caption>
                             <thead>
                                 <tr>
-                                    <th style=" width: 50%">甲</th>
-                                    <th>乙</th>
+                                    <th scope="col" style=" width: 50%">甲</th>
+                                    <th scope="col">乙</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -240,15 +241,16 @@
                         </div>
                     </div>
                     <div class="question-limit">
-                        <div><span class="material-symbols-rounded">timer</span> 5 分鐘</div>
-                        <div><span class="material-symbols-rounded">mobile_hand</span> 掣 3 留 1</div>
+                        <div><span class="material-symbols-rounded" aria-hidden="true">timer</span> 5 分鐘</div>
+                        <div><span class="material-symbols-rounded" aria-hidden="true">mobile_hand</span> 掣 3 留 1</div>
                     </div>
                     <figure class="table-container">
-                        <table>
+                        <table aria-describedby="distance-table-desc">
+                            <caption id="distance-table-desc" class="visually-hidden">遠近之問的「類別」「甲」（具體對象）對應表</caption>
                             <thead>
                                 <tr>
-                                    <th style="width: 50%">類別</th>
-                                    <th>甲</th>
+                                    <th scope="col" style="width: 50%">類別</th>
+                                    <th scope="col">甲</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -347,14 +349,15 @@
                         </div>
                     </div>
                     <div class="question-limit">
-                        <div><span class="material-symbols-rounded">timer</span> 5 分鐘</div>
-                        <div><span class="material-symbols-rounded">mobile_hand</span> 掣 2 留 1</div>
+                        <div><span class="material-symbols-rounded" aria-hidden="true">timer</span> 5 分鐘</div>
+                        <div><span class="material-symbols-rounded" aria-hidden="true">mobile_hand</span> 掣 2 留 1</div>
                     </div>
                     <figure class="table-container">
-                        <table class="custom">
+                        <table aria-describedby="apart-table-desc">
+                            <caption id="apart-table-desc" class="visually-hidden">項背之問的「甲」（移動距離）對應表</caption>
                             <thead>
                                 <tr>
-                                    <th colspan="2">甲</th>
+                                    <th scope="col" colspan="2">甲</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -389,14 +392,15 @@
                         </div>
                     </div>
                     <div class="question-limit">
-                        <div><span class="material-symbols-rounded">timer</span> 5 分鐘</div>
-                        <div><span class="material-symbols-rounded">mobile_hand</span> 掣 2 留 1</div>
+                        <div><span class="material-symbols-rounded" aria-hidden="true">timer</span> 5 分鐘</div>
+                        <div><span class="material-symbols-rounded" aria-hidden="true">mobile_hand</span> 掣 2 留 1</div>
                     </div>
                     <figure class="table-container">
-                        <table>
+                        <table aria-describedby="radar-table-desc">
+                            <caption id="radar-table-desc" class="visually-hidden">環偵之問的「甲」（距離範圍）對應表</caption>
                             <thead>
                                 <tr>
-                                    <th colspan="2">甲</th>
+                                    <th scope="col" colspan="2">甲</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -458,16 +462,17 @@
                             </div>
                         </div>
                         <div class="question-limit">
-                            <div><span class="material-symbols-rounded">timer</span> 5 分鐘</div>
-                            <div><span class="material-symbols-rounded">mobile_hand</span> 掣 4 留 2</div>
+                            <div><span class="material-symbols-rounded" aria-hidden="true">timer</span> 5 分鐘</div>
+                            <div><span class="material-symbols-rounded" aria-hidden="true">mobile_hand</span> 掣 4 留 2</div>
                         </div>
                         <figure class="table-container">
-                            <table>
+                            <table aria-describedby="tentacle-table-desc">
+                                <caption id="tentacle-table-desc" class="visually-hidden">鎖域之問的「甲」（半徑距離）、「乙」（地點類型）與「例如」（實例）對應表</caption>
                                 <thead>
                                     <tr>
-                                        <th style="min-width: 3em;">甲</th>
-                                        <th style="width: 40%">乙</th>
-                                        <th>例如</th>
+                                        <th scope="col" style="min-width: 3em;">甲</th>
+                                        <th scope="col" style="width: 40%">乙</th>
+                                        <th scope="col">例如</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -521,20 +526,21 @@
                         </div>
                     </div>
                     <div class="question-limit">
-                        <div><span class="material-symbols-rounded">timer</span> <span class="forS">10</span><span class="forM">10</span><span class="forL">20</span> 分鐘</div>
-                        <div><span class="material-symbols-rounded">mobile_hand</span> 掣 1 留 1</div>
+                        <div><span class="material-symbols-rounded" aria-hidden="true">timer</span> <span class="forS">10</span><span class="forM">10</span><span class="forL">20</span> 分鐘</div>
+                        <div><span class="material-symbols-rounded" aria-hidden="true">mobile_hand</span> 掣 1 留 1</div>
                     </div>
                     <figure class="table-container">
-                        <table>
+                        <table aria-describedby="photo-table-desc">
+                            <caption id="photo-table-desc" class="visually-hidden">採樣之問的「甲」（拍攝對象）與「拍攝要求」對應表</caption>
                             <thead>
                                 <tr>
-                                    <th>甲</th>
-                                    <th>拍攝要求</th>
+                                    <th scope="col">甲</th>
+                                    <th scope="col">拍攝要求</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="min-width: 4em"><span><a draggable="false" data-key="a14p2">匿域中樞</a></span><span>附近</span><span>任何建築</span></td>
+                                    <td style="min-width: 4em"><span><a draggable="false" data-key="a14p2-spot">匿域中樞</a></span><span>附近</span><span>任何建築</span></td>
                                     <td style="text-align: justify;">佇於車站任何出口，拍出建築物屋頂及兩側，且屋頂應位於照片頂端 ⅓ 處。</td>
                                 </tr>
                                 <tr>
@@ -558,7 +564,7 @@
                                     <td style="text-align: justify;">於戶外平置手機於地面向上拍攝，不調參數。</td>
                                 </tr>
                                 <tr class="forML">
-                                    <td><span><a draggable="false" data-key="a14p2">匿域中樞</a></span><span>附近</span><span>至高大廈</span></td>
+                                    <td><span><a draggable="false" data-key="a14p2-spot">匿域中樞</a></span><span>附近</span><span>至高大廈</span></td>
                                     <td style="text-align: justify;">佇於車站任何出口，拍出主觀認定除車站外最高大樓屋頂及兩側，且屋頂應位於照片頂端 ⅓ 處。</td>
                                 </tr>
                                 <tr class="forML">
@@ -577,7 +583,7 @@
                                     <td>廟宇</td>
                                 </tr>
                                 <tr class="forML">
-                                    <td><span><a draggable="false" data-key="a14p2">匿域中樞</a></span><span>月臺</span></td>
+                                    <td><span><a draggable="false" data-key="a14p2-spot">匿域中樞</a></span><span>月臺</span></td>
                                     <td style="text-align: justify;">至少含 3 件可辨識之物體。</td>
                                 </tr>
                                 <tr class="forML">
@@ -589,7 +595,7 @@
                                     <td style="text-align: justify;">應含所有車道。</td>
                                 </tr>
                                 <tr class="forL">
-                                    <td><span><a draggable="false" data-key="a14p2">匿域中樞</a></span><span>附近</span><span>最高山巔</span></td>
+                                    <td><span><a draggable="false" data-key="a14p2-spot">匿域中樞</a></span><span>附近</span><span>最高山巔</span></td>
                                     <td style="text-align: justify;">佇於車站任意出口拍攝主觀認定最高之峰，山頂應位於照片頂端 ⅓ 處。</td>
                                 </tr>
                                 <tr class="forL">
@@ -605,6 +611,14 @@
                     </figure>
                 </div>
             </main>
+        </div>
+        <div class="no-js" role="alert">
+            <span class="material-symbols-rounded" aria-hidden="true">
+                warning
+            </span>
+            <p>
+                你的瀏覽器並未允許 JavaScript 運作，此將導致本網站大量功能失效。請 <a href="https://www.google.com/search?q=%E5%A6%82%E4%BD%95%E5%9C%A8%E7%80%8F%E8%A6%BD%E5%99%A8%E5%95%9F%E7%94%A8+JavaScript" draggable="false" target="_blank" rel="noopener noreferrer" aria-label="開啟新頁籤，搜尋如何開啟 JavaScript">點此</a> 搜尋如何將其啟用。
+            </p>
         </div>
     </div>
     <footer></footer>

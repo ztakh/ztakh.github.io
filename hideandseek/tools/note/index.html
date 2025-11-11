@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-tw">
+<html lang="zh-Hant-TW">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Notes | Hide + Seek / ZTAKH.LOL</title>
+    <title>Digital Notes | Hide + Seek</title>
     <meta name="description" content="">
     <link rel="icon" type="image/x-icon" href="/hideandseek/logo/logo.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,6 +135,9 @@
             border: none;
             resize: none;
             background-color: transparent;
+            transition:
+                var(--transition),
+                height 0.2s ease-in-out;
         }
 
         .binary-options {
@@ -172,22 +175,22 @@
     </style>
 </head>
 
-<body>
+<body data-mapsize="M">
     <header></header>
     <div class="container">
         <aside></aside>
         <div class="article-container-group">
             <div class="article-banner" style="--gradient: linear-gradient(135deg, #aaa, #777)">
-                <span class="material-symbols-rounded">note_alt</span>
+                <span class="material-symbols-rounded" aria-hidden="true">note_alt</span>
             </div>
             <main class="article-container">
                 <div class="article-header">
                     <!-- <span class="article-tag">114-9-21</span> -->
                     <h1>電子詰問簿</h1>
                     <div class="article-actions">
-                        <a id="mapSelect-btn" draggable="false"><span class="material-symbols-rounded">aspect_ratio</span> <span><span id="mapSelect-label"></span>品等</span></a>
-                        <a id="export-btn" draggable="false"><span class="material-symbols-rounded">export_notes</span> <span>匯出</span></a>
-                        <a id="restart-btn" draggable="false"><span class="material-symbols-rounded">refresh</span> <span>重置</span></a>
+                        <a id="mapSelect-btn" draggable="false"><span class="material-symbols-rounded" aria-hidden="true">aspect_ratio</span> <span><span id="mapSelect-label">中</span>品等</span></a>
+                        <a id="export-btn" draggable="false"><span class="material-symbols-rounded" aria-hidden="true">export_notes</span> <span>匯出</span></a>
+                        <a id="restart-btn" draggable="false"><span class="material-symbols-rounded" aria-hidden="true">refresh</span> <span>重置</span></a>
                     </div>
                 </div>
 
@@ -198,6 +201,14 @@
                 </div>
             </main>
         </div>
+        <div class="no-js" role="alert">
+            <span class="material-symbols-rounded" aria-hidden="true">
+                warning
+            </span>
+            <p>
+                你的瀏覽器並未允許 JavaScript 運作，此將導致本工具完全無法使用。請 <a href="https://www.google.com/search?q=%E5%A6%82%E4%BD%95%E5%9C%A8%E7%80%8F%E8%A6%BD%E5%99%A8%E5%95%9F%E7%94%A8+JavaScript" draggable="false" target="_blank" rel="noopener noreferrer" aria-label="開啟新頁籤，搜尋如何開啟 JavaScript">點此</a> 搜尋如何將其啟用。
+            </p>
+        </div>
     </div>
     <div id="modal-question" class="modal">
         <div class="content">
@@ -205,12 +216,11 @@
                 <span class="close" onclick="closeModal()"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path d="M12 2c5.53 0 10 4.47 10 10s-4.47 10-10 10S2 17.53 2 12 6.47 2 12 2m3.59 5L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z"></path>
                         </svg></span></span>
-                <h2 id="modalQuestionText"></h2>
+                <h2 id="modalQuestionText">題目</h2>
                 <div id="modalQuestionType" style="font-style: italic; margin-bottom: 10px;"></div>
             </div>
             <div class="body" style="max-height: 50dvh;">
-                <div class="answer-list" id="answerList">
-                </div>
+                <div class="answer-list" id="answerList"></div>
             </div>
             <div class="footer">
                 <div class="add-answer-form" id="addAnswerForm"></div>
@@ -223,14 +233,14 @@
                 <span class="close" onclick="closeModal()"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path d="M12 2c5.53 0 10 4.47 10 10s-4.47 10-10 10S2 17.53 2 12 6.47 2 12 2m3.59 5L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z"></path>
                         </svg></span></span>
-                <h2><span class="material-symbols-rounded">note_alt</span>匯出筆記內容</h2>
+                <h2><span class="material-symbols-rounded" aria-hidden="true">note_alt</span>匯出筆記內容</h2>
             </div>
             <div class="body">
-                <textarea id="export-content" readonly></textarea>
+                <textarea id="export-content" title="匯出內容" readonly></textarea>
             </div>
             <div class="footer" style="display: flex;flex-direction: row;justify-content: end;gap: 0.5em;">
-                <div id="copy-btn" class="btn"><span class="material-symbols-rounded">copy_all</span>複製</div>
-                <div id="download-btn" class="btn"><span class="material-symbols-rounded">download</span>下載</div>
+                <div id="copy-btn" class="btn"><span class="material-symbols-rounded" aria-hidden="true">copy_all</span>複製</div>
+                <div id="download-btn" class="btn"><span class="material-symbols-rounded" aria-hidden="true">download</span>下載</div>
             </div>
         </div>
     </div>
