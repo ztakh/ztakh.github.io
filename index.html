@@ -243,6 +243,9 @@
             }
         }
     </style>
+    <script>
+        location.replace("/hideandseek/");
+    </script>
 </head>
 
 <body>
@@ -260,14 +263,10 @@
 
     <div class="redirect-container">
         <main id="main-content">
-
             <div class="info-section">
                 <p class="info-text">
                     <span class="text-nowrap">即將自動跳轉至</span> <span class="text-nowrap"><span class="highlight">Hide + Seek 首頁</span>。</span>
                 </p>
-                <div class="countdown-container">
-                    <div class="countdown-number" id="countdown">1</div>
-                </div>
                 <p class="footer-text"><span class="text-nowrap">若未自動跳轉，</span><span class="text-nowrap">請點擊下方按鈕手動前往。</span></p>
             </div>
 
@@ -288,17 +287,6 @@
             e.preventDefault();
         });
 
-        let countdown = 1;
-        const countdownEl = document.getElementById('countdown');
-        const timer = setInterval(() => {
-            countdown--;
-            countdownEl.textContent = countdown;
-            if (countdown <= 0) {
-                clearInterval(timer);
-                location.replace("/hideandseek/");
-            }
-        }, 1000);
-
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
@@ -315,7 +303,7 @@
             liveRegion.style.height = '1px';
             liveRegion.style.overflow = 'hidden';
             document.body.appendChild(liveRegion);
-            liveRegion.textContent = '頁面即將在 10 秒後跳轉至 Hide + Seek 首頁，或按 Enter 鍵快速跳轉。';
+            liveRegion.textContent = '頁面即將跳轉至 Hide + Seek 首頁；若仍未發生，試按 Enter 鍵，或上方按鈕或網址。';
         });
     </script>
 </body>

@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" data-fullscreenEnabled="true">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proficiency Test | Hide + Seek</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/x-icon" href="/hideandseek/logo/logo.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Serif:wght@600;900&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/Zutek3134/zutek3134.github.io@main/stylesheets/fonts/ZutekSans/ZutekSans-Normal.woff" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/js/snackbar/script.js"></script>
+    <style>
+        input {
+            flex: 1;
+            padding: 0.75em 1em;
+            border: none;
+            background-color: rgba(var(--text-paragraph), 0.1);
+            color: inherit;
+            font-family: inherit;
+            font-weight: inherit;
+            font-size: inherit;
+        }
+
+        .modal {
+            .body:empty {
+                display: none;
+            }
+
+            .footer {
+                display: flex;
+
+                #decode-input {
+                    border-radius: var(--radius-half) 0 0 var(--radius-half);
+                }
+
+                #decode-btn {
+                    border-radius: 0 var(--radius-half) var(--radius-half) 0;
+                }
+            }
+        }
+
+        .article-content {
+            text-align: justify;
+        }
+
+        #about_area {
+            input {
+                padding: 0.625em 0.9em;
+                border-radius: var(--radius-half) 0 0 var(--radius-half);
+                font-family: "Noto Serif", "Noto Serif TC", "serif";
+                font-weight: 900;
+            }
+
+            .btn {
+                border-radius: 0 var(--radius-half) var(--radius-half) 0;
+            }
+        }
+
+        .btnContainer {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+
+            .btn {
+                width: max(25dvw, 7rem);
+                min-width: fit-content;
+            }
+        }
+
+        #question_area {
+            display: none;
+            flex-direction: column;
+            min-height: 100%;
+            opacity: 0;
+            animation: fadeIn 0.2s forwards;
+
+            #section {
+                font-size: 0.8em;
+                font-weight: 500;
+                padding: 0.25em 0.8em;
+                background-color: rgb(var(--secondary), 0.5);
+                color: rgb(var(--bg-main));
+                width: fit-content;
+                border-radius: 500px;
+                margin-bottom: 0.5em;
+            }
+
+            #As {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5em;
+                margin: 1em 0;
+
+                li {
+                    padding: 0.625em 1em;
+                    overflow-y: hidden;
+                    cursor: pointer;
+                    outline: 2px solid transparent;
+                    outline-offset: 2px;
+                    opacity: 0;
+                    transform: translateY(-25%);
+                    animation: fadeInUp 0.2s forwards;
+
+                    &:hover {
+                        outline-color: rgb(var(--border-colour));
+                    }
+
+                    &:nth-child(1) {
+                        animation-delay: 0.05s;
+                    }
+
+                    &:nth-child(2) {
+                        animation-delay: 0.1s;
+                    }
+
+                    &:nth-child(3) {
+                        animation-delay: 0.15s;
+                    }
+
+                    &:nth-child(4) {
+                        animation-delay: 0.2s;
+                    }
+
+                    &:nth-child(1)::before {
+                        content: "looks_one";
+                    }
+
+                    &:nth-child(2)::before {
+                        content: "looks_two";
+                    }
+
+                    &:nth-child(3)::before {
+                        content: "looks_3";
+                    }
+
+                    &:nth-child(4)::before {
+                        content: "looks_4";
+                    }
+
+                    &.correct,
+                    &.incorrect {
+                        &:hover {
+                            outline-color: rgb(var(--border-colour), 0.5);
+                        }
+                    }
+                }
+            }
+        }
+
+        #stats {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 2em;
+            gap: 0.75em;
+            padding-bottom: 2em;
+            border-bottom: 1px dotted;
+
+
+            .stat-box {
+                display: grid;
+                grid-template-columns: 4em 1fr auto;
+                align-items: center;
+                gap: 1em;
+
+                .pb-outer {
+                    background-color: rgb(var(--text-paragraph), 0.1);
+                    height: 0.625em;
+                    border-radius: 50px;
+                    overflow: hidden;
+
+                    .pb-inner {
+                        width: var(--progress, 0%);
+                        height: 100%;
+                        background-color: rgb(var(--primary));
+                        transition:
+                            var(--transition),
+                            width 0.2s ease-out;
+                    }
+                }
+
+                span {
+                    text-align: right;
+                    min-width: 2.5em;
+                    width: fit-content;
+
+                    &::after {
+                        font-size: 0.8em;
+                        margin-left: 0.25em;
+                        opacity: 0.75;
+                    }
+                }
+
+                &#accuracy .pb-inner {
+                    background-color: rgb(var(--secondary));
+                }
+
+                &#progress span::after {
+                    content: "/ 25";
+                }
+
+                &#accuracy span::after {
+                    content: "%";
+                }
+            }
+        }
+
+        #result_area {
+            display: none;
+
+            #result-banner {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto 2em;
+                max-width: 40em;
+
+                #icon {
+                    font-size: 3em;
+                    width: 2em;
+                    height: 2em;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+                    color: rgb(var(--bg-main));
+                    opacity: 0;
+                    transform: scale(0.9);
+                    animation: fadeInGrow 0.2s forwards;
+
+                    &.learner {
+                        background-color: rgba(var(--text-title));
+                    }
+
+                    &.failed {
+                        background-color: rgba(var(--text-danger));
+                    }
+
+                    &.passed {
+                        background-color: rgba(var(--primary-light));
+                    }
+                }
+
+                #dwuanway {
+                    font-size: 2em;
+                    font-weight: 700;
+                    letter-spacing: 0.025em;
+                    margin: 0.5rem 0 0.25rem;
+                    opacity: 0;
+                    transform: translateY(-25%);
+                    animation: fadeInUp 0.2s 0.1s forwards;
+                }
+
+                #desc {
+                    padding-left: 0.5em;
+                    color: rgba(var(--text-paragraph), 0.75);
+                    text-align: center;
+                    opacity: 0;
+                    transform: translateY(-25%);
+                    animation: fadeInUp 0.2s 0.2s forwards;
+
+                    span {
+                        white-space: nowrap;
+                    }
+                }
+            }
+
+            .game-cards {
+                grid-template-columns: repeat(2, 1fr);
+                color: rgb(var(--border-colour));
+
+                .card {
+                    padding: 1em 0;
+                    opacity: 0;
+                    transform: translateY(-25%);
+                    animation: fadeInUp 0.2s forwards;
+
+                    h4 {
+                        font-size: 0.75rem;
+                        line-height: 1;
+                        opacity: 0.75;
+                    }
+
+                    p {
+                        font-size: 2.5rem;
+                        font-weight: 700;
+                        line-height: 1;
+                        opacity: 0;
+                        transform: scale(0.9);
+                        animation: fadeInGrow 0.2s forwards;
+
+                        small {
+                            font-weight: 500;
+                            font-size: 0.75em;
+                            opacity: 0.75;
+                            margin-left: 0.25em;
+                        }
+                    }
+
+                    &:nth-child(1) {
+                        animation-delay: 0.4s;
+
+                        p {
+                            animation-delay: 0.7s;
+                        }
+                    }
+
+                    &:nth-child(2) {
+                        animation-delay: 0.5s;
+
+                        p {
+                            animation-delay: 0.8s;
+                        }
+                    }
+
+                    &:nth-child(3) {
+                        animation-delay: 0.6s;
+
+                        p {
+                            animation-delay: 0.9s;
+                        }
+                    }
+                }
+            }
+
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #sectionsResult {
+                gap: 0.375em;
+                margin-top: 2em;
+                background-color: rgb(var(--bg-body));
+                padding: 0.5em;
+                border-radius: var(--radius);
+                font-size: 0.875em;
+                opacity: 0;
+                animation: fadeIn 0.2s 0.9s forwards;
+
+                &>li {
+                    cursor: pointer;
+                    display: grid;
+                    grid-template-columns: 1em 1fr auto 3.5em;
+                    border: 1px solid rgba(var(--border-colour), 0.25);
+                    padding: 0.5em;
+                    border-radius: var(--radius-half);
+                    background-color: rgb(var(--bg-main));
+                    opacity: 0;
+                    transform: translateY(-25%);
+                    animation: fadeInUp 0.2s forwards;
+                    overflow-y: hidden;
+                    height: 3em;
+                    transition:
+                        var(--transition),
+                        height 0.2s ease-in-out;
+
+                    span {
+                        white-space: nowrap;
+
+                        span {
+                            font-size: 0.8em;
+                        }
+                    }
+
+                    span:not(:first-of-type) {
+                        text-align: right;
+                    }
+
+                    small {
+                        font-size: 0.8em;
+                        margin-left: 0.25em;
+                        opacity: 0.75;
+                    }
+
+                    &::before {
+                        content: "";
+                        display: inline-block;
+                        width: 0.5em;
+                        height: 0.5em;
+                        background-color: rgb(var(--primary));
+                        margin: auto 0 auto 0.125em;
+                        border-radius: 50%;
+                    }
+
+                    &.failed::before {
+                        background-color: rgb(var(--text-danger));
+                    }
+
+                    ol {
+                        grid-column: 1 / 5;
+                        padding: 1em 0.5em 1em 2em;
+                        cursor: auto;
+
+                        >li+li {
+                            margin-top: 0.75em;
+                        }
+
+                        li ul li {
+                            padding: 0.375em 0.8em;
+                            margin-top: 0.5em;
+                            border-width: 1.5px;
+                        }
+                    }
+                }
+            }
+
+            #certificate {
+                margin-top: 3em;
+                opacity: 0;
+                transform: translateY(-25%);
+                animation: fadeInUp 0.2s 1.6s forwards;
+
+                #preview {
+                    display: block;
+                    width: min(100%, 50em);
+                    border: 1px solid rgba(var(--border-colour), 0.5);
+                    border-radius: var(--radius-half);
+                    text-align: center;
+                    margin: 0 auto;
+                    aspect-ratio: 1.414 / 1;
+                    overflow: hidden;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        #As li,
+        #sectionsResult ol li ul li {
+            display: grid;
+            grid-template-columns: 1.2em 1fr;
+            gap: 0.75em;
+            align-items: center;
+            border-radius: var(--radius-half);
+            background-color: rgb(var(--bg-body));
+            border: 2px solid transparent;
+            transition:
+                var(--transition-all),
+                outline 0.2s ease-in-out,
+                height 0.2s ease-in-out;
+
+            &::before {
+                display: block;
+                font-family: "Material Symbols Rounded";
+                font-size: 1.2em;
+                opacity: 0.5;
+            }
+
+            &.correct,
+            &.incorrect {
+                &::before {
+                    opacity: 1;
+                }
+
+                &::after {
+                    content: var(--explain, "");
+                    grid-column: 1 / 3;
+                    padding-top: 0.75rem;
+                    border-top: 1px dashed rgb(var(--text-paragraph), 0.25);
+                    font-size: 0.8em;
+                }
+            }
+
+            &.correct {
+                border-color: rgb(var(--primary));
+
+                &::before {
+                    content: "check_circle" !important;
+                    color: rgb(var(--primary));
+                }
+            }
+
+            &.incorrect {
+                border-color: rgb(var(--text-danger));
+
+                &::before {
+                    content: "dangerous" !important;
+                    color: rgb(var(--text-danger));
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            #about_area {
+                .btnContainer {
+                    flex-direction: column;
+
+                    input {
+                        width: 100%;
+                        text-align: center;
+                        border-radius: var(--radius-half) var(--radius-half) 0 0;
+                    }
+
+                    .btn {
+                        width: 100%;
+                        border-radius: 0 0 var(--radius-half) var(--radius-half);
+                    }
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+    <div class="container">
+        <aside></aside>
+        <div class="article-container-group">
+            <div class="article-banner" style="--gradient: linear-gradient(135deg, #33b6cc, #2a7a8d)">
+                <span class="material-symbols-rounded" aria-hidden="true">lab_profile</span>
+            </div>
+            <main class="article-container">
+                <div class="article-header">
+                    <!-- <span class="article-tag">114-9-21</span> -->
+                    <h1>能力檢定</h1>
+                    <div class="article-actions">
+                        <a draggable="false" onclick="openModal('decode')"><span class="material-symbols-rounded">search_check_2</span> 查驗證字號</a>
+                    </div>
+                </div>
+
+                <div class="article-content">
+                    <div id="about_area" style="margin-bottom: 1em;">
+                        <p class="text-indent">歡迎來到玩家能力檢定。本檢定目的在於評估玩家對遊戲<span class="books">通則</span>之掌握，確保全體參與者皆能基於對等規則理解，進行公平且嚴謹的遊戲。測驗內容參照<span class="books">通則</span>而出，著重於釐清玩家可能忽略或誤解之細節，將強調相近釋義名詞之解釋及其差別。</p>
+                        <p class="text-indent">本檢定涵蓋以下內容：
+                        <figure class="table-container">
+                            <table aria-describedby="question-table-desc">
+                                <caption id="question-table-desc" class="visually-hidden">檢定題目分布</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">大題名稱</th>
+                                        <th scope="col" class="text-right">小題數量</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: left;">壹、名詞定義</td>
+                                        <td class="text-right">6</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;">貳、權利與義務</td>
+                                        <td class="text-right">4</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;">參、詰問與牌令觀念</td>
+                                        <td class="text-right">4</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;">肆、制約權能牌</td>
+                                        <td class="text-right">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;">伍、情境題　<small>小華（匿者）vs 小明（尋差）</small></td>
+                                        <td class="text-right">8</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </figure>
+                        <p>⋯⋯共 25 題。全部題型皆為單選題，意即，每題僅有 1 個最符合題意的答案。</p>
+                        <div class="btnContainer" style="margin-top: 2em;">
+                            <input id="certPName" placeholder="玩家名稱，至多 16 字" maxlength="16">
+                            <div class="btn primary">準備好即可開始作答<span class="material-symbols-rounded">arrow_circle_right</span></div>
+                        </div>
+                    </div>
+
+                    <div id="question_area">
+                        <div id="stats">
+                            <div id="progress" class="stat-box">答題進度<div class="pb-outer">
+                                    <div class="pb-inner"></div>
+                                </div><span>0</span></div>
+                            <div id="accuracy" class="stat-box">準確率<div class="pb-outer">
+                                    <div class="pb-inner"></div>
+                                </div><span>0</span></div>
+                        </div>
+                        <div id="animation">
+                            <div id="section"></div>
+                            <div id="Q"></div>
+                            <ul id="As">
+                                <li data-option="0"></li>
+                                <li data-option="1"></li>
+                                <li data-option="2"></li>
+                                <li data-option="3"></li>
+                            </ul>
+                        </div>
+                        <div class="btnContainer">
+                            <div id="btn-next" class="btn primary disabled">下題<span class="material-symbols-rounded">arrow_circle_right</span></div>
+                        </div>
+                    </div>
+
+                    <div id="result_area">
+                        <div id="result-banner">
+                            <div id="icon">
+                                <span class="material-symbols-rounded"></span>
+                            </div>
+                            <div id="dwuanway"></div>
+                            <div id="desc"></div>
+                        </div>
+                        <div class="game-cards">
+                            <div class="card">
+                                <h4>答對小題數</h4>
+                                <p class="text-centre"><span id="card-correctQ"></span><small>/ 25</small></p>
+                            </div>
+                            <div class="card">
+                                <h4>通過大題數</h4>
+                                <p class="text-centre"><span id="card-passSec"></span><small>/ 5</small></p>
+                            </div>
+                        </div>
+                        <ul id="sectionsResult"></ul>
+                        <div id="certificate" style="margin-bottom: 1em;">
+                            <a id="preview" target="_blank">
+                                <img id="certImg" alt="能力檢定證書">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div class="no-js" role="alert">
+            <span class="material-symbols-rounded" aria-hidden="true">
+                warning
+            </span>
+            <p>
+                你的瀏覽器並未允許 JavaScript 運作，故無法使用本測驗。請 <a href="https://www.google.com/search?q=%E5%A6%82%E4%BD%95%E5%9C%A8%E7%80%8F%E8%A6%BD%E5%99%A8%E5%95%9F%E7%94%A8+JavaScript" draggable="false" target="_blank" rel="noopener noreferrer" aria-label="開啟新頁籤，搜尋如何開啟 JavaScript">點此</a> 搜尋如何將其啟用。
+            </p>
+        </div>
+        <canvas id="certCanvas" width="1600" height="1130" style="display: none;"></canvas>
+    </div>
+    <div id="modal-decode" class="modal">
+        <div class="content">
+            <div class="header">
+                <span class="close" onclick="closeModal()"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2c5.53 0 10 4.47 10 10s-4.47 10-10 10S2 17.53 2 12 6.47 2 12 2m3.59 5L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z"></path>
+                        </svg></span></span>
+                <h2 id="modalQuestionText"><span class="material-symbols-rounded" aria-hidden="true">search_check_2</span> 查驗證字號</h2>
+            </div>
+            <div class="body" id="decode-result"></div>
+            <div class="footer">
+                <input type="text" id="decode-input" placeholder="請輸入證書字號">
+                <div id="decode-btn" class="btn">驗證</div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="/hideandseek/includes/includes.js"></script>
+    <script src="certificateGenerator.js"></script>
+    <script>
+        const testData = {
+            maxQ: 25,
+            originalData: {},
+            processedData: {},
+            current: {
+                index: {
+                    index: 0,
+                    section: 0,
+                    question: 0,
+                    total: 25,
+                    correct: 0
+                },
+                attempt: {
+                    question: [],
+                    count: 0,
+                    isCorrect: false
+                }
+            },
+            userPaper: []
+        };
+
+        const dom = {
+            about: {
+                area: document.getElementById('about_area'),
+                startBtn: document.querySelector('#about_area .btn'),
+                nameInput: document.getElementById('certPName')
+            },
+            question: {
+                area: document.getElementById('question_area'),
+                animated_area: document.getElementById('animation'),
+                section: document.getElementById('section'),
+                q: document.getElementById('Q'),
+                as: document.querySelectorAll('#As li'),
+                nextBtn: document.getElementById('btn-next'),
+                stats: {
+                    progress: {
+                        pb: document.querySelector('#progress .pb-inner'),
+                        value: document.querySelector('#progress span')
+                    },
+                    accuracy: {
+                        pb: document.querySelector('#accuracy .pb-inner'),
+                        value: document.querySelector('#accuracy span')
+                    }
+                }
+            },
+            result: {
+                area: document.getElementById('result_area'),
+                iconCode: document.querySelector('#icon .material-symbols-rounded'),
+                dwuanway: document.getElementById('dwuanway'),
+                desc: document.getElementById('desc'),
+                correctQ: document.getElementById('card-correctQ'),
+                passSec: document.getElementById('card-passSec'),
+                sectionsResult: document.getElementById('sectionsResult')
+            },
+            decode: {
+                input: document.getElementById('decode-input'),
+                btn: document.getElementById('decode-btn'),
+                resultContainer: document.getElementById('decode-result')
+            }
+        }
+
+        function init() {
+            bindEvents();
+            shuffleQuestions();
+        }
+
+        function displayQuestion() {
+            testData.current.attempt = {
+                question: testData.processedData.secs[testData.current.index.section].qs[testData.current.index.question],
+                count: 0,
+                isCorrect: false
+            };
+
+            dom.question.section.textContent = testData.processedData.secs[testData.current.index.section].title;
+            dom.question.q.textContent = testData.current.attempt.question.q;
+            dom.question.as.forEach((element, index) => {
+                dom.question.nextBtn.classList.add("disabled");
+
+                element.classList = "";
+                element.textContent = testData.current.attempt.question.a[index].text;
+                element.onclick = () => {
+                    if (element.classList.contains("disabled"))
+                        return;
+
+                    element.style.height = element.scrollHeight + "px";
+                    element.classList.add(`${testData.current.attempt.question.a[index].isCorrect ? "" : "in"}correct`, "disabled");
+                    element.style.setProperty('--explain', `"${testData.current.attempt.question.a[index].explanation}"`);
+                    requestAnimationFrame(() => element.style.height = element.scrollHeight + "px");
+                    testData.current.attempt.count++;
+
+                    if (testData.current.attempt.count === 1) {
+                        testData.userPaper[testData.current.index.section].records.push(element.dataset.option);
+                    }
+
+                    if (!testData.current.attempt.question.a[index].isCorrect)
+                        return;
+
+                    if (testData.current.attempt.count === 1 && !testData.current.attempt.isCorrect) {
+                        testData.current.attempt.isCorrect = true;
+                        testData.current.index.correct++;
+                        testData.userPaper[testData.current.index.section].correctCount++;
+                    }
+
+                    dom.question.nextBtn.classList.remove("disabled");
+                };
+            });
+            dom.question.animated_area.style.display = "block";
+
+            setTimeout(() => {
+                dom.question.stats.progress.value.textContent = testData.current.index.index + 1;
+                dom.question.stats.progress.pb.style.width = `${((testData.current.index.index + 1) / testData.current.index.total) * 100}%`;
+
+                if (testData.current.index.index === 0)
+                    return;
+
+                const accuracy = (testData.current.index.correct / testData.current.index.index) * 100;
+                const start = parseInt(dom.question.stats.accuracy.value.textContent, 10);
+                const end = accuracy;
+
+                if (start === end)
+                    return;
+
+                const progressBarDurationPerPercent = 0.01;
+                const progressBar = dom.question.stats.accuracy.pb;
+                const currentWidth = parseInt(progressBar.style.width, 10) || 0;
+                const progressBarSteps = Math.abs(end - currentWidth);
+
+                progressBar.style.transitionDuration = `${progressBarSteps * progressBarDurationPerPercent}s`;
+                progressBar.style.width = `${accuracy}%`;
+
+                let current = start;
+                const step = (end > start) ? 1 : -1;
+                const labelInterval = setInterval(() => {
+                    current += step;
+
+                    if (start < end && current >= end) {
+                        clearInterval(labelInterval);
+                        current = end;
+                    } else if (start > end && current <= end) {
+                        clearInterval(labelInterval);
+                        current = end;
+                    }
+
+                    dom.question.stats.accuracy.value.textContent = Math.round(current);
+                }, progressBarDurationPerPercent * 1000);
+
+            }, 210);
+        }
+
+        function shuffleQuestions() {
+            testData.processedData = {
+                ...testData.originalData,
+                secs: testData.originalData.secs.map(sec => {
+                    const shuffledQs = Utils.randomSample(sec.qs, sec.limit).map(question => {
+                        const markedAnswers = [question.a[Utils.getRandomInt(question.correctTo)]].concat(Utils.randomSample(question.a.slice(question.correctTo + 1), 3)).map((answer, index) => ({
+                            ...answer,
+                            isCorrect: index === 0
+                        }));
+                        return {
+                            ...question,
+                            a: Utils.shuffleArray(markedAnswers)
+                        };
+                    });
+                    return {
+                        ...sec,
+                        qs: Utils.shuffleArray(shuffledQs)
+                    };
+                })
+            };
+            testData.userPaper = Array.from(
+                { length: testData.processedData.secs.length },
+                () => ({
+                    correctCount: 0,
+                    records: []
+                })
+            );
+        }
+
+        function gameOver() {
+            dom.question.area.style.display = "none";
+
+            let sectionsResult = "";
+            let passedSections = 0;
+            let finalScore = 0;
+
+            testData.userPaper.forEach((sections, index) => {
+                const sectionAccuracy = Math.round((sections.correctCount / testData.processedData.secs[index].limit) * 1000) / 10;
+                const sectionAccuracySegments = sectionAccuracy.toString().split('.');
+                let sectionAccuracyPrettyString = sectionAccuracySegments[0];
+                let failedClass = "";
+
+                if (sectionAccuracySegments.length > 1)
+                    sectionAccuracyPrettyString += ".<span>" + sectionAccuracySegments[1] + "</span>";
+
+                if (sectionAccuracy >= 60) {
+                    passedSections++;
+                } else {
+                    failedClass = 'class="failed"';
+                }
+
+                finalScore += sectionAccuracy * testData.processedData.secs[index].weight;
+                sectionsResult += `<li data-expanded="false" ${failedClass} style="animation-delay: ${1 + 0.1 * index}s"><span>${testData.processedData.secs[index].title}</span><span>${Math.min(sections.correctCount, testData.processedData.secs[index].limit)}<small>/ ${testData.processedData.secs[index].limit}</small></span><span>${sectionAccuracyPrettyString}<small>%</small></span>${generateUserPaper(index)}</li>`;
+            });
+
+            dom.result.sectionsResult.innerHTML = sectionsResult;
+            dom.result.correctQ.textContent = testData.current.index.correct;
+            dom.result.passSec.textContent = passedSections;
+            dom.result.area.style.display = "block";
+
+            dom.result.sectionsResult.querySelectorAll('li[data-expanded]').forEach(element => {
+                element.onclick = (e) => {
+                    if (e.target.closest('ol')) {
+                        return;
+                    }
+
+                    const isExpanded = Utils.toggleDataBool(element, "expanded");
+
+                    element.style.height = isExpanded ? "3em" : element.scrollHeight + "px";
+
+                    if (isExpanded) {
+                        element.querySelector("ol").style.display = "block";
+                    }
+
+                    element.style.transitionDuration = element.scrollHeight / 1200 + "s";
+                    requestAnimationFrame(() => element.style.height = isExpanded ? element.scrollHeight + "px" : "3em");
+                };
+
+                element.addEventListener("transitionend", () => {
+                    if (element.dataset.expanded === "false") {
+                        element.querySelector("ol").style.display = "none";
+                    }
+
+                    element.style.height = "auto";
+                });
+            });
+
+            finalScore = finalScore / 100;
+
+            initGenCertif(passedSections, finalScore, Math.round(testData.current.index.correct / 25 * 1000) / 100);
+        }
+
+        function generateUserPaper(sectionIndex) {
+            const wrapper = document.createElement("div");
+            const fragment = document.createDocumentFragment();
+            const q_ol = document.createElement('ol');
+            let curQ = 0;
+
+            if (sectionIndex > 0)
+                q_ol.start = curQ + 1;
+
+            testData.processedData.secs[sectionIndex].qs.forEach((question, q_index) => {
+                curQ++;
+                const userThisSectionPaper = testData.userPaper[sectionIndex].records;
+                const q_li = document.createElement('li');
+                const a_ul = document.createElement('ul');
+                let a_li_correct = null;
+                let a_li_incorrect = null;
+
+                question.a.forEach((answer, a_index) => {
+                    if (answer.isCorrect) {
+                        a_li_correct = document.createElement('li');
+                        a_li_correct.classList.add("correct");
+                        a_li_correct.textContent = answer.text;
+                        a_li_correct.style.setProperty("--explain", '"' + answer.explanation + '"');
+                    }
+
+                    if (userThisSectionPaper[q_index] == a_index && !answer.isCorrect) {
+                        a_li_incorrect = document.createElement('li');
+                        a_li_incorrect.classList.add("incorrect");
+                        a_li_incorrect.textContent = answer.text;
+                        a_li_incorrect.style.setProperty("--explain", '"' + answer.explanation + '"');
+                    }
+                });
+
+                a_ul.appendChild(a_li_correct);
+                if (a_li_incorrect !== null) a_ul.appendChild(a_li_incorrect);
+
+                q_li.textContent = question.q;
+                q_li.appendChild(a_ul);
+                q_ol.appendChild(q_li);
+            });
+
+            fragment.appendChild(q_ol);
+            wrapper.appendChild(fragment);
+            return wrapper.innerHTML;
+        }
+
+        function determineCertificateLevel({ passedSections, finalScore, accuracy }) {
+            let level = "";
+            let dwuanway = "";
+            let desc = "";
+            let iconClass = "";
+            let iconCode = "";
+
+            if (passedSections === 5 && finalScore >= 100) {
+                level = "甲級";
+                dwuanway = `滿分玩家`;
+                desc = `百分百正確率，《通則》已經被玩家完全內化了。所有規則、機制，都不在話下，可從容應付遊戲任何情況。配合實戰經驗，將不落於紙上談兵的困境。`;
+                certDesc = `完美通過本檢定，榮獲 100% 分。經綜合評估，已能勝任遊戲主持，亦可自信解答、從容應對幾乎所有疑難雜症。如配合實戰經驗，將不落於紙上談兵的困境。`;
+                iconClass = "passed";
+                iconCode = "award_star";
+            } else if (passedSections === 5 && finalScore >= 90) {
+                level = "甲級";
+                dwuanway = `優秀玩家`;
+                desc = `熱烈歡迎行走的《通則》！5 大題全部拿下，加權總得分高達 ${finalScore}%。所有規則、機制，都不在話下，可從容應付遊戲任何情況。配合實戰經驗，將不落於紙上談兵的困境。`;
+                certDesc = `於本檢定中榮獲 ${finalScore}% 之高分。經綜合評估，遊戲規則、機制等已然不在話下，並能應付遊戲特殊情況。如亦具豐富大眾運輸工具知識，則可成為遊戲指標性顧問及可信的策略戰友。`;
+                iconClass = "passed";
+                iconCode = "award_star";
+            } else if (passedSections >= 4 && finalScore >= 80) {
+                level = "乙級";
+                dwuanway = `高級玩家`;
+                desc = `恭喜獲得乙級認證！經綜合評估，玩家遊戲知識已達精熟階段，想必能策略地進行詰問、行牌，並應付遊戲邊緣情況。`;
+                certDesc = `於本檢定中榮獲 ${finalScore}% 分。經綜合評估，玩家遊戲知識已達精熟階段，應能策略地進行詰問、行牌，並應付遊戲邊緣情況。`;
+                iconClass = "passed";
+                iconCode = "celebration";
+            } else if (passedSections >= 3 && finalScore >= 70) {
+                level = "乙級";
+                dwuanway = `普通玩家`;
+                desc = `恭喜獲得乙級認證。經綜合評估，玩家已拿捏遊戲核心關鍵，在備妥《通則》的前提下具備帶局及指導他人的能力。`;
+                certDesc = `於本檢定中榮獲 ${finalScore}% 分。經綜合評估，玩家已拿捏遊戲核心關鍵，於備妥規則前提下具備帶局及指導他人之能力。`;
+                iconClass = "passed";
+                iconCode = "wand_stars";
+            } else if (passedSections >= 3 && finalScore >= 60) {
+                level = "丙級";
+                dwuanway = `新手玩家`;
+                desc = `恭喜獲得丙級認證。經綜合評估，玩家已掌握遊戲基礎知識及核心玩法，面對正常狀況能大致應付。但仍須搭配《通則》反覆確認，且面對特殊情形時需要外援協助。`;
+                certDesc = `以 ${finalScore}% 分通過本檢定。經綜合評估，玩家已掌握遊戲基礎知識及核心玩法，面對正常狀況能大致應付。但仍須搭配規則反覆確認，且面對特殊情形時需要外援協助。`;
+                iconClass = "passed";
+                iconCode = "check";
+            } else if (passedSections >= 2 && finalScore >= 50) {
+                level = "臨門一腳";
+                dwuanway = `再接再厲`;
+                desc = `就差一點點！經綜合評估，玩家基礎知識與能力仍不及格，建議加強名詞定義及熟悉遊戲機制。`;
+                certDesc = `已完成本檢定並得 ${finalScore}% 分，可惜未達通過門檻。經綜合評估，玩家基礎知識與能力仍不及格，建議加強名詞定義及熟悉遊戲機制。`;
+                iconClass = "failed";
+                iconCode = "computer_cancel";
+            } else {
+                level = "學習證明";
+                dwuanway = `繼續加油`;
+                desc = `感謝參與檢定。本次得分為 ${finalScore}% 分，未達認證門檻。建議回去複習錯題本，鞏固基礎知識後，再來挑戰吧。`;
+                certDesc = `已參與並完成本檢定，然未能觸及合格邊緣。建議回去複習錯題本，鞏固基礎知識後，再度挑戰。`;
+                iconClass = "learner";
+                iconCode = "school";
+            }
+
+            dom.result.iconCode.parentElement.classList.add(iconClass);
+            dom.result.iconCode.textContent = iconCode;
+            dom.result.dwuanway.textContent = dwuanway;
+            dom.result.desc.textContent = desc;
+
+            return {
+                level,
+                dwuanway,
+                desc: certDesc
+            };
+        }
+
+        async function initGenCertif(passedSections, finalScore, accuracy) {
+            try {
+                const certConfig = {
+                    determineCertificateLevel: window.determineCertificateLevel,
+                    dclVar: {
+                        passedSections, finalScore, accuracy
+                    },
+                    QUESTIONS: testData.originalData?.secs?.map(sec => ({
+                        total: sec.limit,
+                        weight: sec.weight / 100
+                    }))
+                };
+
+                const certGenerator = new CertificateGenerator(certConfig);
+                await certGenerator.init();
+
+                const pName = dom.about.nameInput.value.trim();
+                certGenerator.generateCertificate({ pName });
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        function bindEvents() {
+            dom.about.startBtn.addEventListener("click", () => {
+                const name = dom.about.nameInput.value;
+                if (!name.trim()) {
+                    showSnackbar("請輸入名稱");
+                    return;
+                }
+
+                dom.about.area.style.opacity = 0;
+                setTimeout(() => {
+                    dom.about.area.style.display = "none";
+                    dom.question.area.style.display = "flex";
+                    displayQuestion();
+                }, 210);
+            });
+
+            dom.question.nextBtn.addEventListener("click", () => {
+                if (dom.question.nextBtn.classList.contains("disabled"))
+                    return;
+
+                dom.question.animated_area.style.display = "none";
+
+                testData.current.index.index++;
+                testData.current.index.question++;
+
+                if (testData.current.index.index >= testData.maxQ) {
+                    gameOver();
+                    return;
+                }
+
+                if (testData.current.index.question >= testData.processedData.secs[testData.current.index.section].qs.length) {
+                    testData.current.index.section++;
+                    testData.current.index.question = 0;
+                }
+
+                setTimeout(displayQuestion, 10);
+            });
+
+            dom.question.as.forEach(element => {
+                element.addEventListener("transitionend", () => {
+                    element.style.height = "auto";
+                });
+            });
+
+            dom.decode.btn.addEventListener("click", () => {
+                const inputValue = dom.decode.input.value.toString().trim();
+
+                if (!inputValue) {
+                    showSnackbar("請輸入欲查驗的證書號碼。");
+                    return;
+                }
+
+                try {
+                    const { year, month, day, score, sections } = CertificateEncoder.decodeCertificate(inputValue);
+
+                    dom.decode.resultContainer.innerHTML = `
+<figure class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">取得日期</th>
+                <th scope="col" style="text-align: right">獲得分數</th>
+                <th scope="col" style="text-align: right">通過大題數</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span>${year} 年</span> <span>${month} 月</span> <span>${day} 日</span></td>
+                <td style="text-align: right">${score} <small>%</small></td>
+                <td style="text-align: right">${sections}</td>
+            </tr>
+        </tbody>
+    </table>
+</figure>`;
+                } catch (error) {
+                    showSnackbar(error.message);
+                }
+            });
+        }
+
+        fetch('teekoo.json')
+            .then(response => {
+                if (!response.ok) throw new Error(`Failed to load ${file}`);
+                return response.json();
+            })
+            .then(response => {
+                testData.originalData = response;
+                init();
+            });
+
+        function autoAnswer(rate) {
+            let interval = setInterval(() => {
+                if (testData.current.index.index >= 25) {
+                    clearInterval(interval);
+                    return;
+                }
+
+                const index = Utils.getRandomInt(3);
+                if (Utils.getRandomInt(rate) === 0) {
+                    dom.question.as[index].click();
+                }
+
+                if (!testData.current.attempt.question.a[index].isCorrect) {
+                    for (let i = 0; i < dom.question.as.length; i++) {
+                        if (testData.current.attempt.question.a[i].isCorrect) {
+                            dom.question.as[i].click();
+                            break;
+                        }
+                    }
+                }
+
+                dom.question.nextBtn.click();
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>

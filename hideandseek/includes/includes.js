@@ -154,12 +154,52 @@ function addShareModal() {
 }
 
 function initialiseShareButton() {
-    const articleActions = document.querySelectorAll('.article-actions')[0];
-    if (!articleActions) {
-        return;
+    const articleActions = document.querySelector('.article-actions');
+    if (!articleActions) return;
+
+    const fullscreenEnabled = document.documentElement.dataset.fullscreenenabled === "true";
+
+    if (fullscreenEnabled) {
+        const fullscreenBtn = document.createElement('a');
+        fullscreenBtn.setAttribute('draggable', 'false');
+        fullscreenBtn.innerHTML = `<span class="material-symbols-rounded">arrows_output</span> 放大滿版`;
+        articleActions.appendChild(fullscreenBtn);
+
+        const fullscreenArea = document.querySelector('.article-content');
+
+        function setFullscreen(go) {
+            window.scrollTo({ top: 0, behavior: "instant" });
+            document.body.style.overflowY = go ? "hidden" : "";
+
+            if (go) {
+                fullscreenArea.classList.add("fullscreen");
+            } else {
+                fullscreenArea.classList.add("unfullscreen");
+                fullscreenArea.addEventListener("animationend", () => {
+                    fullscreenArea.classList.remove("fullscreen");
+                    fullscreenArea.classList.remove("unfullscreen");
+                }, { once: true });
+            }
+        }
+
+        fullscreenBtn.addEventListener('click', () => setFullscreen(true));
+
+        const unfullscreenBtn = document.createElement('div');
+        unfullscreenBtn.id = "btn-unfullscreen";
+        unfullscreenBtn.className = "btn";
+        unfullscreenBtn.innerHTML = `<span class="material-symbols-rounded">arrows_input</span>`;
+        unfullscreenBtn.addEventListener('click', () => setFullscreen(false));
+
+        fullscreenArea.prepend(unfullscreenBtn);
+
+        setFullscreen(true);
     }
 
-    articleActions.innerHTML += `<a draggable="false" onclick="openModal('qrcode')"><span class="material-symbols-rounded">share</span> 分享</a>`;
+    const shareBtn = document.createElement('a');
+    shareBtn.setAttribute('draggable', 'false');
+    shareBtn.innerHTML = `<span class="material-symbols-rounded">share</span> 分享`;
+    shareBtn.addEventListener('click', () => openModal('qrcode'));
+    articleActions.appendChild(shareBtn);
 
     const modal = document.createElement('div');
     modal.classList.add('modal');
@@ -532,3 +572,28 @@ function footerScript() {
         scrollTitleText();
     }, 100);
 }
+
+const Utils = {
+    getRandomInt(max) {
+        return Math.floor(Math.random() * (max + 1));
+    },
+    shuffleArray(array) {
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+    },
+    randomSample(array, sampleSize) {
+        const indices = Array.from({ length: array.length }, (_, i) => i);
+        const sampledIndices = indices.slice(0, Math.min(sampleSize, array.length));
+        return sampledIndices.map(index => array[index]);
+    },
+    toggleDataBool(el, key) {
+        const newBool = el.dataset[key] !== "true";
+        el.dataset[key] = newBool;
+        return newBool;
+    }
+};
+window.Utils = Utils;

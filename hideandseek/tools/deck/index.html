@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Notes | Hide + Seek</title>
+    <title>Digital Deck | Hide + Seek</title>
     <meta name="description" content="">
     <link rel="icon" type="image/x-icon" href="/hideandseek/logo/logo.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,167 +12,7 @@
     <link rel="preload" href="https://cdn.jsdelivr.net/gh/Zutek3134/zutek3134.github.io@main/stylesheets/fonts/ZutekSans/ZutekSans-Normal.woff" as="font" type="font/woff" crossorigin>
     <link rel="stylesheet" href="/style.css" />
     <script src="/js/snackbar/script.js"></script>
-    <style>
-        #categories-container {
-            opacity: 1;
-            transition: opacity 0.3s ease-in-out;
-            margin-bottom: 1em;
-        }
-
-        #categories-container.fadeOut {
-            opacity: 0;
-        }
-
-        .questions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
-            gap: 0.5em;
-        }
-
-        .question-card {
-            padding: 1em 0.25em;
-            background: rgb(var(--highlight));
-            color: rgb(var(--highlight-dark));
-            border-radius: var(--radius);
-            border: 2px solid transparent;
-            cursor: pointer;
-            text-align: center;
-            min-height: 2em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .question-card.answered {
-            background-color: transparent;
-            border: 2px solid rgba(var(--highlight-dark), 0.5);
-            border-radius: calc(var(--radius) / 2);
-            opacity: 0.7;
-        }
-
-        .question-card:hover {
-            background: rgb(var(--highlight-dark));
-            color: rgb(var(--bg-main));
-        }
-
-        .modal .body:has(.answer-list:empty) {
-            display: none;
-        }
-
-        .answer-list {
-            border: 1px solid rgba(var(--border-colour), 0.5);
-            padding: 0 1em;
-            border-radius: calc(var(--radius) / 2);
-        }
-
-        .answer-item {
-            padding: 1.5em 0.5em;
-            border-bottom: 1px dashed rgba(var(--border-colour), 0.5);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1em;
-        }
-
-        .answer-item:last-child {
-            border-bottom: none;
-        }
-
-        .delete-answer {
-            color: rgb(var(--text-danger));
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0.3em;
-            margin: -0.5em;
-            min-width: 2em;
-            min-height: 2em;
-            border-radius: 0.25em;
-        }
-
-        .delete-answer:hover {
-            background-color: rgb(var(--text-danger));
-            color: rgb(var(--bg-main));
-            border-radius: 50%;
-        }
-
-        .add-answer-form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75em;
-            font-weight: 500;
-        }
-
-        .add-answer-form input {
-            padding: 1em;
-            border: none;
-            border-radius: var(--radius-half);
-            background-color: rgba(var(--text-paragraph), 0.1);
-            color: inherit;
-            font-family: inherit;
-            font-weight: inherit;
-            font-size: inherit;
-        }
-
-        .add-answer-form .saveBtn {
-            background: rgb(var(--primary));
-            align-self: end;
-        }
-
-        #restart-btn {
-            background: rgb(var(--text-danger));
-            color: rgb(var(--bg-main));
-        }
-
-        #modal-export #export-content {
-            width: 100%;
-            line-height: inherit;
-            font-size: inherit;
-            font-family: inherit;
-            font-weight: inherit;
-            color: inherit;
-            border: none;
-            resize: none;
-            background-color: transparent;
-            transition:
-                var(--transition),
-                height 0.2s ease-in-out;
-        }
-
-        .binary-options {
-            display: flex;
-            gap: 0.5em;
-        }
-
-        .binary-option {
-            flex: 1;
-            background: rgba(var(--text-paragraph), 0.1);
-            color: rgb(var(--text-paragraph));
-            justify-content: center;
-        }
-
-        .binary-option.btn:hover {
-            transform: none;
-        }
-
-        .binary-option .material-symbols-rounded {
-            width: calc(0em);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .binary-option.selected,
-        .add-answer-form input.used {
-            background: rgb(var(--secondary));
-            color: rgb(var(--bg-main));
-            border-radius: var(--radius);
-        }
-
-        .binary-option.selected .material-symbols-rounded {
-            width: calc(1em);
-        }
-    </style>
+    <style></style>
 </head>
 
 <body data-mapsize="M">
@@ -181,12 +21,12 @@
         <aside></aside>
         <div class="article-container-group">
             <div class="article-banner" style="--gradient: linear-gradient(135deg, #aaa, #777)">
-                <span class="material-symbols-rounded" aria-hidden="true">note_alt</span>
+                <span class="material-symbols-rounded" aria-hidden="true">cards_stack</span>
             </div>
             <main class="article-container">
                 <div class="article-header">
                     <!-- <span class="article-tag">114-9-21</span> -->
-                    <h1>電子詰問簿</h1>
+                    <h1>電子牌堆</h1>
                     <div class="article-actions">
                         <a id="mapSelect-btn" draggable="false"><span class="material-symbols-rounded" aria-hidden="true">aspect_ratio</span> <span><span id="mapSelect-label">中</span>品等</span></a>
                         <a id="export-btn" draggable="false"><span class="material-symbols-rounded" aria-hidden="true">export_notes</span> <span>匯出</span></a>
@@ -197,7 +37,7 @@
 
                 <div class="article-content">
                     <div id="categories-container">
-                        <!-- Categories will be generated here -->
+                        <p>已於測試階段；即將到來，敬請期待。</p>
                     </div>
                 </div>
             </main>
@@ -262,7 +102,7 @@
     <footer></footer>
     <script src="/hideandseek/includes/includes.js"></script>
     <script src="/js/mapSize/script.js"></script>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
 </body>
 
 </html>

@@ -27,11 +27,14 @@
     font-family: 'Material Symbols Rounded';
     font-style: normal;
     font-weight: 400;
-    src: url("https://fonts.gstatic.com/s/materialsymbolsrounded/v291/syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDJ_vb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rIelXxGJKJBiCa8.woff") format('woff');
+    src: url("https://fonts.gstatic.com/l/font?kit=syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDJ_vb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rIelXxGJKJBiCa8&skey=70ddea8fe54d532e&v=v300") format('woff');
 }
 
 :root {
-    --font-primary: 'Noto Sans Display', 'PingFang TC', 'ZutekSans', 'Product Sans', 'PingFang SC', 'Noto Sans TC', 'Noto Sans SC', 'Microsoft Jhenghei', 'Microsoft Yahei', sans-serif;
+    --font-primary:
+        'Noto Sans Display',
+        /* 'PingFang TC', */
+        'ZutekSans', 'Product Sans', 'PingFang SC', 'Noto Sans TC', 'Noto Sans SC', 'Microsoft Jhenghei', 'Microsoft Yahei', sans-serif;
     --font-display: "Montserrat", var(--font-primary);
     --font-code: "Noto Sans Mono", monospace;
 
@@ -69,7 +72,7 @@
     --highlight-dark: 226, 192, 164;
     --text-title: 213, 195, 182;
     --text-paragraph: 239, 224, 213;
-    --text-danger: 255, 180, 171;
+    --text-danger: 247, 71, 71;
     --border-colour: 158, 142, 129;
     --bg-body: 25, 18, 12;
     --bg-main: 38, 30, 24;
@@ -439,6 +442,7 @@ header #sidebar {
     white-space: nowrap;
     word-wrap: normal;
     direction: ltr;
+    font-feature-settings: "liga";
     -moz-font-feature-settings: 'liga';
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -608,21 +612,73 @@ a[data-key] .material-symbols-rounded {
     color: rgb(var(--secondary));
 }
 
+.article-content #btn-unfullscreen {
+    display: none;
+    font-size: 0.7em;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgb(var(--text-paragraph));
+}
+
+.article-content.fullscreen {
+    position: fixed;
+    top: 4.5rem;
+    left: 0;
+    width: 100dvw;
+    height: calc(100dvh - 4.5rem);
+    z-index: 10;
+    background-color: rgb(var(--bg-main));
+    padding: 3.5em 4em;
+    overflow-y: auto;
+    opacity: 0;
+    transform: scale(0.9);
+    animation: fadeInGrow 0.2s forwards;
+}
+
+.article-content.unfullscreen {
+    animation: fadeOutShrink 0.2s forwards;
+}
+
+.article-content.fullscreen h2 {
+    margin-top: 0;
+}
+
+.article-content #btn-unfullscreen {
+    display: flex;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
 .btn {
-    padding: 0.7em 1em;
+    padding: 0.625em 0.9em;
     font-weight: 500;
+    font-size: 0.875em;
     background: rgb(var(--secondary));
     color: rgb(var(--bg-main));
-    border-radius: calc(var(--radius) / 2);
+    border-radius: var(--radius-half);
     cursor: pointer;
     width: fit-content;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.25em;
 }
 
-.btn:hover {
-    transform: scale(0.95);
+.btn.primary {
+    background: rgb(var(--primary));
+}
+
+.btn.outline {
+    background: transparent;
+    color: rgb(var(--highlight-dark));
+    border: 2px solid rgb(var(--border-colour));
+}
+
+.btn:not(.disabled):hover {
+    transform: scale(0.975);
 }
 
 .table-container {
@@ -679,7 +735,7 @@ tr:hover {
 table,
 th,
 td {
-    padding: 0.75em 0.5em;
+    padding: 0.75em;
 }
 
 th,
@@ -951,6 +1007,10 @@ footer {
     text-align: center !important;
 }
 
+.text-right {
+    text-align: right !important;
+}
+
 .text-indent {
     text-indent: 2em;
 }
@@ -1117,7 +1177,7 @@ ruby rt sub {
         left: unset;
         width: min(70dvw, 300px);
         height: var(--height);
-        z-index: 11;
+        z-index: 21;
         backdrop-filter: blur(10px);
         --webkit-backdrop-filter: blur(10px);
         background: rgba(var(--bg-main), 0.85);
@@ -1125,7 +1185,7 @@ ruby rt sub {
 
     .overlay {
         position: fixed;
-        z-index: 10;
+        z-index: 20;
         width: 100dvw;
         height: 100dvh;
         background-color: rgba(0, 0, 0, 0.25);
@@ -1190,6 +1250,10 @@ ruby rt sub {
         gap: 0.6em;
     }
 
+    .article-content.fullscreen {
+        padding: 4em 1.5em;
+    }
+
     .container {
         padding: 0.7rem;
     }
@@ -1207,5 +1271,51 @@ ruby rt sub {
         border-top: 1px solid rgba(var(--bg-main), 0.1);
         margin-top: 2.4rem;
         padding-top: 2.4rem;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(25%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInGrow {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOutShrink {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.9);
     }
 }
