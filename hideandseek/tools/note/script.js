@@ -374,8 +374,8 @@ function copyExportToClipboard() {
     }
 }
 
-function downloadExportedNotes() {
-    if (confirm("確定下載？")) {
+function downloadExportedNotes(event) {
+    Confirm.confirmAction(event, '確定下載？', () => {
         const now = new Date();
 
         const year = now.getFullYear() - 1911;
@@ -393,7 +393,7 @@ function downloadExportedNotes() {
         URL.revokeObjectURL(url);
 
         showSnackbar('成功下載');
-    }
+    });
 }
 
 function restartGame() {
@@ -414,7 +414,7 @@ function setupEventListeners() {
     document.querySelector('#restart-btn').addEventListener('click', restartGame);
     document.querySelector('#export-btn').addEventListener('click', exportNotes);
     document.querySelector('#copy-btn').addEventListener('click', copyExportToClipboard);
-    document.querySelector('#download-btn').addEventListener('click', downloadExportedNotes);
+    document.querySelector('#download-btn').addEventListener('click', (event) => downloadExportedNotes(event));
 }
 
 document.addEventListener('DOMContentLoaded', loadGameData);

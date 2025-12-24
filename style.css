@@ -1,26 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wdth,wght@87.5,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
 @font-face {
-    font-family: "ZutekSans";
-    src: url("https://cdn.jsdelivr.net/gh/Zutek3134/zutek3134.github.io@main/stylesheets/fonts/ZutekSans/ZutekSans-Normal.woff") format("woff");
-    font-display: swap;
-    font-weight: 300;
-}
-
-@font-face {
-    font-family: "ZutekSans";
-    src: url("https://cdn.jsdelivr.net/gh/Zutek3134/zutek3134.github.io@main/stylesheets/fonts/ZutekSans/ZutekSans-Medium.woff") format("woff");
+    font-family: "Bpmf";
+    src: url("https://dict.zutek3134.taipei/fonts/bopomofo.woff2") format("woff2");
     font-display: swap;
     font-weight: 500;
-}
-
-@font-face {
-    font-family: "ZutekSans";
-    src: url("https://cdn.jsdelivr.net/gh/Zutek3134/zutek3134.github.io@main/stylesheets/fonts/ZutekSans/ZutekSans-Bold.woff") format("woff");
-    font-display: swap;
-    font-weight: 700;
 }
 
 @font-face {
@@ -33,8 +20,10 @@
 :root {
     --font-primary:
         'Noto Sans Display',
-        /* 'PingFang TC', */
-        'ZutekSans', 'Product Sans', 'PingFang SC', 'Noto Sans TC', 'Noto Sans SC', 'Microsoft Jhenghei', 'Microsoft Yahei', sans-serif;
+        'PingFang TC', 'PingFang SC',
+        'Noto Sans TC', 'Noto Sans SC',
+        'Microsoft Jhenghei', 'Microsoft Yahei',
+        sans-serif;
     --font-display: "Montserrat", var(--font-primary);
     --font-code: "Noto Sans Mono", monospace;
 
@@ -86,8 +75,8 @@ html {
     -ms-user-select: none;
     user-select: none;
     overscroll-behavior: none;
-    -webkit-font-feature-settings: "kern";
-    font-feature-settings: "kern";
+    /* -webkit-font-feature-settings: "kern";
+    font-feature-settings: "kern"; */
     scroll-padding-top: 5.5em;
     font-size: var(--fs, 17px);
 }
@@ -316,16 +305,16 @@ html[data-js="true"] .no-js {
 
 #aside-button-group {
     display: flex;
-    margin: 0 10px 3em;
+    margin: 0 0 3em;
     justify-content: space-around;
-    gap: 5px;
+    gap: 0.25em;
 }
 
 #aside-button-group div {
     background-color: transparent;
     flex: 1;
     text-align: center;
-    padding: 5px 10px;
+    padding: 0.25em 0;
     color: inherit;
     font-weight: 500;
     border: 2px solid rgb(var(--highlight));
@@ -378,8 +367,8 @@ header #sidebar {
 .sidebar h3 {
     color: rgb(var(--primary));
     font-size: 1.05rem;
-    margin: 2.5em 0 1em 0.5em;
-    padding-bottom: 8px;
+    margin: 2.5em 0 1em;
+    padding-bottom: 0.5em;
     border-bottom: 2px solid rgb(var(--highlight));
     position: relative;
 }
@@ -412,8 +401,11 @@ header #sidebar {
 }
 
 .sidebar li {
-    padding: 8px 0;
-    border-bottom: 1px dashed rgb(var(--border-colour));
+    padding: 0;
+}
+
+.sidebar li+li {
+    border-top: 1px dashed rgb(var(--border-colour));
 }
 
 .sidebar a {
@@ -422,12 +414,16 @@ header #sidebar {
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 5px 10px;
+    gap: 0.5em;
+    padding: 0.9em 0.8em;
 }
 
 .sidebar li+a {
     margin-top: 1em;
+}
+
+.sidebar a:has(+ul) {
+    border-bottom: 1px dashed rgb(var(--border-colour));
 }
 
 .material-symbols-rounded {
@@ -468,12 +464,9 @@ header #sidebar {
     margin-right: 0.4em;
 }
 
-.sidebar li:has(a:not(.disabled):hover) {
-    background: rgb(var(--primary), 0.1);
-}
-
 .sidebar a:not(.disabled):hover {
     color: rgb(var(--primary));
+    background: rgb(var(--primary), 0.1);
 }
 
 /* Article Styles */
@@ -516,14 +509,15 @@ header #sidebar {
     margin-bottom: 1em;
 }
 
-.article-actions-holder {
+/* .article-actions-holder {
     overflow-x: auto;
     white-space: nowrap;
-}
+} */
 
 .article-actions {
     display: flex;
-    gap: 1em;
+    flex-wrap: wrap;
+    gap: 0.75em;
     font-size: 0.88rem;
     font-weight: 500;
     margin-top: 1em;
@@ -537,8 +531,8 @@ header #sidebar {
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 15px;
+    gap: 0.5em;
+    padding: 0.5em 1em;
     border-radius: 50px;
     background: rgb(var(--highlight));
 }
@@ -758,6 +752,7 @@ th {
 .card {
     display: flex;
     flex-direction: column;
+    gap: 0.875em;
     background: transparent;
     border: 1.5px solid rgb(var(--highlight));
     border-radius: var(--radius);
@@ -782,8 +777,8 @@ th {
     border-radius: 20px;
 }
 
-.card>*:last-child {
-    margin-bottom: 0;
+.card>* {
+    margin: 0 !important;
 }
 
 a.card {
@@ -801,7 +796,6 @@ a.card:not(.disabled):hover {
 .card .card-icon,
 .article-banner {
     width: 100%;
-    margin-bottom: 0.8em;
     background: var(--gradient, linear-gradient(135deg, rgb(var(--primary-light)), rgb(var(--primary-dark))));
     color: white;
     text-align: center;
@@ -839,7 +833,6 @@ a.card:not(.disabled):hover {
 
 .card h4 {
     font-size: 1.17rem;
-    margin-bottom: 10px;
     color: rgb(var(--text-title));
 }
 
@@ -850,28 +843,6 @@ a.card:not(.disabled):hover {
     color: rgba(var(--text-title), 0.7);
     text-align: left;
     font-weight: 300;
-}
-
-.references {
-    font-size: 0.88rem;
-    margin-top: 40px;
-    border-top: 1px solid rgb(var(--border-colour));
-    padding-top: 25px;
-}
-
-.references h2 {
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-}
-
-.references ol {
-    padding-left: 30px;
-}
-
-.references li {
-    margin-bottom: 15px;
-    padding-left: 10px;
-    border-left: 3px solid rgb(var(--highlight));
 }
 
 .article-pagination {
@@ -928,9 +899,9 @@ footer {
 
 .footer-section h3 {
     font-size: 1.17rem;
-    margin-bottom: 25px;
+    margin-bottom: 1.5em;
     position: relative;
-    padding-bottom: 10px;
+    padding-bottom: 0.8em;
 }
 
 .footer-section h3::after {
@@ -948,7 +919,7 @@ footer {
 }
 
 .footer-links li {
-    margin-bottom: 12px;
+    margin-bottom: 0.75em;
 }
 
 .footer-links a {
@@ -956,7 +927,7 @@ footer {
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.5em;
     padding: 0.25em 1em;
     margin: -0.25em -1em;
     border-radius: 500px;
@@ -965,11 +936,6 @@ footer {
 .footer-links a:not(.disabled):hover {
     color: rgb(var(--primary));
     background-color: rgb(var(--bg-main));
-}
-
-.footer-links a i {
-    width: 20px;
-    text-align: center;
 }
 
 .footer-bottom {
@@ -1027,7 +993,7 @@ footer {
     /* border: 1px solid var(--border-color); */
     border-radius: var(--radius);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    padding: 10px;
+    padding: 0.75em;
     width: min(300px, 30dvw);
     z-index: 1;
     transform: scale(0.98);
@@ -1059,7 +1025,7 @@ footer {
     font-size: 0.7rem;
     color: rgba(var(--text-paragraph), 0.8);
     font-weight: 500;
-    margin-top: 5px;
+    margin-top: 1em;
     text-align: right;
 }
 
@@ -1094,13 +1060,18 @@ ruby rt sup {
 ruby {
     display: inline-flex;
     align-items: center;
+}
+
+ruby:has(+ruby) {
     margin-right: 0.2em;
 }
 
 ruby rt {
     display: inline-block;
     opacity: 0.7;
-    font-family: 'ZutekSans', 'Bpmf', sans-serif;
+    font-family:
+        /* 'ZutekSans', */
+        'Bpmf', sans-serif;
     font-size: 0.4em;
     font-weight: 500;
     max-height: 3em;

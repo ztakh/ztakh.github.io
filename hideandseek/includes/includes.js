@@ -162,7 +162,7 @@ function initialiseShareButton() {
     if (fullscreenEnabled) {
         const fullscreenBtn = document.createElement('a');
         fullscreenBtn.setAttribute('draggable', 'false');
-        fullscreenBtn.innerHTML = `<span class="material-symbols-rounded">arrows_output</span> 放大滿版`;
+        fullscreenBtn.innerHTML = `<span class="material-symbols-rounded">open_in_full</span> 放大滿版`;
         articleActions.appendChild(fullscreenBtn);
 
         const fullscreenArea = document.querySelector('.article-content');
@@ -187,12 +187,20 @@ function initialiseShareButton() {
         const unfullscreenBtn = document.createElement('div');
         unfullscreenBtn.id = "btn-unfullscreen";
         unfullscreenBtn.className = "btn";
-        unfullscreenBtn.innerHTML = `<span class="material-symbols-rounded">arrows_input</span>`;
+        unfullscreenBtn.innerHTML = `<span class="material-symbols-rounded">close_fullscreen</span>`;
         unfullscreenBtn.addEventListener('click', () => setFullscreen(false));
 
         fullscreenArea.prepend(unfullscreenBtn);
 
         setFullscreen(true);
+    }
+
+    if (document.documentElement.dataset.markdown === "true") {
+        const mdBtn = document.createElement('a');
+        mdBtn.setAttribute('draggable', 'false');
+        mdBtn.innerHTML = `<span class="material-symbols-rounded">markdown</span> 純文字`;
+        mdBtn.href = "markdown.md";
+        articleActions.appendChild(mdBtn);
     }
 
     const shareBtn = document.createElement('a');
@@ -207,12 +215,8 @@ function initialiseShareButton() {
     modal.innerHTML = `
     <div class="content show">
         <div class="header">
-            <span class="close" onclick="closeModal()"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12 2c5.53 0 10 4.47 10 10s-4.47 10-10 10S2 17.53 2 12 6.47 2 12 2m3.59 5L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z"></path>
-                    </svg></span></span>
-            <h2><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M4 4h6v6H4zm16 0v6h-6V4zm-6 11h2v-2h-2v-2h2v2h2v-2h2v2h-2v2h2v3h-2v2h-2v-2h-3v2h-2v-4h3zm2 0v3h2v-3zM4 20v-6h6v6zM6 6v2h2V6zm10 0v2h2V6zM6 16v2h2v-2zm-2-5h2v2H4zm5 0h4v4h-2v-2H9zm2-5h2v4h-2zM2 2v4H0V2a2 2 0 0 1 2-2h4v2zm20-2a2 2 0 0 1 2 2v4h-2V2h-4V0zM2 18v4h4v2H2a2 2 0 0 1-2-2v-4zm20 4v-4h2v4a2 2 0 0 1-2 2h-4v-2z" />
-                    </svg></span>分享此頁面</h2>
+            <span class="close material-symbols-rounded" onclick="closeModal()">cancel</span>
+            <h2><span class="material-symbols-rounded">qr_code_scanner</span> 分享此頁面</h2>
         </div>
         <div class="body">
             <div style="display: flex; flex-direction: column;">
@@ -261,7 +265,7 @@ function scrollTitleText() {
     const mainH2 = document.querySelectorAll('main h2');
 
     headerFlexBox.setAttribute("style", `width: ${headerFlexBox.style.offsetWidth}px`);
-    headerH1.textContent = mainH1.textContent.trim();
+    headerH1.textContent = mainH1.dataset.value || mainH1.textContent.trim();
 
     function onScroll() {
         var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
