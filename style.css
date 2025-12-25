@@ -1029,16 +1029,6 @@ footer {
     text-align: right;
 }
 
-:not(:lang(zh-tw))>ruby+ruby {
-    margin-left: 0.4em;
-}
-
-:not(:lang(zh-tw))>ruby rt {
-    font-size: 0.7em;
-    font-weight: 500;
-    padding-bottom: 0.3em;
-}
-
 .rubyWrapper {
     display: contents;
 }
@@ -1062,7 +1052,7 @@ ruby {
     align-items: center;
 }
 
-ruby:has(+ruby) {
+ruby:has(+*:not([data-norubyspace])) {
     margin-right: 0.2em;
 }
 
