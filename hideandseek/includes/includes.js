@@ -200,6 +200,7 @@ function initialiseShareButton() {
         mdBtn.setAttribute('draggable', 'false');
         mdBtn.innerHTML = `<span class="material-symbols-rounded">markdown</span> 純文字`;
         mdBtn.href = "markdown.md";
+        mdBtn.target = "_blank";
         articleActions.appendChild(mdBtn);
     }
 

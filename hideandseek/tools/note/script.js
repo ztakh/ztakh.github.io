@@ -396,8 +396,8 @@ function downloadExportedNotes(event) {
     });
 }
 
-function restartGame() {
-    if (confirm("筆記將被清空，確定重置？")) {
+function restartGame(event) {
+    Confirm.confirmAction(event, "筆記將被清空，確定重置？", () => {
         categoriesContainer.classList.add("fadeOut");
         gameState.answeredQuestions = {};
         saveGameState();
@@ -407,11 +407,11 @@ function restartGame() {
             showSnackbar("成功重置");
             categoriesContainer.classList.remove("fadeOut");
         }, 500);
-    }
+    });
 }
 
 function setupEventListeners() {
-    document.querySelector('#restart-btn').addEventListener('click', restartGame);
+    document.querySelector('#restart-btn').addEventListener('click', (event) => restartGame(event));
     document.querySelector('#export-btn').addEventListener('click', exportNotes);
     document.querySelector('#copy-btn').addEventListener('click', copyExportToClipboard);
     document.querySelector('#download-btn').addEventListener('click', (event) => downloadExportedNotes(event));

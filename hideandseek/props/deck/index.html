@@ -113,20 +113,20 @@
                                 <span class="material-symbols-rounded" aria-hidden="true">change_circle</span>
                             </div>
                             <h4>換題</h4>
-                            <p>尋差須利用亂數產生器自原詰問類型重新選新題目。原問題不視為答畢，故應納入樣本空間。</p>
+                            <p>尋差須利用亂數產生器自原詰問類型重新選新題目。原問題視為答畢，故不納入樣本空間，且適用復問規則。</p>
                         </div>
                         <div class="card" id="discard-1">
                             <div class="card-icon" style="background: cadetblue;">
                                 <span class="material-symbols-rounded" aria-hidden="true">delete_sweep</span>
                             </div>
-                            <h4>返還 1</h4>
+                            <h4>返 1 掣 2</h4>
                             <p><a draggable="false" data-key="a23p3">返還</a><a draggable="false" data-key="a23p1-hand">手執</a>任何牌令 1 張，並掣取 2 張新牌令。</p>
                         </div>
                         <div class="card" id="discard-2">
                             <div class="card-icon" style="background: cadetblue;">
                                 <span class="material-symbols-rounded" aria-hidden="true">delete_sweep</span>
                             </div>
-                            <h4>返還 2</h4>
+                            <h4>返 2 掣 3</h4>
                             <p><a draggable="false" data-key="a23p3">返還</a><a draggable="false" data-key="a23p1-hand">手執</a>任何牌令 2 張，並掣取 3 張新牌令。</p>
                         </div>
                         <div class="card" id="expand">
@@ -236,7 +236,15 @@
                             </div>
                             <h4>急急如廁令</h4>
                             <p>尋差不得藉助科技，應自行尋找、前往、打卡公共廁所後，至鄰近場所休憩 <span class="forS">30</span><span class="forM">40</span><span class="forL">50</span> 分鐘；該廁所應有明確指示牌說明其實為之。</p>
-                            <p class="cost">尋差得復用已詰之題，且匿者應放棄所多享之掣牌權。</p>
+                            <p class="cost">尋差得隨機復用 1 道已詰之題。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/?key=lie" draggable="false" class="card" id="lie">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded" aria-hidden="true">history</span>
+                            </div>
+                            <h4>校正回歸</h4>
+                            <p>接下來 3 回中可以說謊或答非所問 1 次，但於第 4 回後 5 分鐘內必須勘誤。</p>
+                            <p class="cost">匿者應選 1 道詰問供尋差復用，且當前非為殘局。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=pen" draggable="false" class="card" id="pen">
                             <div class="card-icon" style="background: cornflowerblue;">
@@ -298,7 +306,15 @@
                                 <span class="material-symbols-rounded" aria-hidden="true">store</span>
                             </div>
                             <h4>超商巡禮</h4>
-                            <p>匿者應前往任意有效超商，並於店內拍攝 1 張足以辨別品牌之圖。尋差應立即前往同品牌之超商，並錄製 1 段走過去再走回來之影片。</p>
+                            <p>前往任意有效超商，並於店內拍攝 1 張足以辨別品牌之圖。尋差應立即前往同品牌之超商，並錄製 1 段走過去再走回來之影片。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/?key=ahead" draggable="false" class="card" id="ahead">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded" aria-hidden="true">strategy</span>
+                            </div>
+                            <h4>超前部署</h4>
+                            <p>選擇 1 道詰問提早迴避。若尋差之後問出，則不用履行答題義務，且可直接掣取 3 張牌令。</p>
+                            <p class="cost">放棄下回掣牌權。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=car" draggable="false" class="card" id="car">
                             <div class="card-icon" style="background: cornflowerblue;">
@@ -329,6 +345,14 @@
                             <h4>以上疊石</h4>
                             <p>匿者及尋差應以自然石頭疊出 1 座塔直至崩塌；其中尋差應至少使用與匿者相同數目之自然石頭。</p>
                         </a>
+                        <a href="/hideandseek/rulebook/spep/?key=megabonus" draggable="false" class="card" id="megabonus">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded" aria-hidden="true">solar_power</span>
+                            </div>
+                            <h4>一分耕耘</h4>
+                            <p>所有時賞令倍增 1.35 倍。</p>
+                            <p class="cost">返還至少累計 <span class="forS">6</span><span class="forM">9</span><span class="forL">15</span> 分鐘之時賞令。</p>
+                        </a>
                         <a href="/hideandseek/rulebook/spep/?key=right" draggable="false" class="card" id="right">
                             <div class="card-icon" style="background: cornflowerblue;">
                                 <span class="material-symbols-rounded" aria-hidden="true">cycle</span>
@@ -352,6 +376,14 @@
                             <h4>完美蛋侶</h4>
                             <p>尋差應攜帶 1 顆蛋為蛋侶進行遊戲，獲取後才能詰問。倘蛋侶遺失或破損，則匿者獲得 <span class="forS">30</span><span class="forM">45</span><span class="forL">60</span> 分鐘時賞。</p>
                             <p class="cost">返還 2 張牌令，且當前非為殘局。</p>
+                        </a>
+                        <a href="/hideandseek/rulebook/spep/?key=magnet" draggable="false" class="card" id="magnet">
+                            <div class="card-icon" style="background: cornflowerblue;">
+                                <span class="material-symbols-rounded" aria-hidden="true">orbit</span>
+                            </div>
+                            <h4>萬有引力</h4>
+                            <p>祕密選擇 1 處距尋差 500 公尺遠之地點。15 分鐘內，尋差若經過該處 300 公尺範圍，則須立即前往該處休憩 <span class="forS">15</span><span class="forM">30</span><span class="forL">45</span> 分鐘。</p>
+                            <p class="cost">尋差非於大眾運輸上，且當前非為局。</p>
                         </a>
                         <a href="/hideandseek/rulebook/spep/?key=yundle" draggable="false" class="card" id="yundle">
                             <div class="card-icon" style="background: cornflowerblue;">
