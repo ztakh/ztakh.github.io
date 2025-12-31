@@ -96,6 +96,7 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
     min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
 }
 
 header {
@@ -241,9 +242,18 @@ code {
     text-decoration: 1px underline wavy;
 }
 
+.font-mono {
+    font-family: var(--font-code);
+}
+
 *.disabled {
     opacity: 0.3;
     cursor: not-allowed !important;
+}
+
+ol.informal {
+    padding-left: 2em;
+    list-style: trad-chinese-informal;
 }
 
 /* Main Content Layout */
@@ -678,6 +688,7 @@ a[data-key] .material-symbols-rounded {
 .table-container {
     max-width: 100%;
     overflow-x: auto;
+    overscroll-behavior: none;
     margin-bottom: 1em;
     border: 2px solid rgb(var(--border-colour));
     border-radius: var(--radius);
@@ -845,6 +856,27 @@ a.card:not(.disabled):hover {
     font-weight: 300;
 }
 
+details {
+    font-size: 0.9em;
+    margin-bottom: 1rem;
+    padding: 0.5em 1em;
+    border: 1px solid rgb(var(--border-colour));
+    border-radius: 0.5em;
+
+    summary {
+        cursor: pointer;
+        font-weight: bold;
+
+        &+* {
+            margin-top: 1em !important;
+        }
+    }
+
+    &>*:last-child {
+        margin-bottom: 0.5em !important;
+    }
+}
+
 .article-pagination {
     width: 100%;
     max-height: 4rem;
@@ -969,6 +1001,13 @@ footer {
     height: auto;
 }
 
+footer .banners {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em;
+}
+
 .text-centre {
     text-align: center !important;
 }
@@ -1083,7 +1122,6 @@ ruby rt sub {
     font-size: 1em;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1100px) {
     .sidebar {
         min-width: 220px;

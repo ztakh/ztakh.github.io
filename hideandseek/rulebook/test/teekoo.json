@@ -574,7 +574,7 @@
                             "explanation": "答對了。"
                         },
                         {
-                            "text": "腦霧。",
+                            "text": "校正回歸",
                             "explanation": "答對了。"
                         },
                         {
@@ -684,14 +684,6 @@
                             "explanation": "的確不需要。"
                         },
                         {
-                            "text": "腦霧。",
-                            "explanation": "的確不需要。"
-                        },
-                        {
-                            "text": "檸魂附身。",
-                            "explanation": "的確不需要。"
-                        },
-                        {
                             "text": "寧靜車廂。",
                             "explanation": "的確不需要。"
                         },
@@ -721,10 +713,6 @@
                         },
                         {
                             "text": "五六三十。",
-                            "explanation": "的確不需要。"
-                        },
-                        {
-                            "text": "完美蛋侶。",
                             "explanation": "的確不需要。"
                         },
                         {
@@ -760,6 +748,18 @@
                             "explanation": "的確不需要。"
                         },
                         {
+                            "text": "校正回歸。",
+                            "explanation": "當前非為殘局。"
+                        },
+                        {
+                            "text": "檸魂附身。",
+                            "explanation": "當前非為殘局。"
+                        },
+                        {
+                            "text": "完美蛋侶。",
+                            "explanation": "當前非為殘局。"
+                        },
+                        {
                             "text": "橋一下。",
                             "explanation": "必須相隔某公里以上。"
                         },
@@ -772,7 +772,7 @@
                             "explanation": "必須相隔某公里以上。"
                         }
                     ],
-                    "correctTo": 22
+                    "correctTo": 19
                 },
                 {
                     "q": "下列何張「制約權能牌」不以干擾尋差之「詰問權」為目的？",
@@ -878,7 +878,7 @@
                             "explanation": "限制詰問題目。"
                         },
                         {
-                            "text": "腦霧。",
+                            "text": "超前部署。",
                             "explanation": "限制詰問題目。"
                         }
                     ],
@@ -920,7 +920,7 @@
                             "explanation": "答錯了。"
                         },
                         {
-                            "text": "腦霧。",
+                            "text": "萬有引力。",
                             "explanation": "答錯了。"
                         },
                         {

@@ -69,10 +69,6 @@
                     <p>這是一款結合真實世界探索的「捉迷藏」遊戲。</p>
 
                     <h2 id="section-roles">角色與目標</h2>
-                    <ul>
-                        <li>建議 4 人遊玩並分為 2 組，儘量避免落單<sup><a draggable="false" data-key="a7"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。</li>
-                        <li>在遊戲時段中，所有玩家僅能以步行或<a draggable="false" data-key="a8p2s1-5">大眾運輸工具</a>移動。</li>
-                    </ul>
                     <div class="game-cards" style="grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));">
                         <div class="card" style="--gradient: linear-gradient(135deg, #71cc33, #2d8d2a)">
                             <div class="card-icon">
@@ -124,6 +120,15 @@
                             </section>
                         </div>
                     </div>
+                    <details>
+                        <summary>遊戲需要花多久時間遊玩？</summary>
+                        <p class="text-indent">總遊戲時數依<a draggable="false" data-key="a5p10">品等</a>而異，不過能確定如果雙方都非常會玩，則 1 天之內絕對結束不了。故開局前務必明定<a draggable="false" data-key="a16">遊戲時段</a>以保障遊戲體驗，時段結束時立即暫停，等明日時段開始及全體歸位後繼續。初次嘗試亦可先從小範圍開始，抓到訣竅後再逐漸擴大版圖。</p>
+                    </details>
+                    <details>
+                        <summary>如何分配玩家及局數？</summary>
+                        <p class="text-indent">遊戲最大的時間單位是「<a draggable="false" data-key="a5p5">輪</a>」，指「所有玩家都至少當過 1 <a draggable="false" data-key="a5p4">局</a>『匿者』」。通常遊戲為 2 輪，也就是所有玩家都跑過 2 局的匿者，算是有機會可以反敗為勝。</p>
+                        <p class="text-indent">遊戲建議 2 到 4 人遊玩。2、3 人時，每局 1 位匿者，其餘當尋差，並設 2 輪，每輪局數與人數相同。4 人時較為特殊，建議拆為 2 人 1 組，即可適用 2 人遊戲模式；也可在第 1 輪後重新分組，進行新輪。成績結算方面，每局都是獨立的成績，意即同個人不同局不累計，以整場遊戲下來單局藏匿時間最久者獲勝。</p>
+                    </details>
 
                     <h2 id="section-prepare">遊戲流程</h2>
                     <div class="timeline">
@@ -135,22 +140,73 @@
                             </div>
                             <div class="item">
                                 <div class="smolTitle">決定品等</div>
-                                <p class="item-content">遊戲<a draggable="false" data-key="a5p10">品等</a>將影響<a draggable="false" data-key="a5p9">遊戲範圍</a>、詰問類別、牌令功能等。</p>
+                                <p class="item-content">遊戲<a draggable="false" data-key="a5p10">品等</a>將影響詰問類別及可用題目、牌令功能及參數⋯⋯等內容。</p>
+                                <details>
+                                    <summary>如何決定品等？</summary>
+                                    <p class="text-indent">根據<a href="../genp/#a12" class="inlineLink" draggable="false">第 12 條</a>所書，玩家可以參考<a draggable="false" data-key="a5p9">遊戲範圍</a>的一些特徵來決定遊戲品等。</p>
+                                    <figure class="table-container">
+                                        <table style="text-align: center;">
+                                            <caption>品等參照表</caption>
+                                            <thead>
+                                                <tr>
+                                                    <th><span>變數＼品等</span></th>
+                                                    <th>小</th>
+                                                    <th>中</th>
+                                                    <th>大</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>車站<br><small>（座）</small></th>
+                                                    <td><span>[30, 99]</span></td>
+                                                    <td><span>[100, 499]</span></td>
+                                                    <td><span>[500, &infin;)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>可移動面積<br><small>（平方公里）</small></th>
+                                                    <td><span>[26, 259]</span></td>
+                                                    <td><span>[260, 2599]</span></td>
+                                                    <td><span>[2600, &infin;)</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </figure>
+                                    <p class="text-indent">舉些例子：</p>
+                                    <ol class="informal">
+                                        <li>
+                                            <p>香港重鐵、輕鐵、高鐵、電車等車站合計約 280 座，總面積約為 1,116 平方公里，完全符合「中」品等條件。</p>
+                                        </li>
+                                        <li>
+                                            <p>北北基桃捷運、輕軌、臺鐵、高鐵車站總數為 220 座，總面積約為 3,678 平方公里；前者符合「中」品等，後者符合「大」品等，因此需要進一步分析。面積看似大，實則多為山區，又大眾運輸工具多不達，故應為「中」品等。</p>
+                                        </li>
+                                        <li>
+                                            <p>高雄捷運、輕軌、臺鐵、高鐵車站總數為 97 座，總面積約為 2,952 平方公里。考量車站數量、分布及實際可移動面積，應為「小」品等。</p>
+                                        </li>
+                                        <li>
+                                            <p>日本車站數量破萬，無疑是「大」品等。</p>
+                                        </li>
+                                    </ol>
+                                </details>
                             </div>
                             <div class="item">
                                 <div class="smolTitle">攜帶道具</div>
-                                <p class="item-content">雙方玩家應備妥角色相應道具及骰子。</p>
+                                <p class="item-content">雙方玩家應備妥角色相應道具及骰子，亦可攜帶<span class="books">通則</span>隨時查閱。</p>
                             </div>
                             <div class="item">
                                 <div class="smolTitle">最後檢查</div>
                                 <p class="item-content">討論出<a draggable="false" data-key="a5p9">遊戲範圍</a>、<a draggable="false" data-key="a16">遊戲時段</a>，分享<a draggable="false" data-key="a5p13">定位</a>⋯⋯等。</p>
                             </div>
+                            <div class="smolTitle">→ 詳細規章：<a href="../genp/#ch3" draggable="false">總則・第 3 章・準備</a></div>
                         </div>
                         <div class="timeline-node">
                             <h3>開局</h3>
                             <div class="item">
                                 <div class="smolTitle">匿者藏匿</div>
                                 <p class="item-content">「移動時間」開始計時。匿者此時將前往<a draggable="false" data-key="a5p9">遊戲範圍</a>內任何車站躲藏。</p>
+                                <details>
+                                    <summary>哪些車站可以藏匿？哪些大眾運輸工具可以代步？</summary>
+                                    <p class="text-indent">遊戲對於<a draggable="false" data-key="a14p2-spot">匿域中樞</a>僅要求是大眾運輸工具的車站即可，具體是哪些大眾運輸工具，玩家可在開局前依照遊玩地區特性自行決定。如在北北基桃，基礎版就會是捷運及輕軌，進階點可以包含臺鐵甚至高鐵。只要明確討論出路線、站點，想包含公車或 Ubike 都可以。</p>
+                                </details>
                             </div>
                             <div class="item">
                                 <div class="smolTitle">尋差找尋</div>
@@ -161,7 +217,7 @@
                             <h3>局中</h3>
                             <div class="item">
                                 <div class="smolTitle">尋差提問</div>
-                                <p class="item-content">尋差從「六大詰問」中向匿者提出詰問，匿者應誠實回答<sup><a draggable="false" data-key="a9p1"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。於時限內完成答覆才能從「匿者牌堆」中掣取相應牌令數量<sup><a draggable="false" data-key="a9p2"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a><a draggable="false" data-key="a9p3"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a><a draggable="false" data-key="a33"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。已提問過的問題原則上不得再重問，如果真的想要，則匿者可獲得加倍的掣牌機會<a draggable="false" data-key="a10p4"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。</p>
+                                <p class="item-content">尋差從「六大詰問」中向匿者提出詰問，匿者應誠實回答<sup><a draggable="false" data-key="a9p1"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。於時限內完成答覆才能從「匿者牌堆」中掣取相應牌令數量<sup><a draggable="false" data-key="a9p2"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a><a draggable="false" data-key="a9p3"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a><a draggable="false" data-key="a33"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。已提問過的問題原則上不得再重問，不然就要付出讓匿者獲得加倍掣牌機會的代價<a draggable="false" data-key="a10p4"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。</p>
                             </div>
                             <div class="item">
                                 <div class="smolTitle">匿者行牌</div>
@@ -180,7 +236,7 @@
                             <h3>局末</h3>
                             <div class="item">
                                 <div class="smolTitle">捕獲匿者</div>
-                                <p class="item-content">當尋差正式接觸到匿者時，該局告終<sup><a draggable="false" data-key="a9p7-caught"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>，並停止計時「藏匿時間」。</p>
+                                <p class="item-content">當尋差發現了匿者並且距離不超過 3 公尺時，停止計時「藏匿時間」，該局告終<sup><a draggable="false" data-key="a9p7-caught"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。</p>
                             </div>
                             <div class="item">
                                 <div class="smolTitle">尋匿易人</div>
@@ -200,12 +256,7 @@
                     <p>尋差能找到匿者的惟一線索來源。可善用<a draggable="false" href="/hideandseek/tools/note/">電子詰問簿</a>及地圖做筆記，提高效率。</p>
 
                     <h2 id="section-winning">獲勝條件</h2>
-                    <p>由「藏匿時間」最久的玩家獲勝<sup><a draggable="false" data-key="a5p7"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。</p>
-                    <ul>
-                        <li>假設玩家 4 人，則通常兩兩組隊，並以 1 輪 2 局為主<sup><a draggable="false" data-key="a11p1"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。</li>
-                        <li>玩家若自行增加遊玩輪數，則最終結果還是以單局的「藏匿時間」為主。不同輪次間的時間不合計。<sup><a draggable="false" data-key="a11p2"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup></li>
-                        <li>如果要將原本的組拆開重新排列組合，則應另外開啟新的遊戲，才有辦法計算獲勝組別。</li>
-                    </ul>
+                    <p>由單局「藏匿時間」最久的玩家獲勝<sup><a draggable="false" data-key="a5p7"><span class="material-symbols-rounded" aria-hidden="true">article_shortcut</span></a></sup>。</p>
 
                     <h2 id="section-extra">延伸閱讀</h2>
                     <div class="game-cards">
