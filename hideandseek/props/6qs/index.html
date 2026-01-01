@@ -94,6 +94,19 @@
             padding: 0.75em 0.5em;
         }
 
+        details .img-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+
+            img {
+                max-width: 100%;
+                max-height: 50dvh;
+                border-radius: 0.25em;
+            }
+        }
+
         @media (max-width: 600px) {
             .chat-bubble>div {
                 padding: 0;
@@ -101,6 +114,15 @@
         }
     </style>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-66G1H5EZ4J"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-66G1H5EZ4J');
+</script>
 
 <body data-mapsize="M">
     <header></header>
@@ -154,7 +176,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>捷運路線，包含輕軌</td>
+                                    <td>捷運路線，包含輕軌<sup>1</sup></td>
                                     <td><span>淡水信義線</span>、<span>桃園機場捷運</span>等</td>
                                 </tr>
                                 <tr>
@@ -162,23 +184,23 @@
                                     <td><span>臺灣桃園國際機場</span>等</td>
                                 </tr>
                                 <tr>
-                                    <td>路街道</td>
+                                    <td>路街道<sup>2</sup></td>
                                     <td><span>凱達格蘭大道</span>、<span>忠孝東路</span>等</td>
                                 </tr>
                                 <tr>
-                                    <td>第一級行政區<small>（省、直轄市）</small></td>
+                                    <td>第一級行政區<sup>2</sup><small>（省、直轄市）</small></td>
                                     <td><span>臺灣省</span>、<span>福建省</span>、<span>臺北市</span>等</td>
                                 </tr>
                                 <tr>
-                                    <td>第二級行政區<small>（縣、省轄市）</small></td>
+                                    <td>第二級行政區<sup>2</sup><small>（縣、省轄市）</small></td>
                                     <td><span>宜蘭縣</span>、<span>連江縣</span>、<span>基隆市</span>等</td>
                                 </tr>
                                 <tr>
-                                    <td>第三級行政區<small>（鄉、鎮、縣轄市、區）</small></td>
+                                    <td>第三級行政區<sup>2</sup><small>（鄉、鎮、縣轄市、區）</small></td>
                                     <td><span>中正區</span>、<span>和平區</span>、<span>蘭嶼鄉</span>等</td>
                                 </tr>
                                 <tr>
-                                    <td>第四級行政區<small>（村或里）</small></td>
+                                    <td>第四級行政區<sup>2</sup><small>（村或里）</small></td>
                                     <td><span>三民里</span>、<span>圓山里</span>、<span>龍潭村</span>等</td>
                                 </tr>
                                 <tr>
@@ -236,6 +258,20 @@
                             </tbody>
                         </table>
                     </figure>
+                    <details>
+                        <summary>備注 1</summary>
+                        <p class="text-indent">尋差必須要搭乘他們正在詰問的路線。若該班車次的停靠站有<a draggable="false" data-key="a14p2-spot">匿域中樞</a>，則匿者要回答是；同路線但過站不停或區間車不達則否。</p>
+                    </details>
+                    <details>
+                        <summary>備注 2</summary>
+                        <p class="text-indent">雖未明文規定，但邏輯上而言尋差只能詢問他們所處的路街道或行政區。</p>
+                    </details>
+                    <details>
+                        <summary>示意圖</summary>
+                        <div class="img-container">
+                            <a href="images/example_1.png" target="_blank"><img src="images/example_1.png" alt="Example 1" draggable="false"></a>
+                        </div>
+                    </details>
                     <h2 id="distance">其二　遠近之問</h2>
                     <div class="smolTitle">→ 完整條例：<a href="/hideandseek/rulebook/spep/#ch6s2" draggable="false">分則・第 6 章第 2 節・遠近之問</a></div>
                     <div class="chat-bubble">
@@ -257,8 +293,8 @@
                             <caption id="distance-table-desc" class="visually-hidden">遠近之問的「類別」「甲」（具體對象）對應表</caption>
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 50%">類別</th>
-                                    <th scope="col">甲</th>
+                                    <th scope="col" style="width: 50%">甲</th>
+                                    <th scope="col">範例</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -345,12 +381,18 @@
                             </tbody>
                         </table>
                     </figure>
+                    <details>
+                        <summary>示意圖</summary>
+                        <div class="img-container">
+                            <a href="images/example_2.png" target="_blank"><img src="images/example_2.png" alt="Example 2" draggable="false"></a>
+                        </div>
+                    </details>
                     <h2 id="apart">其三　遐邇之問</h2>
                     <div class="smolTitle">→ 完整條例：<a href="/hideandseek/rulebook/spep/#ch6s3" draggable="false">分則・第 6 章第 3 節・遐邇之問</a></div>
                     <div class="chat-bubble">
                         <div>
                             <div>尋</div>
-                            <p>剛剛位移了（至少）「甲」，與原本的位置相比，我們的距離現在是更遐還是邇？</p>
+                            <p>剛剛位移了（至少）「甲」，與原本的位置相比，我們的距離是縮小了還是擴大了？</p>
                         </div>
                         <div>
                             <div>匿</div>
@@ -389,6 +431,12 @@
                             </tbody>
                         </table>
                     </figure>
+                    <details>
+                        <summary>示意圖</summary>
+                        <div class="img-container">
+                            <a href="images/example_3.png" target="_blank"><img src="images/example_3.png" alt="Example 3" draggable="false"></a>
+                        </div>
+                    </details>
                     <h2 id="radar">其四　環偵之問</h2>
                     <div class="smolTitle">→ 完整條例：<a href="/hideandseek/rulebook/spep/#ch6s4" draggable="false">分則・第 6 章第 4 節・環偵之問</a></div>
                     <div class="chat-bubble">
@@ -456,6 +504,12 @@
                             </tbody>
                         </table>
                     </figure>
+                    <details>
+                        <summary>示意圖</summary>
+                        <div class="img-container">
+                            <a href="images/example_4.png" target="_blank"><img src="images/example_4.png" alt="Example 4" draggable="false"></a>
+                        </div>
+                    </details>
                     <h2 id="tentacle">其五　鎖域之問</h2>
                     <div class="smolTitle">→ 完整條例：<a href="/hideandseek/rulebook/spep/#ch6s5" draggable="false">分則・第 6 章第 5 節・鎖域之問</a></div>
                     <section class="forS">
@@ -469,7 +523,7 @@
                             </div>
                             <div>
                                 <div>匿</div>
-                                <p>*名稱*</p>
+                                <p>*名稱*／我不在範圍內</p>
                             </div>
                         </div>
                         <div class="question-limit">
@@ -525,6 +579,16 @@
                             </table>
                         </figure>
                     </section>
+                    <details>
+                        <summary>備注</summary>
+                        <p class="text-indent">匿者位於尋差方圓半徑「甲」公里內才需要回答本詰問。</p>
+                    </details>
+                    <details>
+                        <summary>示意圖</summary>
+                        <div class="img-container">
+                            <a href="images/example_5.png" target="_blank"><img src="images/example_5.png" alt="Example 5" draggable="false"></a>
+                        </div>
+                    </details>
                     <h2 id="photo">其六　採樣之問</h2>
                     <div class="smolTitle">→ 完整條例：<a href="/hideandseek/rulebook/spep/#ch6s6" draggable="false">分則・第 6 章第 6 節・採樣之問</a></div>
                     <div class="chat-bubble">
